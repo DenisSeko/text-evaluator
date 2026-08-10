@@ -48,6 +48,12 @@ Ruff za lint/format (isti standard kao i okolina iz koje projekt potječe).
 komanda `lexi-evaluator <URL>` na sva tri OS-a (stvara `.venv/bin/lexi-evaluator` na
 Linux/macOS i `.venv\Scripts\lexi-evaluator.exe` na Windowsu). `.env` se učitava relativno
 na projektni root (`config.py`), ne na CWD — komanda radi iz bilo kojeg foldera.
+**Convenience:** postoje opcionalne instalacijske skripte `scripts/install.sh`
+(Linux/macOS) i `scripts/install.bat` (Windows) — automatiziraju venv + ovisnosti + `.env`.
+One su čisti convenience; ručni koraci (u README) i dalje rade, pa "bez shell skripti"
+kao princip za pokretanje aplikacije ostaje na snazi. Za distribuciju bez Python instalacije
+README dokumentira opciju gradnje samostalnog `.exe`-a (PyInstaller, mora se raditi na
+Windowsu — nema cross-compile-a).
 
 ### ADR-004: Scraping — trafilatura primarno, BeautifulSoup fallback
 **Odluka:** `trafilatura.extract` kao primarni ekstraktor, fallback na ciljanu

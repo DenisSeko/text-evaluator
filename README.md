@@ -64,6 +64,31 @@ URL ──► scraper ──► ekstraktor ──► 4 agenta (paralelno) ──
 
 ## Instalacija i pokretanje (Windows / macOS / Linux)
 
+### Preduvjet: Python 3.11+
+
+- **Windows 10/11:** [python.org/downloads/windows](https://www.python.org/downloads/windows/)
+  — pri instalaciji označi **"Add Python to PATH"**.
+- **macOS:** [python.org/downloads/macos](https://www.python.org/downloads/macos/)
+- **Linux:** [python.org/downloads](https://www.python.org/downloads/) ili paketni menadžer
+  (`sudo apt install python3 python3-venv python3-pip` na Debian/Ubuntu).
+
+### Brza instalacija (skripte iz repoa)
+
+```bash
+# Linux / macOS
+bash scripts/install.sh
+```
+
+```bat
+:: Windows 10/11 (PowerShell ili cmd)
+scripts\install.bat
+```
+
+Skripte rade sve automatski: stvore `.venv`, instaliraju pinned ovisnosti + CLI komandu
+`lexi-evaluator`, i kreiraju `.env` iz `.env.example` (samo upiši ključ).
+
+### Ručna instalacija
+
 ```bash
 cd lexi-evaluator
 python3 -m venv .venv
@@ -74,7 +99,7 @@ python -m pip install -r requirements-dev.txt
 python -m pip install -e .
 
 # Konfiguracija (ključ se NIKAD ne commit-a)
-cp .env.example .env
+cp .env.example .env        # Windows: copy .env.example .env
 # uredi .env i upiši pravi OPENAI_API_KEY
 ```
 
@@ -116,6 +141,20 @@ pa je paket importabilan):
 python -m pytest -q          # offline: ekstraktor, scoring, dry-run pipeline
 python scripts/check_no_secrets.py   # honeypot: provjera da nema ključeva u repou
 ruff check . && ruff format --check .
+```
+
+### (Opcionalno) Samostalni `.exe` (Windows 10/11)
+
+Ako želiš distribuirati **samostalni `.exe` bez Python instalacije**, napravi ga na
+Windowsu (PyInstaller ne podržava cross-compile, pa se ne može graditi s Linuxa/macOS-a):
+
+```powershell
+.venv\Scripts\activate
+python -m pip install pyinstaller
+pyinstaller --onefile --name lexi-evaluator lexi_evaluator\__main__.py
+# rezultat: dist\lexi-evaluator.exe — pokreće se kao:
+#   dist\lexi-evaluator.exe <URL>
+# Napomena: za ključ i dalje treba .env u radnom folderu ili OPENAI_API_KEY env varijabla.
 ```
 
 ---

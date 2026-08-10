@@ -65,31 +65,47 @@ python3 -m venv .venv
 # Windows: .venv\Scripts\activate     macOS/Linux: source .venv/bin/activate
 python -m pip install -r requirements-dev.txt
 
+# Instaliraj CLI kao komandu (stvara `lexi-evaluator` na sva tri OS-a)
+python -m pip install -e .
+
 # Konfiguracija (ključ se NIKAD ne commit-a)
 cp .env.example .env
 # uredi .env i upiši pravi OPENAI_API_KEY
 ```
 
+> Nakon `pip install -e .` imaš **istu komandu na Linuxu, macOS-u i Windows 10/11**:
+> `lexi-evaluator <URL>`. Radi iz bilo kojeg foldera jer se `.env` traži relativno na
+> projektni root (ne na trenutni direktorij). Ako ne želiš instalirati, koristi
+> `python -m lexi_evaluator <URL>` iz projektnog root foldera.
+
 ### Pokretanje
 
 ```bash
-# Evaluacija pravog Lexi posta
-python -m lexi_evaluator "https://lexi.hr/why-writing-sounds-generic/"
+# Evaluacija pravog Lexi posta (ista komanda na svim OS-ovima)
+lexi-evaluator "https://lexi.hr/why-writing-sounds-generic/"
 
 # Snimi izvještaj kao Markdown i/ili JSON
-python -m lexi_evaluator <URL> --output md  --out-file examples/run.md
-python -m lexi_evaluator <URL> --output json --out-file examples/run.json
+lexi-evaluator <URL> --output md  --out-file examples/run.md
+lexi-evaluator <URL> --output json --out-file examples/run.json
 
 # Offline demo bez API ključa i bez mreže (mock LLM + spremljeni fixture)
-python scripts/demo_dry.py
+lexi-evaluator --dry-run --fixture tests/fixtures/sample_article.html
+# ili: python scripts/demo_dry.py
 
 # Opcije
-python -m lexi_evaluator <URL> --agents structure,rubric   # podskup agenata
-python -m lexi_evaluator <URL> --no-synth                  # bez finalnog suda
-python -m lexi_evaluator <URL> --no-cache                  # bez cache-a HTML-a
+lexi-evaluator <URL> --agents structure,rubric   # podskup agenata
+lexi-evaluator <URL> --no-synth                  # bez finalnog suda
+lexi-evaluator <URL> --no-cache                  # bez cache-a HTML-a
+lexi-evaluator --help                            # sve opcije
 ```
 
+> **Napomena o testiranju:** `--fixture` očekuje putanju do HTML fajla, a `--dry-run`
+> je zasebna zastavica — obavezno oboje: `--dry-run --fixture <path>`.
+
 ### Testovi i lint
+
+Pokreće se iz **projektnog root foldera** (`python -m` dodaje root na `sys.path`,
+pa je paket importabilan):
 
 ```bash
 python -m pytest -q          # offline: ekstraktor, scoring, dry-run pipeline
@@ -163,8 +179,11 @@ Detaljno u [PLAN.md](PLAN.md). Ključno:
 
 ## Primjeri outputa
 
-- [`examples/demo-dry.md`](examples/demo-dry.md) — offline demo (mock LLM) na stvarnom
-  Lexi članku "Why Writing Sounds Generic: The Psychology Behind It".
-- [`examples/demo-dry.json`](examples/demo-dry.json) — ista evaluacija kao strukturirani JSON.
-
-> Nakon live run-a s pravim ključem, u `examples/` će biti i rezultat na stvarnom postu.
+- [`examples/demo-dry.md`](examples/demo-dry.md) / `.json` — offline demo (mock LLM)
+  na stvarnom Lexi članku "Why Writing Sounds Generic: The Psychology Behind It".
+- [`examples/lexi-why-writing-sounds-generic.md`](examples/lexi-why-writing-sounds-generic.md)
+  / `.json` — live evaluacija s pravim ključem (7.0/10, C).
+- [`examples/lexi-psiholoski-mehanizmi-iza-clickbaita.md`](examples/lexi-psiholoski-mehanizmi-iza-clickbaita.md)
+  / `.json` — live evaluacija (7.7/10, C).
+- [`examples/lexi-how-to-respond-to-a-negative-review.md`](examples/lexi-how-to-respond-to-a-negative-review.md)
+  / `.json` — live evaluacija (7.7/10, C).

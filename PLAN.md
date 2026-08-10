@@ -43,6 +43,11 @@ pnpm workspace) donosi rizike i buku. Potpuna izolacija.
 **Zašto:** cross-OS zahtjev (Windows/macOS/Linux). Čist Python s `pathlib` + UTF-8 radi
 svugdje; `uv`/`poetry` su opcija, ali pip + pinned je najmanje ovisnosti i najpredvidljivije.
 Ruff za lint/format (isti standard kao i okolina iz koje projekt potječe).
+**Dopuna (iz live verifikacije):** `pyproject.toml` definira `[project.scripts]`
+(`lexi-evaluator = "lexi_evaluator.cli:main"`), pa nakon `pip install -e .` postoji ista
+komanda `lexi-evaluator <URL>` na sva tri OS-a (stvara `.venv/bin/lexi-evaluator` na
+Linux/macOS i `.venv\Scripts\lexi-evaluator.exe` na Windowsu). `.env` se učitava relativno
+na projektni root (`config.py`), ne na CWD — komanda radi iz bilo kojeg foldera.
 
 ### ADR-004: Scraping — trafilatura primarno, BeautifulSoup fallback
 **Odluka:** `trafilatura.extract` kao primarni ekstraktor, fallback na ciljanu

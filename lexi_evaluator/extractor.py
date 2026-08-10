@@ -38,6 +38,20 @@ def _estimate_read_time(word_count: int) -> str:
     return f"{minutes} min"
 
 
+# Croatian uses distinctive diacritics (č, ć, š, ž, đ) that English never does.
+_HR_DIACRITICS = "čćšžđČĆŠŽĐ"
+
+
+def detect_language(text: str) -> str:
+    """Cheap HR/EN guess from the article text.
+
+    If Croatian diacritics appear anywhere, the article is Croatian; otherwise
+    English. Good enough for Lexi content (HR or EN); it only drives the language
+    of the generated review, never any logic-critical behaviour.
+    """
+    return "hr" if any(c in text for c in _HR_DIACRITICS) else "en"
+
+
 def _headings_from_html(html: str) -> list[str]:
     """Collect H1/H2/H3 text used to verify/annotate structure."""
     try:
@@ -73,6 +87,7 @@ def _build_article(
         word_count=words,
         headings=headings or [],
         source=source,
+        language=detect_language(text),
     )
 
 

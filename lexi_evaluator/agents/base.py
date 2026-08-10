@@ -63,9 +63,18 @@ class Agent(ABC):
 
     def build_messages(self, article: Article, max_chars: int) -> list[dict[str, str]]:
         text = article.plain_text[:max_chars]
+        language_name = "Croatian" if article.language == "hr" else "English"
+        user_prompt = self.build_user_prompt(text)
+        # Auto-detected article language drives the language of the whole review:
+        # verdict, strengths, weaknesses and every per-criterion note.
+        user_prompt += (
+            '\n\nLanguage: write ALL narrative output — "verdict", "strengths", '
+            f'"weaknesses" and every "note" — in {language_name} (the language of '
+            "the article)."
+        )
         return [
             {"role": "system", "content": self.system_prompt()},
-            {"role": "user", "content": self.build_user_prompt(text)},
+            {"role": "user", "content": user_prompt},
         ]
 
     def parse_verdict(self, raw: str) -> AgentVerdict:

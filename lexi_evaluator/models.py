@@ -20,6 +20,7 @@ class Article(BaseModel):
     word_count: int
     headings: list[str] = Field(default_factory=list)
     source: str = "trafilatura"
+    language: str = "en"  # "hr" | "en" — auto-detected, drives the review language
 
 
 class Criterion(BaseModel):

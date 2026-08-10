@@ -72,15 +72,29 @@ URL ──► scraper ──► ekstraktor ──► 4 agenta (paralelno) ──
 - **Linux:** [python.org/downloads](https://www.python.org/downloads/) ili paketni menadžer
   (`sudo apt install python3 python3-venv python3-pip` na Debian/Ubuntu).
 
-### Brza instalacija (skripte iz repoa)
+### Brza instalacija
+
+**Linux / macOS — direktno kroz terminal (curl, bez ručnog kloniranja):**
 
 ```bash
-# Linux / macOS
-bash scripts/install.sh
+curl -fsSL https://raw.githubusercontent.com/lexi-hr/lexi-evaluator/main/scripts/install.sh | bash
 ```
 
+Skripta sama klonira repo (u `~/lexi-evaluator`), stvori `.venv`, instalira ovisnosti +
+CLI i napravi `.env`. Ako je repo hostiran negdje drugdje, postavi URL prije pokretanja:
+
+```bash
+LEXI_REPO_URL="https://github.com/TVOJ-ORG/lexi-evaluator" \
+  curl -fsSL https://raw.githubusercontent.com/lexi-hr/lexi-evaluator/main/scripts/install.sh | bash
+```
+
+> **Sigurnost:** `curl | bash` izvršava udaljeni skript. Prvo ga pogledaj:
+> `curl -fsSL <URL>` i pregledaj izlaz prije pipanja u `bash`.
+> Skripta radi i lokalno iz repoa: `bash scripts/install.sh`.
+
+**Windows 10/11:**
+
 ```bat
-:: Windows 10/11 (PowerShell ili cmd)
 scripts\install.bat
 ```
 

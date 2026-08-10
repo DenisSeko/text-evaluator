@@ -2,16 +2,44 @@
 #
 # Lexi Evaluator — install script (Linux / macOS).
 #
-# Does everything automatically:
-#   1. finds Python 3.11+
-#   2. creates a .venv
-#   3. installs pinned requirements (incl. dev/test tools) + the CLI command
-#   4. creates .env from .env.example (you only add your OPENAI_API_KEY)
+# Two ways to use it:
+#   1. From inside a checkout:  bash scripts/install.sh   (or: ./scripts/install.sh)
+#   2. Direct install via curl (no clone needed by hand):
+#        curl -fsSL <RAW-URL-OF-THIS-FILE> | bash
+#      The script then clones the repo itself (see LEXI_REPO_URL below).
 #
-# Usage:  bash scripts/install.sh      (or:  ./scripts/install.sh)
+# It finds Python 3.11+, creates a .venv, installs pinned requirements +
+# the `lexi-evaluator` CLI command, and creates .env from .env.example.
+#
+# Env overrides:
+#   LEXI_REPO_URL  - git URL cloned by the direct curl install
+#                    (default: https://github.com/lexi-hr/lexi-evaluator)
+#   LEXI_REPO_BRANCH - branch to clone (default: main)
+#   LEXI_DIR       - target directory for the direct curl install
+#                    (default: $HOME/lexi-evaluator)
 set -euo pipefail
 
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+REPO_URL="${LEXI_REPO_URL:-https://github.com/lexi-hr/lexi-evaluator}"
+REPO_BRANCH="${LEXI_REPO_BRANCH:-main}"
+INSTALL_DIR="${LEXI_DIR:-$HOME/lexi-evaluator}"
+
+# --- 0. Running inside a checkout, or direct curl install? --------------------
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-.}")" && pwd)"
+if [ -f "$SCRIPT_DIR/../pyproject.toml" ]; then
+  ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+  echo "==> Lexi Evaluator install in place: $ROOT"
+else
+  echo "==> Lexi Evaluator direct install"
+  if [ ! -d "$INSTALL_DIR/.git" ]; then
+    echo "==> Cloning $REPO_URL ($REPO_BRANCH) -> $INSTALL_DIR"
+    mkdir -p "$(dirname "$INSTALL_DIR")"
+    git clone --branch "$REPO_BRANCH" "$REPO_URL" "$INSTALL_DIR"
+  else
+    echo "==> Repo already present in $INSTALL_DIR — updating"
+    git -C "$INSTALL_DIR" pull --ff-only || echo "warn: could not pull (continuing)"
+  fi
+  ROOT="$INSTALL_DIR"
+fi
 cd "$ROOT"
 
 echo "==> Lexi Evaluator install (Linux/macOS)"

@@ -39,7 +39,7 @@ class PsychologyAgent(Agent):
 </ARTICLE>
 
 Score it 0-10 using these criteria:
-- "Specifičnost": are ideas concrete and vivid instead of abstract?
+- "Concreteness": are ideas concrete and vivid instead of abstract?
 - "Reader benefit": does the reader clearly see what's in it for them?
 - "Tone & emotional resonance": is the tone human, warm and emotionally engaging?
 - "Avoiding generic filler": does it dodge clichés, buzzwords and empty phrases?

@@ -9,12 +9,8 @@ on:
 
 jobs:
   checks:
-    name: pytest + ruff + secrets (${{ matrix.os }})
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+    name: pytest + ruff + secrets (ubuntu-latest)
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 

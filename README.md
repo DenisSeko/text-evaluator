@@ -181,7 +181,7 @@ pyinstaller --onefile --name lexi-evaluator lexi_evaluator\__main__.py
 Repo ima **automatizirani "code review" gate**:
 
 - **GitHub Actions** (`.github/workflows/ci.yml`) — na svaki `push` na `main` i na svaki
-  **pull request** automatski provjerava na **sva 3 OS-a** (Ubuntu, Windows, macOS):
+  **pull request** automatski provjerava na **Ubuntu** (besplatni runner):
   `pytest` (offline, bez ključa/mreže), `ruff check`, `ruff format --check` i honeypot scan.
   Bez zelenih provjera PR se ne može "reviewati" kao čist.
 - **Lokalni gate prije pusha** — pokreni prije `git push`:

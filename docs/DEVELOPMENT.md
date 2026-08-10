@@ -234,5 +234,5 @@ git config core.hooksPath .githooks     # jednom: pre-push hook pokreće check_a
 ```
 
 **CI/CD:** `.github/workflows/ci.yml` (GitHub Actions) pokreće iste provjere na svakom
-push/PR-u na **sva 3 OS-a** — to je automatizirani "code review" (bez zelenih provjera
+push/PR-u na **Ubuntu** — to je automatizirani "code review" (bez zelenih provjera
 PR se ne smatra čistim). Lokalni gate `scripts/check_all.sh` to zrcali prije pusha.

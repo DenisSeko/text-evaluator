@@ -77,7 +77,7 @@ Samostalna Python CLI aplikacija koja: (1) scrape-a Lexi blog post s URL-a, (2) 
 ## Scope
 - IN: scraper+extractor, 4 agenta, scoring, CLI, docs, testovi, primjer outputa, honeypot guard.
 - IN (kasnije dodano, nakon što je zadatak bio gotov): CI/CD gate — GitHub Actions
-  (`.github/workflows/ci.yml`, sva 3 OS-a) + lokalni gate `scripts/check_all.sh` + pre-push hook.
+  (`.github/workflows/ci.yml`, Ubuntu) + lokalni gate `scripts/check_all.sh` + pre-push hook.
 - OUT (per task, "nemoj over-engineerati"): baza, deploy, auth, web UI, dodatni provideri
   (samo dokumentirani seam).
 

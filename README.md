@@ -200,24 +200,34 @@ pyinstaller --onefile --name lexi-evaluator lexi_evaluator\__main__.py
 
 ## Projektna struktura
 
+> Detaljan vodič za razvoj (stablo s objašnjenjima, "gdje je što", recepti za dodavanje
+> agenata/providera, konvencije): [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md).
+
 ```
 lexi-evaluator/
   lexi_evaluator/
-    cli.py            # CLI ulaz (argparse)
-    config.py         # pydantic-settings (.env)
-    models.py         # pydantic modeli (Article, AgentVerdict, ...)
+    cli.py            # CLI ulaz (argparse) + tok run-a
+    config.py         # pydantic-settings (.env, projekt-relative)
+    models.py         # pydantic modeli (Article, AgentVerdict, EvaluationResult, ...)
     scraper.py        # httpx fetch + cache
-    extractor.py      # trafilatura / BeautifulSoup čisti sadržaj
-    scoring.py        # agregacija + letter grade
+    extractor.py      # trafilatura / BeautifulSoup čisti sadržaj + detect_language
+    scoring.py        # agregacija + letter grade + renormalizacija
     orchestrator.py   # paralelni agenti + sintetizator
-    report.py         # Markdown/JSON render
-    providers/        # LLM apstrakcija (OpenAI + Mock)
-    agents/           # 4 agenta + prompti
-  scripts/            # check_no_secrets.py, demo_dry.py
-  tests/              # pytest + fixture stvarnog Lexi HTML-a
+    report.py         # Markdown/JSON render (+ lokalizacija datuma)
+    providers/        # LLM apstrakcija (OpenAI + Mock) + build_client
+    agents/           # 4 agenta (prompt + schema) + registar
+  scripts/
+    install.sh        # instalacija Linux/macOS (i curl | bash)
+    install.bat       # instalacija Windows 10/11
+    check_no_secrets.py  # honeypot scan
+    demo_dry.py       # offline demo → examples/
+  tests/              # pytest (ekstraktor, scoring, report, dry-run pipeline) + fixture
   examples/           # primjeri outputa (committed)
-  docs/PROMPTS.md     # svi promptovi verbatim + razlozi dizajna
-  PLAN.md             # planiranje + arhitekturalne odluke
+  docs/
+    PROMPTS.md        # svi promptovi verbatim + razlozi dizajna
+    PLANNING.md       # originalni plan sesije
+    DEVELOPMENT.md    # vodič za razvoj (gdje/kako/što)
+  PLAN.md             # planiranje + arhitekturalne odluke (ADR)
 ```
 
 ## Odluke (ukratko)

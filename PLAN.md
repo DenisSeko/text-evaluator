@@ -108,9 +108,10 @@ Mock provider omogućuje testove i demo **bez ključa i mreže**.
 - Svaki agent vraća: `score`, `criteria[]` (name/score/note), `strengths[]`,
   `weaknesses[]`, `verdict` — pa je jasno **zašto** je tekst dobio ocjenu koju je dobio.
 - **Jezik reviewa** se auto-detektira iz članka (`extractor.detect_language`: hrvatski
-  dijakritici `čćšžđ` → HR, inače EN) i prosljeđuje u prompt svih agenata — narativ
-  (verdict, snage, slabosti, notes) piše se na jeziku članka, dok nazivi kriterija
-  ostaju EN (strukturirani scoring).
+  dijakritici `čćšžđ` → HR, inače EN) i prosljeđuje u prompt svih agenata — **cijeli
+  izvještaj** (verdict, snage, slabosti, notes i nazivi kriterija) piše se na jeziku
+  članka; tamo gdje je moguće engleski naziv kriterija ostaje samo kao glosa u zagradi
+  (npr. "Specifičnost (Concreteness)") radi povezivanja s fiksnom rubricom.
 - JSON se validira (pydantic) i po potrebi retry-ja; na ponovljeni neuspjeh agent se
   označi kao neuspješan i ne ruši cijeli run.
 

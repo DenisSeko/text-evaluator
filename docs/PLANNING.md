@@ -80,5 +80,5 @@ Samostalna Python CLI aplikacija koja: (1) scrape-a Lexi blog post s URL-a, (2) 
 
 ## Further considerations
 1. ✅ Model: `gpt-4.1-mini` za agente + `gpt-5-mini` za sintetizator (konfigurabilno preko `.env`); početna preporuka `gpt-4o-mini` je zamijenjena nakon rasprave o novijim modelima.
-2. ✅ Jezik outputa: ocjene strukturirane (EN nazivi kriterija); narativ (verdict, snage, slabosti, notes) na jeziku članka. Jezik se **auto-detektira** iz članka (heuristika: hrvatski dijakritici `čćšžđ` → HR, inače EN; `extractor.detect_language`) i prosljeđuje u prompt svih agenata (`agents/base.build_messages`), tako da model piše cijeli review na jeziku članka.
+2. ✅ Jezik outputa: cijeli izvještaj (verdict, snage, slabosti, notes i nazivi kriterija) na jeziku članka; engleski naziv kriterija ostaje samo kao glosa u zagradi gdje ima smisla. Jezik se **auto-detektira** iz članka (heuristika: hrvatski dijakritici `čćšžđ` → HR, inače EN; `extractor.detect_language`) i prosljeđuje u prompt svih agenata (`agents/base.build_messages`), tako da model piše cijeli review na jeziku članka.
 3. ✅ Git: samostalan repo u `lexi-evaluator/` (branch `main`), premješten iz monorepa.

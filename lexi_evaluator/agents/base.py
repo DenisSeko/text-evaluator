@@ -66,11 +66,13 @@ class Agent(ABC):
         language_name = "Croatian" if article.language == "hr" else "English"
         user_prompt = self.build_user_prompt(text)
         # Auto-detected article language drives the language of the whole review:
-        # verdict, strengths, weaknesses and every per-criterion note.
+        # verdict, strengths, weaknesses, per-criterion notes AND criterion names.
+        criterion_example = ' (e.g. "Clarity" -> "Jasnoća")' if article.language == "hr" else ""
         user_prompt += (
-            '\n\nLanguage: write ALL narrative output — "verdict", "strengths", '
-            f'"weaknesses" and every "note" — in {language_name} (the language of '
-            "the article)."
+            f"\n\nLanguage: the article is written in {language_name}. Write ALL text "
+            'output in that language — "verdict", "strengths", "weaknesses", every '
+            f'"note" and every criterion "name"{criterion_example}. Do not keep '
+            "English-only criterion names."
         )
         return [
             {"role": "system", "content": self.system_prompt()},

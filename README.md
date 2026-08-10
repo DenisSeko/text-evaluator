@@ -38,6 +38,10 @@ URL ──► scraper ──► ekstraktor ──► 4 agenta (paralelno) ──
 | **Kvantitativna rubrika** | Fiksna rubrika, konzistentna ocjena | Clarity, Structure, Specificity, Reader-benefit, Tone, Readability |
 | **Ljudski glas / anti-generic** | Zvuči li ljudski ili AI-generično | Authenticity, Anti-cliché, Personal voice, AI-markers |
 
+> Jezici: nazivi kriterija i sav narativ (verdict, snage, slabosti, notes) **prate jezik
+> članka** (auto-detektiran, HR ili EN) — engleski naziv kriterija ostaje samo kao glosa
+> u zagradi (npr. "Specifičnost (Concreteness)").
+
 ### Sustav ocjenjivanja
 
 - Svaki agent vraća ocjenu **0–10** + kriterije + snage/slabosti + obrazloženje.

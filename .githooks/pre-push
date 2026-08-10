@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#
+# Pre-push hook — runs the local gate before anything is pushed.
+# Enable once with:  git config core.hooksPath .githooks
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+exec bash "$ROOT/scripts/check_all.sh"

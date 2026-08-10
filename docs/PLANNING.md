@@ -76,7 +76,10 @@ Samostalna Python CLI aplikacija koja: (1) scrape-a Lexi blog post s URL-a, (2) 
 
 ## Scope
 - IN: scraper+extractor, 4 agenta, scoring, CLI, docs, testovi, primjer outputa, honeypot guard.
-- OUT (per task, "nemoj over-engineerati"): baza, deploy, auth, web UI, dodatni provideri (samo dokumentirani seam), CI.
+- IN (kasnije dodano, nakon što je zadatak bio gotov): CI/CD kapija — GitHub Actions
+  (`.github/workflows/ci.yml`, sva 3 OS-a) + lokalna kapija `scripts/check_all.sh` + pre-push hook.
+- OUT (per task, "nemoj over-engineerati"): baza, deploy, auth, web UI, dodatni provideri
+  (samo dokumentirani seam).
 
 ## Further considerations
 1. ✅ Model: `gpt-4.1-mini` za agente + `gpt-5-mini` za sintetizator (konfigurabilno preko `.env`); početna preporuka `gpt-4o-mini` je zamijenjena nakon rasprave o novijim modelima.

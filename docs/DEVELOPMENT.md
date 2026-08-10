@@ -228,11 +228,11 @@ ruff check . && ruff format --check .   # lint + format
 python scripts/check_no_secrets.py      # honeypot (obavezno prije pusha)
 python scripts/demo_dry.py              # regenerira examples/demo-dry.*
 
-# CI / pre-push kapija
+# CI / pre-push vrata
 bash scripts/check_all.sh               # pytest + ruff + format + honeypot (lokalni gate)
 git config core.hooksPath .githooks     # jednom: pre-push hook pokreće check_all.sh
 ```
 
 **CI/CD:** `.github/workflows/ci.yml` (GitHub Actions) pokreće iste provjere na svakom
 push/PR-u na **sva 3 OS-a** — to je automatizirani "code review" (bez zelenih provjera
-PR se ne smatra čistim). Lokalna kapija `scripts/check_all.sh` to zrcali prije pusha.
+PR se ne smatra čistim). Lokalna vrata `scripts/check_all.sh` to zrcali prije pusha.

@@ -173,17 +173,17 @@ pyinstaller --onefile --name lexi-evaluator lexi_evaluator\__main__.py
 
 ### CI/CD i provjere prije pusha
 
-Repo ima **automatiziranu "code review" kapiju**:
+Repo ima **automatizirana "code review" vrata**:
 
 - **GitHub Actions** (`.github/workflows/ci.yml`) — na svaki `push` na `main` i na svaki
   **pull request** automatski provjerava na **sva 3 OS-a** (Ubuntu, Windows, macOS):
   `pytest` (offline, bez ključa/mreže), `ruff check`, `ruff format --check` i honeypot scan.
   Bez zelenih provjera PR se ne može "reviewati" kao čist.
-- **Lokalna kapija prije pusha** — pokreni prije `git push`:
+- **Lokalna vrata prije pusha** — pokreni prije `git push`:
   ```bash
   bash scripts/check_all.sh     # pytest + ruff + format + honeypot
   ```
-- **Pre-push git hook** (opcionalno, automatski pokreće kapiju prije svakog pusha):
+- **Pre-push git hook** (opcionalno, automatski pokreće vrata prije svakog pusha):
   ```bash
   git config core.hooksPath .githooks
   ```

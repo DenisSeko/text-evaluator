@@ -2,7 +2,71 @@
 
 from __future__ import annotations
 
+from datetime import datetime
+
 from .models import EvaluationResult
+
+# Date/time localization: HR long form ("28. siječnja 2026.") vs US ("January 28, 2026").
+_HR_MONTHS = {
+    1: "siječnja",
+    2: "veljače",
+    3: "ožujka",
+    4: "travnja",
+    5: "svibnja",
+    6: "lipnja",
+    7: "srpnja",
+    8: "kolovoza",
+    9: "rujna",
+    10: "listopada",
+    11: "studenoga",
+    12: "prosinca",
+}
+_EN_MONTHS = {
+    1: "January",
+    2: "February",
+    3: "March",
+    4: "April",
+    5: "May",
+    6: "June",
+    7: "July",
+    8: "August",
+    9: "September",
+    10: "October",
+    11: "November",
+    12: "December",
+}
+_DATE_FORMATS = ("%Y-%m-%dT%H:%M:%S%z", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d")
+
+
+def _parse_datetime(value: str) -> datetime | None:
+    for fmt in _DATE_FORMATS:
+        try:
+            return datetime.strptime(value.strip(), fmt)
+        except ValueError:
+            continue
+    return None
+
+
+def format_date(value: str, language: str) -> str:
+    """Localize a date string: HR \"28. siječnja 2026.\" / US \"January 28, 2026\"."""
+    dt = _parse_datetime(value)
+    if dt is None:
+        return value
+    if language == "hr":
+        return f"{dt.day}. {_HR_MONTHS[dt.month]} {dt.year}."
+    return f"{_EN_MONTHS[dt.month]} {dt.day}, {dt.year}"
+
+
+def format_datetime(value: str, language: str) -> str:
+    """Localize a datetime string: HR \"28. siječnja 2026. u 21:02 (UTC)\" / US \"...\"."""
+    dt = _parse_datetime(value)
+    if dt is None:
+        return value
+    time_part = dt.strftime("%H:%M")
+    date_part = format_date(value, language)
+    if language == "hr":
+        return f"{date_part} u {time_part} (UTC)"
+    return f"{date_part}, {time_part} (UTC)"
 
 
 def to_json(result: EvaluationResult) -> dict:
@@ -21,12 +85,12 @@ def render_markdown(result: EvaluationResult) -> str:
     if article.author:
         lines.append(f"- **Autor:** {article.author}")
     if article.published_at:
-        lines.append(f"- **Objavljeno:** {article.published_at}")
+        lines.append(f"- **Objavljeno:** {format_date(article.published_at, article.language)}")
     lines.append(f"- **Duljina:** {article.word_count} riječi · {article.read_time}")
     lines.append(
         f"- **Model (agenti):** {result.model} · **Model (sintetizator):** {result.synth_model or '—'}"
     )
-    lines.append(f"- **Vrijeme izrade:** {result.created_at}")
+    lines.append(f"- **Vrijeme izrade:** {format_datetime(result.created_at, article.language)}")
     lines.append("")
 
     lines.append(

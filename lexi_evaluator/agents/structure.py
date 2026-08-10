@@ -36,7 +36,7 @@ class StructureAgent(Agent):
 </ARTICLE>
 
 Score it 0-10 on how well it guides the reader, using these criteria:
-- "Uvod (hook)": does the opening pull the reader in and set expectations?
+- "Uvod": does the opening pull the reader in and set expectations?
 - "Logical flow": does each section build on the previous one without jumps?
 - "Heading structure": are headings informative, parallel and well organised?
 - "Clarity": is the language precise and easy to follow?

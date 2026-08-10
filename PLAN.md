@@ -109,9 +109,12 @@ Mock provider omogućuje testove i demo **bez ključa i mreže**.
   `weaknesses[]`, `verdict` — pa je jasno **zašto** je tekst dobio ocjenu koju je dobio.
 - **Jezik reviewa** se auto-detektira iz članka (`extractor.detect_language`: hrvatski
   dijakritici `čćšžđ` → HR, inače EN) i prosljeđuje u prompt svih agenata — **cijeli
-  izvještaj** (verdict, snage, slabosti, notes i nazivi kriterija) piše se na jeziku
-  članka; tamo gdje je moguće engleski naziv kriterija ostaje samo kao glosa u zagradi
-  (npr. "Specifičnost (Concreteness)") radi povezivanja s fiksnom rubricom.
+  izvještaj** (verdict, snage, slabosti, notes i nazivi kriterija) piše se **samo na
+  jeziku članka**, bez engleskih glosa u zagradi.
+- **Datumi i vrijeme** u izvještaju se lokaliziraju prema jeziku članka: HR dugi oblik
+  ("24. srpnja 2025." / "u 22:09 (UTC)") za hrvatski, američki oblik ("July 24, 2025" /
+  ", 22:09 (UTC)") za engleski (`report.format_date` / `format_datetime`; JSON ostaje
+  ISO 8601 zbog strojne čitljivosti).
 - JSON se validira (pydantic) i po potrebi retry-ja; na ponovljeni neuspjeh agent se
   označi kao neuspješan i ne ruši cijeli run.
 

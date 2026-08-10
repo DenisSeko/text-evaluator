@@ -46,7 +46,7 @@ Sintetizator (5. uloga) ne ocjenjuje — **spaja** i piše finalni sud + priorit
 > logical flow, heading quality, paragraph rhythm and whether the reader is ever lost.
 > You judge and justify — you never rewrite the article.
 
-**Kriteriji:** Hook (uvod) · Logical flow · Heading structure · Clarity · Pacing & transitions
+**Kriteriji:** Uvod · Logical flow · Heading structure · Clarity · Pacing & transitions
 
 **Dizajn:** strukturiranje je "arhitektura" teksta — vodi li čitatelja od prvog retka do
 zaključka. Hook zasebno jer je uvod odluka čitatelja hoće li uopće nastaviti. Headings
@@ -65,8 +65,13 @@ svih agenata — oni su **sci** ne **copywriteri**.
 > engagement, specific examples and stories, and the absence of generic filler.
 > You judge and justify — you never rewrite the article.
 
-**Kriteriji:** Concreteness · Reader benefit · Tone & emotional resonance ·
+**Kriteriji:** Specifičnost · Reader benefit · Tone & emotional resonance ·
 Avoiding generic filler · Examples & storytelling · Trust & authority
+
+> **Napomena o jeziku:** nazivi kriterija i sav narativ se pri izvršavanju lokaliziraju
+> prema auto-detektiranom jeziku članka (HR/EN) — npr. za hrvatski članak "Clarity" →
+> "Jasnoća", "Logical flow" → "Logički tok" (`agents/base.build_messages` dodaje
+> instrukciju; bez engleskih glosa u zagradi).
 
 **Dizajn:** ova perspektiva je "zašto tekst radi (ili ne)". Konkretnost > apstrakcija,
 jer apstraktno ne pogađa čitatelja; benefit je ono što čitatelja zadržava; ton gradi

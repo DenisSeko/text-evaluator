@@ -39,8 +39,9 @@ URL ──► scraper ──► ekstraktor ──► 4 agenta (paralelno) ──
 | **Ljudski glas / anti-generic** | Zvuči li ljudski ili AI-generično | Authenticity, Anti-cliché, Personal voice, AI-markers |
 
 > Jezici: nazivi kriterija i sav narativ (verdict, snage, slabosti, notes) **prate jezik
-> članka** (auto-detektiran, HR ili EN) — engleski naziv kriterija ostaje samo kao glosa
-> u zagradi (npr. "Specifičnost (Concreteness)").
+> članka** (auto-detektiran, HR ili EN), bez engleskih glosa. Datumi i vrijeme u
+> izvještaju lokalizirani su isto — HR oblik (npr. "24. srpnja 2025.") ili američki
+> ("July 24, 2025"); JSON ostaje ISO 8601.
 
 ### Sustav ocjenjivanja
 

@@ -1,0 +1,170 @@
+# Lexi Evaluator
+
+Multi-agent AI aplikacija koja procjenjuje **koliko je dobro napisan** neki tekst s
+Lexi bloga (https://lexi.hr/blog/). Dobije URL, izvuče čisti sadržaj članka, pokrene
+**4 neovisna AI agenta** — svaki s vlastitom perspektivom i promptom — te spoji njihove
+ocjene u ukupnu ocjenu s obrazloženjem po agentu.
+
+> Stack: Python 3.12 · CLI · OpenAI (s apstrakcijskim slojem za druge providere)
+> Bez baze, bez deploya, bez autentikacije — fokus na promptovima i orkestraciji.
+
+---
+
+## Kako radi
+
+```
+URL ──► scraper ──► ekstraktor ──► 4 agenta (paralelno) ──► sintetizator ──► izvještaj
+              (httpx)   (trafilatura/     (OpenAI, JSON)     (finalni sud)   (MD + JSON)
+                        BeautifulSoup)
+```
+
+1. **Scraping** — `scraper.py` dohvati HTML (httpx, vlastiti `User-Agent`, on-disk cache).
+2. **Ekstrakcija** — `extractor.py` izvuče čisti sadržaj članka (naslov, autor, datum,
+   headings, paragrafe) i odbaci navigaciju, footer, cookie banner i "Pročitaj još".
+   Primarno `trafilatura`, fallback `BeautifulSoup`.
+3. **Agenti** — 4 neovisna agenta, svaki s vlastitim system promptom, rubrikom i JSON
+   schemom, pokrenuta paralelno (`asyncio.gather`). Vidi [docs/PROMPTS.md](docs/PROMPTS.md).
+4. **Sintetizator** — 1 dodatni poziv koji pročita sve verdict-ove i napiše finalni,
+   uravnotežen sud s prioritiziranim preporukama (opcionalno, `--no-synth`).
+5. **Ocjenjivanje** — ukupna ocjena = težinski prosjek agent ocjena, mapirana na
+   letter grade A–F + label. Vidi [Sustav ocjenjivanja](#sustav-ocjenjivanja).
+
+### Agenti
+
+| Agent | Perspektiva | Kriteriji |
+|---|---|---|
+| **Struktura i tok** | Vodi li tekst čitatelja logično kroz sadržaj | Hook, Logical flow, Heading structure, Clarity, Pacing |
+| **Psihologija pisanja** | Psihološki principi dobrog pisanja | Concreteness, Reader benefit, Tone, Anti-filler, Examples, Trust |
+| **Kvantitativna rubrika** | Fiksna rubrika, konzistentna ocjena | Clarity, Structure, Specificity, Reader-benefit, Tone, Readability |
+| **Ljudski glas / anti-generic** | Zvuči li ljudski ili AI-generično | Authenticity, Anti-cliché, Personal voice, AI-markers |
+
+### Sustav ocjenjivanja
+
+- Svaki agent vraća ocjenu **0–10** + kriterije + snage/slabosti + obrazloženje.
+- **Ukupna ocjena** = težinski prosjek: struktura **30%**, rubrika **30%**,
+  psihologija **25%**, humanost **15%** (konfigurabilno preko `.env`).
+- Ako agent ne uspije, isključi se i težine se renormaliziraju (ne ruši cijeli rezultat).
+- Letter grade + label:
+
+| Ocjena | Grade | Label |
+|---|---|---|
+| 9.0–10 | A | Excellent |
+| 8.0–8.9 | B | Very good |
+| 7.0–7.9 | C | Good |
+| 6.0–6.9 | D | Adequate |
+| 5.0–5.9 | E | Weak |
+| 0–4.9 | F | Poor |
+
+---
+
+## Instalacija i pokretanje (Windows / macOS / Linux)
+
+```bash
+cd lexi-evaluator
+python3 -m venv .venv
+# Windows: .venv\Scripts\activate     macOS/Linux: source .venv/bin/activate
+python -m pip install -r requirements-dev.txt
+
+# Konfiguracija (ključ se NIKAD ne commit-a)
+cp .env.example .env
+# uredi .env i upiši pravi OPENAI_API_KEY
+```
+
+### Pokretanje
+
+```bash
+# Evaluacija pravog Lexi posta
+python -m lexi_evaluator "https://lexi.hr/why-writing-sounds-generic/"
+
+# Snimi izvještaj kao Markdown i/ili JSON
+python -m lexi_evaluator <URL> --output md  --out-file examples/run.md
+python -m lexi_evaluator <URL> --output json --out-file examples/run.json
+
+# Offline demo bez API ključa i bez mreže (mock LLM + spremljeni fixture)
+python scripts/demo_dry.py
+
+# Opcije
+python -m lexi_evaluator <URL> --agents structure,rubric   # podskup agenata
+python -m lexi_evaluator <URL> --no-synth                  # bez finalnog suda
+python -m lexi_evaluator <URL> --no-cache                  # bez cache-a HTML-a
+```
+
+### Testovi i lint
+
+```bash
+python -m pytest -q          # offline: ekstraktor, scoring, dry-run pipeline
+python scripts/check_no_secrets.py   # honeypot: provjera da nema ključeva u repou
+ruff check . && ruff format --check .
+```
+
+---
+
+## Konfiguracija (`.env`)
+
+| Varijabla | Default | Opis |
+|---|---|---|
+| `OPENAI_API_KEY` | — | OpenAI ključ (iz env varijable, nikad u kodu/repou) |
+| `LEXI_MODEL` | `gpt-4.1-mini` | Model za 4 agenta (jeftin, dobar JSON) |
+| `LEXI_MODEL_SYNTH` | `gpt-5-mini` | Model za sintetizator (1 poziv po run-u) |
+| `LEXI_MAX_CHARS` | `40000` | Truncate članka poslanog agentima |
+| `LEXI_TEMPERATURE` | `0.3` | Sampling temperatura (niska = konzistentnije) |
+| `LEXI_WEIGHT_*` | vidi gore | Težine po agentu (zbroj = 1.0) |
+| `LEXI_CACHE_DIR` | `.cache` | Cache raw HTML (gitignored) |
+
+---
+
+## Sigurnost ključa (VAŽNO)
+
+- Ključ se učitava isključivo iz **environment varijable** ili gitignoriranog `.env`.
+- `.env` je u `.gitignore`; u repo ide samo `.env.example` s placeholderom.
+- `scripts/check_no_secrets.py` scan-ira repo na `sk-proj-…` i slične pattern-e i
+  fail-a ako nađe bilo što — pokreni prije svakog commit-a/pusha.
+- **Nikada ne commit-aj `.env` ni ključ.** Ako se to dogodi, ključ se smatra
+  kompromitiranim.
+
+---
+
+## Projektna struktura
+
+```
+lexi-evaluator/
+  lexi_evaluator/
+    cli.py            # CLI ulaz (argparse)
+    config.py         # pydantic-settings (.env)
+    models.py         # pydantic modeli (Article, AgentVerdict, ...)
+    scraper.py        # httpx fetch + cache
+    extractor.py      # trafilatura / BeautifulSoup čisti sadržaj
+    scoring.py        # agregacija + letter grade
+    orchestrator.py   # paralelni agenti + sintetizator
+    report.py         # Markdown/JSON render
+    providers/        # LLM apstrakcija (OpenAI + Mock)
+    agents/           # 4 agenta + prompti
+  scripts/            # check_no_secrets.py, demo_dry.py
+  tests/              # pytest + fixture stvarnog Lexi HTML-a
+  examples/           # primjeri outputa (committed)
+  docs/PROMPTS.md     # svi promptovi verbatim + razlozi dizajna
+  PLAN.md             # planiranje + arhitekturalne odluke
+```
+
+## Odluke (ukratko)
+
+Detaljno u [PLAN.md](PLAN.md). Ključno:
+
+- **CLI, ne web** — task traži "bez over-engineeringa" (bez baze/deploya/autha).
+- **Python 3.12 + pip + pinned requirements** — cross-OS (Windows/macOS/Linux), bez shell skripti.
+- **`gpt-4.1-mini` za agente + `gpt-5-mini` za sintetizator** — bolji omjer cijene i
+  kvalitete od starijeg `gpt-4o-mini`; razlika u apsolutnom trošku je zanemariva
+  (par centi po run-u). Model je lako zamijeniti preko `.env`.
+- **4 perspektive, ne 3** — dodan "Ljudski glas / anti-generic" jer je to srž Lexi brenda.
+- **Sintetizator kao 5. poziv** — demonstrira suradnju agenata; deterministički zbroj
+  daje broj, sintetizator daje narativ (opcionalno).
+
+---
+
+## Primjeri outputa
+
+- [`examples/demo-dry.md`](examples/demo-dry.md) — offline demo (mock LLM) na stvarnom
+  Lexi članku "Why Writing Sounds Generic: The Psychology Behind It".
+- [`examples/demo-dry.json`](examples/demo-dry.json) — ista evaluacija kao strukturirani JSON.
+
+> Nakon live run-a s pravim ključem, u `examples/` će biti i rezultat na stvarnom postu.

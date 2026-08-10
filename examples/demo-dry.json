@@ -1,0 +1,210 @@
+{
+  "article": {
+    "url": "fixture:sample_article.html",
+    "title": "Why Writing Sounds Generic: The Psychology Behind It",
+    "author": "Team Lexi",
+    "published_at": "2026-01-28",
+    "read_time": "2 min",
+    "plain_text": "Nobody wakes up and says, “Today, I’m going to write something generic.” And yet — somehow — we often do. That’s often why writing sounds generic—even when the intention is to sound clear, professional, or helpful. This shows up everywhere. From emails and landing pages to AI-generated replies that all start to sound eerily similar. Why generic language feels safe It’s not laziness. It’s psychology. Our brains are wired to default to familiar language when we want to avoid friction, mistakes, or standing out. Generic phrases are mental shortcuts. They save energy, reduce risk, signal safety. Saying “We apologize for the inconvenience” feels safe because everyone says it. And if everyone says it, it must be fine. However, what feels safe to the writer often feels invisible to the reader. This is one of the main reasons why writing sounds generic, especially in professional, marketing, and AI-assisted communication. Why writing sounds generic in the first place? Three reasons 1. The curse of knowledge: once we know something, we assume others know it too. We lose the ability to imagine the gaps in their understanding. That’s how we end up skipping context our reader actually needs. 2. It’s also about safety bias—our brain prefers familiarity, even if it renders us invisible. The easy path feels less risky than being different. Neutral language feels safer than taking a clear position. 3, Add cognitive economy, our brain’s instinct to reuse what’s already stored, and suddenly clichés and templates aren’t just sloppy writing, they’re survival strategies. Templates feel efficient in the moment, but over time they erase voice. As a result, the very instincts that kept our ancestors safe in groups now make our writing lifeless today. This explains why writing sounds generic even when people genuinely try to be clear, helpful, or professional. Breaking out of generic isn’t just a stylistic move, it’s challenging how your brain wants to protect you. That’s why advice alone rarely works because the resistance isn’t technical, it’s cognitive. And that’s exactly why we built Lexi: to disrupt your autopilot and return language to where its power truly lies: at the intersection of clarity and authenticity. Lexi is designed to interrupt default phrases, surface blind spots, and force specificity back into writing. Once you understand why writing sounds generic, it becomes much easier to catch yourself before default language takes over. Side-box: Why our brain pushes us into generic This bias is one of the psychological reasons why writing sounds generic, especially when speed and efficiency matter. Curse of knowledge: Once you know something, it’s almost impossible to imagine not knowing it — so you assume others “get it” too. Result: you skip details your reader actually needs. 🔗Harvard Business Review",
+    "char_count": 2840,
+    "word_count": 453,
+    "headings": [
+      "Why we keep sounding generic",
+      "Why generic language feels safe",
+      "Why writing sounds generic in the first place? Three reasons",
+      "Pročitaj još",
+      "How to Write an Apology Email to a Customer (That Actually Rebuilds Trust)",
+      "How to Respond to a Negative Review — and Sound Human Doing It",
+      "Zašto klikamo na bombastične naslove? Istražili smo psihološke mehanizme iza clickbaita",
+      "Postavke privatnosti",
+      "Pomaknite klizač kako biste omogućili ili onemogućili različite vrste kolačića:"
+    ],
+    "source": "trafilatura"
+  },
+  "model": "gpt-4.1-mini",
+  "synth_model": "gpt-5-mini",
+  "agent_verdicts": [
+    {
+      "agent_id": "structure",
+      "agent_name": "Struktura i tok",
+      "perspective": "Vodi li tekst čitatelja logično kroz sadržaj — jasnoća, organizacija i ritam.",
+      "score": 8.5,
+      "criteria": [
+        {
+          "name": "Hook (uvod)",
+          "score": 8.0,
+          "note": "Opens with a relatable, concrete scenario."
+        },
+        {
+          "name": "Logical flow",
+          "score": 9.0,
+          "note": "Each section builds on the previous one."
+        },
+        {
+          "name": "Heading structure",
+          "score": 9.0,
+          "note": "Headings are informative and well ordered."
+        },
+        {
+          "name": "Clarity",
+          "score": 8.5,
+          "note": "Sentences are easy to follow."
+        },
+        {
+          "name": "Pacing & transitions",
+          "score": 8.0,
+          "note": "Paragraphs are digestible."
+        }
+      ],
+      "strengths": [
+        "Clear narrative arc from hook to takeaway.",
+        "Headings guide the reader."
+      ],
+      "weaknesses": [
+        "Some paragraphs could be shorter."
+      ],
+      "verdict": "The text is very well structured and guides the reader logically from the opening hook to a concrete takeaway.",
+      "error": null
+    },
+    {
+      "agent_id": "psychology",
+      "agent_name": "Psihologija pisanja",
+      "perspective": "Koristi li tekst psihološke principe dobrog pisanja — konkretnost, benefit za čitatelja i ton.",
+      "score": 8.0,
+      "criteria": [
+        {
+          "name": "Concreteness",
+          "score": 8.5,
+          "note": "Uses specific examples and metaphors."
+        },
+        {
+          "name": "Reader benefit",
+          "score": 8.0,
+          "note": "Explains why it matters to the reader."
+        },
+        {
+          "name": "Tone & emotional resonance",
+          "score": 8.0,
+          "note": "Human, conversational tone."
+        },
+        {
+          "name": "Avoiding generic filler",
+          "score": 7.5,
+          "note": "Mostly specific, a few generic transitions."
+        }
+      ],
+      "strengths": [
+        "Strong reader-benefit framing.",
+        "Concrete psychological explanations."
+      ],
+      "weaknesses": [
+        "A couple of sections rely on abstract phrasing."
+      ],
+      "verdict": "Psychologically grounded writing that keeps the reader's benefit central.",
+      "error": null
+    },
+    {
+      "agent_id": "rubric",
+      "agent_name": "Kvantitativna rubrika",
+      "perspective": "Konzistentna kvantitativna ocjena po fiksnoj rubrici s obrazloženjem po kriteriju.",
+      "score": 8.2,
+      "criteria": [
+        {
+          "name": "Clarity",
+          "score": 8.5,
+          "note": "Precise and unambiguous."
+        },
+        {
+          "name": "Structure",
+          "score": 9.0,
+          "note": "Well organized."
+        },
+        {
+          "name": "Specificity",
+          "score": 8.5,
+          "note": "Concrete examples throughout."
+        },
+        {
+          "name": "Reader-benefit",
+          "score": 8.0,
+          "note": "Clear value proposition."
+        },
+        {
+          "name": "Tone & voice",
+          "score": 8.0,
+          "note": "Consistent, human voice."
+        },
+        {
+          "name": "Readability",
+          "score": 7.5,
+          "note": "Good but some long sentences."
+        }
+      ],
+      "strengths": [
+        "High specificity.",
+        "Consistent voice."
+      ],
+      "weaknesses": [
+        "Readability dips in a few passages."
+      ],
+      "verdict": "Above-average copy that scores consistently across the rubric.",
+      "error": null
+    },
+    {
+      "agent_id": "humanity",
+      "agent_name": "Ljudski glas / anti-generic",
+      "perspective": "Zvuči li tekst ljudski, autentično i prepoznatljivo — ili generički i AI-slično.",
+      "score": 8.7,
+      "criteria": [
+        {
+          "name": "Authenticity",
+          "score": 9.0,
+          "note": "Sounds like a real person with a point of view."
+        },
+        {
+          "name": "Anti-cliché / anti-template",
+          "score": 8.5,
+          "note": "Avoids corporate filler."
+        },
+        {
+          "name": "Personal voice",
+          "score": 8.5,
+          "note": "Distinctive phrasing."
+        },
+        {
+          "name": "AI-sounding markers",
+          "score": 8.8,
+          "note": "Few generic AI transitions detected."
+        }
+      ],
+      "strengths": [
+        "Genuine, opinionated voice.",
+        "Minimal template language."
+      ],
+      "weaknesses": [
+        "One or two transitions still feel formulaic."
+      ],
+      "verdict": "Reads human and distinctive rather than generic or AI-generated.",
+      "error": null
+    }
+  ],
+  "overall": {
+    "score": 8.31,
+    "letter_grade": "B",
+    "label": "Very good",
+    "weights": {
+      "structure": 0.3,
+      "psychology": 0.25,
+      "rubric": 0.3,
+      "humanity": 0.15
+    },
+    "agent_scores": {
+      "structure": 8.5,
+      "psychology": 8.0,
+      "rubric": 8.2,
+      "humanity": 8.7
+    }
+  },
+  "synthesis": "Svi agenti su suglasni da je tekst iznad prosjeka: odlično strukturiran, psihološki utemeljen i ljudski u tonu. Najveće snage su konkretni primjeri i logičan tok; najslabija točka je čitljivost u par dužih odlomaka. Preporuka: skratiti najdulje rečenice i ukloniti preostale generičke prijelaze.",
+  "created_at": "2026-08-10T20:32:05+00:00"
+}

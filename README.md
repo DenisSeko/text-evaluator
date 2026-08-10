@@ -1,5 +1,10 @@
 # Lexi Evaluator
 
+[![CI](https://github.com/DenisSeko/text-evaluator/actions/workflows/ci.yml/badge.svg)](https://github.com/DenisSeko/text-evaluator/actions/workflows/ci.yml)
+[![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Last commit](https://img.shields.io/github/last-commit/DenisSeko/text-evaluator)](https://github.com/DenisSeko/text-evaluator)
+[![Repo size](https://img.shields.io/github/repo-size/DenisSeko/text-evaluator)](https://github.com/DenisSeko/text-evaluator)
+
 Multi-agent AI aplikacija koja procjenjuje **koliko je dobro napisan** neki tekst s
 Lexi bloga (https://lexi.hr/blog/). Dobije URL, izvuče čisti sadržaj članka, pokrene
 **4 neovisna AI agenta** — svaki s vlastitom perspektivom i promptom — te spoji njihove
@@ -77,7 +82,7 @@ URL ──► scraper ──► ekstraktor ──► 4 agenta (paralelno) ──
 **Linux / macOS — direktno kroz terminal (curl, bez ručnog kloniranja):**
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/lexi-hr/lexi-evaluator/main/scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/DenisSeko/text-evaluator/main/scripts/install.sh | bash
 ```
 
 Skripta sama klonira repo (u `~/lexi-evaluator`), stvori `.venv`, instalira ovisnosti +
@@ -85,7 +90,7 @@ CLI i napravi `.env`. Ako je repo hostiran negdje drugdje, postavi URL prije pok
 
 ```bash
 LEXI_REPO_URL="https://github.com/TVOJ-ORG/lexi-evaluator" \
-  curl -fsSL https://raw.githubusercontent.com/lexi-hr/lexi-evaluator/main/scripts/install.sh | bash
+  curl -fsSL https://raw.githubusercontent.com/DenisSeko/text-evaluator/main/scripts/install.sh | bash
 ```
 
 > **Sigurnost:** `curl | bash` izvršava udaljeni skript. Prvo ga pogledaj:

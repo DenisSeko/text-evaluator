@@ -13,13 +13,13 @@
 #
 # Env overrides:
 #   LEXI_REPO_URL  - git URL cloned by the direct curl install
-#                    (default: https://github.com/lexi-hr/lexi-evaluator)
+#                    (default: https://github.com/DenisSeko/text-evaluator)
 #   LEXI_REPO_BRANCH - branch to clone (default: main)
 #   LEXI_DIR       - target directory for the direct curl install
 #                    (default: $HOME/lexi-evaluator)
 set -euo pipefail
 
-REPO_URL="${LEXI_REPO_URL:-https://github.com/lexi-hr/lexi-evaluator}"
+REPO_URL="${LEXI_REPO_URL:-https://github.com/DenisSeko/text-evaluator}"
 REPO_BRANCH="${LEXI_REPO_BRANCH:-main}"
 INSTALL_DIR="${LEXI_DIR:-$HOME/lexi-evaluator}"
 

@@ -131,7 +131,16 @@ Zadatak izričito potiče korištenje AI-ja. Proces u ovom repou:
 - [x] `ruff check .` + `ruff format --check .` — čisto
 - [x] `python scripts/demo_dry.py` — cijeli pipeline bez ključa/mreže, generira `examples/`
 - [x] `python scripts/check_no_secrets.py` — nema ključeva u repou
-- [ ] Live run na stvarnom Lexi postu s pravim ključem → `examples/` (zahtijeva ključ u `.env`)
+- [x] Live run na stvarnom Lexi postu s pravim ključem → `examples/` (ključ u `.env`)
+  - 3 URL-a: `why-writing-sounds-generic` (7.0/10, C), `psiholoski-mehanizmi-iza-clickbaita` (7.7/10, C), `how-to-respond-to-a-negative-review` (7.7/10, C) — JSON + MD u `examples/`
+
+## 7. Napomena o modelima (iz live verifikacije)
+
+- **`gpt-5` / o-serija modeli ne prihvaćaju custom `temperature`** (samo default 1).
+  `OpenAIProvider` sada prepoznaje reasoning modele po prefiksu (`gpt-5`, `o1`, `o3`, `o4`, `o5`)
+  i ne šalje `temperature`, uz sigurnosnu mrežu: ako API i dalje odbije, retry bez parametra.
+  Ostali `BadRequestError`-i se pretvaraju u `LLMError` da ne sruše cijeli run
+  (usklađeno s ADR-007 — neuspjeh jednog agenta se izolira).
 
 ## 7. Known limitations / future work
 

@@ -1,0 +1,232 @@
+{
+  "article": {
+    "url": "https://lexi.hr/why-writing-sounds-generic/",
+    "title": "Why Writing Sounds Generic: The Psychology Behind It",
+    "author": "Team Lexi",
+    "published_at": "2026-01-28",
+    "read_time": "2 min",
+    "plain_text": "Nobody wakes up and says, “Today, I’m going to write something generic.” And yet — somehow — we often do. That’s often why writing sounds generic—even when the intention is to sound clear, professional, or helpful. This shows up everywhere. From emails and landing pages to AI-generated replies that all start to sound eerily similar. Why generic language feels safe It’s not laziness. It’s psychology. Our brains are wired to default to familiar language when we want to avoid friction, mistakes, or standing out. Generic phrases are mental shortcuts. They save energy, reduce risk, signal safety. Saying “We apologize for the inconvenience” feels safe because everyone says it. And if everyone says it, it must be fine. However, what feels safe to the writer often feels invisible to the reader. This is one of the main reasons why writing sounds generic, especially in professional, marketing, and AI-assisted communication. Why writing sounds generic in the first place? Three reasons 1. The curse of knowledge: once we know something, we assume others know it too. We lose the ability to imagine the gaps in their understanding. That’s how we end up skipping context our reader actually needs. 2. It’s also about safety bias—our brain prefers familiarity, even if it renders us invisible. The easy path feels less risky than being different. Neutral language feels safer than taking a clear position. 3, Add cognitive economy, our brain’s instinct to reuse what’s already stored, and suddenly clichés and templates aren’t just sloppy writing, they’re survival strategies. Templates feel efficient in the moment, but over time they erase voice. As a result, the very instincts that kept our ancestors safe in groups now make our writing lifeless today. This explains why writing sounds generic even when people genuinely try to be clear, helpful, or professional. Breaking out of generic isn’t just a stylistic move, it’s challenging how your brain wants to protect you. That’s why advice alone rarely works because the resistance isn’t technical, it’s cognitive. And that’s exactly why we built Lexi: to disrupt your autopilot and return language to where its power truly lies: at the intersection of clarity and authenticity. Lexi is designed to interrupt default phrases, surface blind spots, and force specificity back into writing. Once you understand why writing sounds generic, it becomes much easier to catch yourself before default language takes over. Side-box: Why our brain pushes us into generic This bias is one of the psychological reasons why writing sounds generic, especially when speed and efficiency matter. Curse of knowledge: Once you know something, it’s almost impossible to imagine not knowing it — so you assume others “get it” too. Result: you skip details your reader actually needs. 🔗Harvard Business Review",
+    "char_count": 2840,
+    "word_count": 453,
+    "headings": [
+      "Why we keep sounding generic",
+      "Why generic language feels safe",
+      "Why writing sounds generic in the first place? Three reasons",
+      "Pročitaj još",
+      "How to Write an Apology Email to a Customer (That Actually Rebuilds Trust)",
+      "How to Respond to a Negative Review — and Sound Human Doing It",
+      "Zašto klikamo na bombastične naslove? Istražili smo psihološke mehanizme iza clickbaita",
+      "Postavke privatnosti",
+      "Pomaknite klizač kako biste omogućili ili onemogućili različite vrste kolačića:"
+    ],
+    "source": "trafilatura"
+  },
+  "model": "gpt-4.1-mini",
+  "synth_model": "gpt-5-mini",
+  "agent_verdicts": [
+    {
+      "agent_id": "structure",
+      "agent_name": "Struktura i tok",
+      "perspective": "Vodi li tekst čitatelja logično kroz sadržaj — jasnoća, organizacija i ritam.",
+      "score": 7.0,
+      "criteria": [
+        {
+          "name": "Hook (uvod)",
+          "score": 8.0,
+          "note": "The opening is engaging and relatable, effectively setting expectations about generic writing."
+        },
+        {
+          "name": "Logical flow",
+          "score": 6.0,
+          "note": "The article generally builds logically from problem to explanation to solution, but some transitions feel abrupt or underdeveloped."
+        },
+        {
+          "name": "Heading structure",
+          "score": 4.0,
+          "note": "There is a lack of clear, consistent headings; the only explicit heading is a numbered list, and the side-box is visually separated but not well integrated."
+        },
+        {
+          "name": "Clarity",
+          "score": 8.0,
+          "note": "The language is mostly clear and accessible, with precise explanations and relatable examples."
+        },
+        {
+          "name": "Pacing & transitions",
+          "score": 6.0,
+          "note": "Paragraphs are generally digestible, but some transitions between ideas and sections could be smoother to better guide the reader."
+        }
+      ],
+      "strengths": [
+        "Engaging and relatable introduction that hooks the reader.",
+        "Clear explanations of psychological reasons behind generic writing.",
+        "Accessible language with helpful examples."
+      ],
+      "weaknesses": [
+        "Lack of informative and consistent headings reduces scannability and structure.",
+        "Transitions between sections sometimes feel abrupt, causing minor reader disorientation.",
+        "The side-box feels somewhat disconnected from the main flow."
+      ],
+      "verdict": "The article offers a compelling introduction and clear explanations that maintain reader interest, but its structural weaknesses hold it back. The absence of well-organized headings and smoother transitions makes the flow less intuitive and the content harder to navigate. Improving heading clarity and integrating side content more seamlessly would greatly enhance reader guidance and overall coherence.",
+      "error": null
+    },
+    {
+      "agent_id": "psychology",
+      "agent_name": "Psihologija pisanja",
+      "perspective": "Koristi li tekst psihološke principe dobrog pisanja — konkretnost, benefit za čitatelja i ton.",
+      "score": 7.0,
+      "criteria": [
+        {
+          "name": "Concreteness (specifičnost)",
+          "score": 7.0,
+          "note": "The article uses some concrete examples like ‘We apologize for the inconvenience’ and references cognitive biases, but many ideas remain somewhat abstract."
+        },
+        {
+          "name": "Reader benefit",
+          "score": 8.0,
+          "note": "The reader clearly understands why their writing might sound generic and is introduced to a solution (Lexi) to improve authenticity."
+        },
+        {
+          "name": "Tone & emotional resonance",
+          "score": 7.0,
+          "note": "The tone is conversational and approachable, with some emotional appeal about safety and invisibility, but it could be warmer or more engaging."
+        },
+        {
+          "name": "Avoiding generic filler",
+          "score": 6.0,
+          "note": "While it critiques generic language, the article itself uses some buzzwords and phrases like ‘clear, professional, or helpful’ and ‘intersection of clarity and authenticity’ that feel somewhat generic."
+        },
+        {
+          "name": "Examples & storytelling",
+          "score": 6.0,
+          "note": "The article provides a few examples and a metaphor about brain safety mechanisms, but it lacks vivid stories or detailed scenarios that would deepen engagement."
+        },
+        {
+          "name": "Trust & authority",
+          "score": 7.0,
+          "note": "It references psychological concepts and cites Harvard Business Review, lending some credibility, though more concrete evidence or expert quotes could strengthen authority."
+        }
+      ],
+      "strengths": [
+        "Clear explanation of psychological reasons behind generic writing",
+        "Good identification of reader pain points and benefits",
+        "Conversational and accessible tone"
+      ],
+      "weaknesses": [
+        "Some abstract phrasing reduces vividness",
+        "Occasional use of buzzwords and generic marketing language",
+        "Limited storytelling or concrete examples to emotionally engage readers"
+      ],
+      "verdict": "The article effectively explains why writing often sounds generic by linking it to cognitive biases, offering readers insight and a clear benefit. Its tone is friendly and human, though it could deepen emotional resonance with more vivid examples or stories. Some abstract language and mild use of buzzwords slightly undermine its concreteness and authenticity. Overall, it is a thoughtful piece that balances psychology with practical advice but could be more engaging and specific to maximize impact.",
+      "error": null
+    },
+    {
+      "agent_id": "rubric",
+      "agent_name": "Kvantitativna rubrika",
+      "perspective": "Konzistentna kvantitativna ocjena po fiksnoj rubrici s obrazloženjem po kriteriju.",
+      "score": 7.0,
+      "criteria": [
+        {
+          "name": "Clarity",
+          "score": 8.0,
+          "note": "The article is generally clear and easy to understand, with precise explanations of why writing sounds generic."
+        },
+        {
+          "name": "Structure",
+          "score": 6.0,
+          "note": "The article has some logical flow and a numbered list, but lacks clear headings and could benefit from more distinct section breaks."
+        },
+        {
+          "name": "Specificity",
+          "score": 5.0,
+          "note": "The article provides some concrete psychological concepts but lacks detailed examples, data, or citations beyond one external link."
+        },
+        {
+          "name": "Reader-benefit",
+          "score": 7.0,
+          "note": "Readers gain insight into cognitive reasons behind generic writing and are introduced to a potential solution, though practical tips are limited."
+        },
+        {
+          "name": "Tone & voice",
+          "score": 8.0,
+          "note": "The tone is consistent, approachable, and somewhat distinctive, balancing professionalism with conversational style."
+        },
+        {
+          "name": "Readability",
+          "score": 7.0,
+          "note": "Sentence and paragraph lengths are generally manageable, but the text could be more scannable with clearer formatting and headings."
+        }
+      ],
+      "strengths": [
+        "Clear explanation of psychological reasons behind generic writing.",
+        "Consistent and engaging tone that maintains reader interest.",
+        "Introduces a novel tool (Lexi) as a solution, adding relevance."
+      ],
+      "weaknesses": [
+        "Lacks clear headings and stronger structural cues for easier navigation.",
+        "Limited use of concrete examples or data to support claims.",
+        "Could offer more actionable advice or practical takeaways for readers."
+      ],
+      "verdict": "This article effectively explains why writing often sounds generic by focusing on cognitive biases, providing readers with useful insights and a compelling narrative voice. However, its impact is somewhat diminished by a lack of clear structure and specific examples, which would enhance reader engagement and understanding. While the introduction of a solution adds value, more practical guidance would improve reader benefit. Overall, it is a solid, informative piece with room for improvement in organization and detail.",
+      "error": null
+    },
+    {
+      "agent_id": "humanity",
+      "agent_name": "Ljudski glas / anti-generic",
+      "perspective": "Zvuči li tekst ljudski, autentično i prepoznatljivo — ili generički i AI-slično.",
+      "score": 7.0,
+      "criteria": [
+        {
+          "name": "Authenticity",
+          "score": 7.0,
+          "note": "The article reads like a thoughtful explanation from a real person, using conversational phrasing such as 'Nobody wakes up and says...' and 'That’s why advice alone rarely works.'"
+        },
+        {
+          "name": "Anti-cliché / anti-template",
+          "score": 6.0,
+          "note": "While it avoids many corporate buzzwords, it still relies on some familiar phrases like 'mental shortcuts,' 'safe because everyone says it,' and 'cognitive economy,' which slightly dull originality."
+        },
+        {
+          "name": "Personal voice",
+          "score": 7.0,
+          "note": "There is a clear point of view about the psychology behind generic writing and a purpose to 'disrupt your autopilot,' but the tone remains somewhat neutral and explanatory rather than strongly distinctive or quirky."
+        },
+        {
+          "name": "AI-sounding markers",
+          "score": 7.0,
+          "note": "The text flows naturally with varied sentence lengths and some rhetorical questions, but occasional structured lists and phrases like 'This explains why...' hint at a polished, possibly AI-assisted style."
+        }
+      ],
+      "strengths": [
+        "Conversational and accessible tone that feels human.",
+        "Clear explanation of psychological concepts with relatable examples.",
+        "Use of direct address ('you') engages the reader personally."
+      ],
+      "weaknesses": [
+        "Some reliance on familiar phrases and conceptual jargon reduces distinctiveness.",
+        "The voice is somewhat neutral and lacks strong personal quirks or humor.",
+        "Certain transitions and list structures feel formulaic, slightly diminishing spontaneity."
+      ],
+      "verdict": "This article largely sounds like a real person thoughtfully explaining a topic, with a conversational and clear style that avoids heavy corporate jargon. However, it leans on some familiar phrases and structured explanations that reduce its uniqueness and make it feel somewhat polished or coached. Overall, it strikes a balance between authenticity and clarity but could benefit from more personal flair or unexpected turns of phrase to feel fully distinctive.",
+      "error": null
+    }
+  ],
+  "overall": {
+    "score": 7.0,
+    "letter_grade": "C",
+    "label": "Good",
+    "weights": {
+      "structure": 0.3,
+      "psychology": 0.25,
+      "rubric": 0.3,
+      "humanity": 0.15
+    },
+    "agent_scores": {
+      "structure": 7.0,
+      "psychology": 7.0,
+      "rubric": 7.0,
+      "humanity": 7.0
+    }
+  },
+  "synthesis": "Final verdict: Overall, this is a clear, thoughtful piece that hooks the reader and explains well why writing can sound generic, but it doesn’t reach its full potential because of structural and specificity gaps. Biggest strengths: an engaging, conversational opening that draws readers in, and an accessible, well-explained account of the underlying psychology (mental shortcuts, safety mechanisms) that makes the problem feel real and solvable. Biggest weaknesses: weak scannability and flow due to a lack of clear headings and a side-box that feels disconnected, and a shortage of vivid, concrete examples or evidence—plus occasional buzzwordy phrasing that undermines authenticity. Top 3 actionable recommendations (prioritised): 1) Add clear, descriptive section headings and smoother transitions, and integrate or caption the side-box so it supports rather than interrupts the main flow; 2) Replace abstract claims with 2–3 concrete mini-stories or specific examples and add at least one clear citation or data point to boost credibility; 3) Cut or rephrase generic marketing language (e.g., “intersection of clarity and authenticity”) and inject one brief personal detail or distinctive turn of phrase to strengthen voice.",
+  "created_at": "2026-08-10T21:02:16+00:00"
+}

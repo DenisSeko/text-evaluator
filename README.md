@@ -95,11 +95,15 @@ LEXI_REPO_URL="https://github.com/TVOJ-ORG/lexi-evaluator" \
 > `curl -fsSL <URL>` i pregledaj izlaz prije pipanja u `bash`.
 > Skripta radi i lokalno iz repoa: `bash scripts/install.sh`.
 
-**Windows 10/11:**
+**Windows 10/11** (iz projektnog root foldera):
 
 ```bat
-scripts\install.bat
+:: cmd:          scripts\install.bat
+:: PowerShell:   .\scripts\install.bat
 ```
+
+> Napomena (PowerShell): skripte se ne pokreću iz trenutnog foldera bez prefiksa `.\`.
+> Ako si već unutar `scripts\` foldera, pokreni `.\install.bat`.
 
 Skripte rade sve automatski: stvore `.venv`, instaliraju pinned ovisnosti + CLI komandu
 `lexi-evaluator`, i kreiraju `.env` iz `.env.example` (samo upiši ključ).

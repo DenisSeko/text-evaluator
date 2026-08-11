@@ -105,6 +105,10 @@ LEXI_REPO_URL="https://github.com/TVOJ-ORG/lexi-evaluator" \
 > Napomena (PowerShell): skripte se ne pokreću iz trenutnog foldera bez prefiksa `.\`.
 > Ako si već unutar `scripts\` foldera, pokreni `.\install.bat`.
 
+> `install.bat` automatski dodaje PowerShell funkciju **`lexi`** u tvoj profil
+> (`$PROFILE`), pa u novom terminalu možeš odmah koristiti `lexi "URL"` — bez aktivacije
+> i bez pune putanje.
+
 **Aktivacija venv-a u PowerShellu** (nakon `install.bat`, venv nije aktivan):
 
 ```powershell

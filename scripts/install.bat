@@ -10,6 +10,7 @@ REM Usage:  .\scripts\install.bat   (PowerShell)  or  double-click
 
 setlocal
 cd /d "%~dp0.."
+set "ROOT=%CD%"
 
 echo === Lexi Evaluator install (Windows) ===
 
@@ -44,15 +45,28 @@ python -m pip install -r requirements-dev.txt
 python -m pip install -e .
 
 REM --- 3. .env ---------------------------------------------------------------
-if exist .env goto :done
+if exist .env goto :profile
 echo === Creating .env from .env.example ===
 copy .env.example .env >nul
 
+REM --- 4. PowerShell "lexi" shortcut (optional, non-fatal) --------------------
+:profile
+set "TMPPS=%TEMP%\lexi-profile-add.ps1"
+>  "%TMPPS%" echo.
+>> "%TMPPS%" echo function lexi {
+>> "%TMPPS%" echo   $exe = "%ROOT%\.venv\Scripts\lexi-evaluator.exe"
+>> "%TMPPS%" echo   if (-not (Test-Path $exe)) { Write-Error "Nije pronađeno: $exe"; return }
+>> "%TMPPS%" echo   ^& $exe @args
+>> "%TMPPS%" echo }
+powershell -NoProfile -Command "$p=$PROFILE; $d=Split-Path $p -Parent; if(-not(Test-Path $d)){New-Item -ItemType Directory -Path $d -Force|Out-Null}; if(-not(Test-Path $p)){New-Item -ItemType File -Path $p -Force|Out-Null}; $c=Get-Content -Raw $p -ErrorAction SilentlyContinue; if($c -notmatch 'function lexi'){Add-Content -Path $p -Value (Get-Content -Raw '%TMPPS%')}"
+del "%TMPPS%" >nul 2>nul
+
 :done
 echo.
-echo Done. The venv is NOT active in a new terminal, so first activate it:
+echo Done. In a NEW PowerShell terminal you can now just run:
+echo   lexi "URL"                (funkcija 'lexi' je dodana u tvoj profil)
+echo Or activate the venv and use the full command:
 echo   .\.venv\Scripts\activate
-echo Then:
 echo   lexi-evaluator --help
 echo   lexi-evaluator --dry-run --fixture tests\fixtures\sample_article.html --output md
 echo   python -m pytest -q

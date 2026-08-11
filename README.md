@@ -105,6 +105,21 @@ LEXI_REPO_URL="https://github.com/TVOJ-ORG/lexi-evaluator" \
 > Napomena (PowerShell): skripte se ne pokreću iz trenutnog foldera bez prefiksa `.\`.
 > Ako si već unutar `scripts\` foldera, pokreni `.\install.bat`.
 
+**Aktivacija venv-a u PowerShellu** (nakon `install.bat`, venv nije aktivan):
+
+```powershell
+# PowerShell moze blokirati .ps1 aktivaciju zbog execution policy — dopusti za sesiju:
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\.venv\Scripts\Activate.ps1
+lexi-evaluator --help
+```
+
+Ili preskoči aktivaciju i koristi punu putanju:
+
+```powershell
+.\.venv\Scripts\lexi-evaluator.exe --help
+```
+
 Skripte rade sve automatski: stvore `.venv`, instaliraju pinned ovisnosti + CLI komandu
 `lexi-evaluator`, i kreiraju `.env` iz `.env.example` (samo upiši ključ).
 

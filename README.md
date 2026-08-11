@@ -2,7 +2,6 @@
 
 [![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![Last commit](https://img.shields.io/github/last-commit/DenisSeko/text-evaluator)](https://github.com/DenisSeko/text-evaluator)
-[![Repo size](https://img.shields.io/github/repo-size/DenisSeko/text-evaluator)](https://github.com/DenisSeko/text-evaluator)
 
 Multi-agent AI aplikacija koja procjenjuje **koliko je dobro napisan** neki tekst s
 Lexi bloga (https://lexi.hr/blog/). Dobije URL, izvuče čisti sadržaj članka, pokrene

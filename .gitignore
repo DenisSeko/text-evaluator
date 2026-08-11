@@ -15,5 +15,9 @@ venv/
 # Runtime cache (raw HTML)
 .cache/
 
+# Generated example reports (folder kept via .gitkeep)
+examples/*
+!examples/.gitkeep
+
 # OS
 .DS_Store

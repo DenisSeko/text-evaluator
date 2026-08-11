@@ -290,11 +290,10 @@ Detaljno u [PLAN.md](PLAN.md). Ključno:
 
 ## Primjeri outputa
 
-- [`examples/demo-dry.md`](examples/demo-dry.md) / `.json` — offline demo (mock LLM)
-  na stvarnom Lexi članku "Why Writing Sounds Generic: The Psychology Behind It".
-- [`examples/lexi-why-writing-sounds-generic.md`](examples/lexi-why-writing-sounds-generic.md)
-  / `.json` — live evaluacija s pravim ključem (7.0/10, C).
-- [`examples/lexi-psiholoski-mehanizmi-iza-clickbaita.md`](examples/lexi-psiholoski-mehanizmi-iza-clickbaita.md)
-  / `.json` — live evaluacija (7.7/10, C).
-- [`examples/lexi-how-to-respond-to-a-negative-review.md`](examples/lexi-how-to-respond-to-a-negative-review.md)
-  / `.json` — live evaluacija (7.7/10, C).
+Folder `examples/` se u repou drži **praznim** (samo `.gitkeep`) — izvještaji se
+**generiraju lokalno** i ne commit-aju:
+
+- Offline demo (mock, bez ključa/mreže): `python scripts/demo_dry.py`
+  → stvara `examples/demo-dry.{md,json}`
+- Živi run: `lexi-evaluator <URL> --output md --out-file examples/run.md`
+  (i `--output json --out-file examples/run.json`)

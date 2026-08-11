@@ -45,12 +45,20 @@ def run(*args: str) -> None:
         )
 
 
+def _require(path: Path) -> None:
+    """Fail loudly if an expected output file was not actually created."""
+    if not path.exists() or path.stat().st_size == 0:
+        sys.exit(f"error: expected output was not created: {path}")
+
+
 def main() -> None:
     if not FIXTURE.exists():
         sys.exit(f"fixture not found: {FIXTURE} (run the extractor tests first?)")
     OUT_MD.parent.mkdir(parents=True, exist_ok=True)
     run("--fixture", str(FIXTURE), "--dry-run", "--output", "md", "--out-file", str(OUT_MD))
+    _require(OUT_MD)
     run("--fixture", str(FIXTURE), "--dry-run", "--output", "json", "--out-file", str(OUT_JSON))
+    _require(OUT_JSON)
     print(f"\nWrote:\n  {OUT_MD}\n  {OUT_JSON}")
 
 

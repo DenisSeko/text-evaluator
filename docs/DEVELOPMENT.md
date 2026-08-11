@@ -71,7 +71,7 @@ lexi-evaluator/
 │   ├── test_scoring.py       # matematika agregacije / grade
 │   ├── test_report.py        # lokalizacija datuma (HR/US)
 │   └── test_pipeline_dry.py  # cijeli pipeline s mock LLM-om, bez mreže
-├── examples/                 # committed primjeri outputa (dry + live)
+├── examples/                 # prazan (samo .gitkeep) — izvještaji se generiraju lokalno
 └── docs/
     ├── PROMPTS.md            # svi promptovi verbatim + razlog dizajna
     ├── PLANNING.md           # originalni plan sesije

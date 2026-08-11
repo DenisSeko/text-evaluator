@@ -265,7 +265,7 @@ lexi-evaluator/
     check_no_secrets.py  # honeypot scan
     demo_dry.py       # offline demo → examples/
   tests/              # pytest (ekstraktor, scoring, report, dry-run pipeline) + fixture
-  examples/           # primjeri outputa (committed)
+  examples/           # prazan folder (samo .gitkeep) — izvještaji se generiraju lokalno
   docs/
     PROMPTS.md        # svi promptovi verbatim + razlozi dizajna
     PLANNING.md       # originalni plan sesije

@@ -55,7 +55,7 @@ Samostalna Python CLI aplikacija koja: (1) scrape-a Lexi blog post s URL-a, (2) 
 ### Faza 6 — Testovi, primjer, sigurnosna verifikacija (djelomično ✅, live run ⏳)
 18. `tests/fixtures/sample_article.html` — spremljeni (trimani) pravi Lexi HTML; `tests/test_extractor.py` (assert sadrži članak, NE sadrži "Kolačići"/"Pročitaj još"/footer), `tests/test_scoring.py` (matematika agregacije), `tests/test_pipeline_dry.py` (dry-run s mock LLM, bez mreže). ✅ (12 testova, zeleno)
 19. `scripts/check_no_secrets.py` — honeypot scan. ✅ (PASS)
-20. ✅ Živi run: `python -m lexi_evaluator https://lexi.hr/why-writing-sounds-generic/` → commit `examples/lexi-why-writing-sounds-generic.json` + `.md` (ključ u `.env`). Live evaluacije su napravljene na sva 3 URL-a iz plana (dolje) — rezultati su commitani u `examples/`.
+20. ✅ Živi run: `python -m lexi_evaluator https://lexi.hr/why-writing-sounds-generic/` → commit `examples/lexi-why-writing-sounds-generic.json` + `.md` (ključ u `.env`). Live evaluacije su napravljene na sva 3 URL-a iz plana (dolje) — rezultati su commitani u `examples/` (kasnije uklonjeno iz repoa — folder se drži praznim, samo `.gitkeep`).
 21. Ruff check/format; pytest zelen; honeypot čist; `git status` bez `.env`. ✅ (uključujući live runove)
 
 ## Relevantni fajlovi (puni putovi — novi)
@@ -72,7 +72,7 @@ Samostalna Python CLI aplikacija koja: (1) scrape-a Lexi blog post s URL-a, (2) 
 3. ✅ `.venv/bin/python -m lexi_evaluator https://lexi.hr/why-writing-sounds-generic/ --out-file examples/...` (živi, s ključem) → validan JSON + MD (ukupno 7.0/10, C — Good).
 4. ✅ `.venv/bin/python -m lexi_evaluator <url> --dry-run` (ili `--fixture`) — pipeline bez ključa/mreže.
 5. ✅ `python scripts/check_no_secrets.py` → 0 pronađenih; `git status --porcelain` bez `.env`.
-6. ✅ Test na 3 navedena URL-a (why-writing-sounds-generic, psiholoski-mehanizmi-iza-clickbaita, how-to-respond-to-a-negative-review) — live, s ključem u `.env`. Rezultati: 7.0 / 7.7 / 7.7 (JSON + MD u `examples/`).
+6. ✅ Test na 3 navedena URL-a (why-writing-sounds-generic, psiholoski-mehanizmi-iza-clickbaita, how-to-respond-to-a-negative-review) — live, s ključem u `.env`. Rezultati: 7.0 / 7.7 / 7.7 (JSON + MD u `examples/`, kasnije uklonjeno iz repoa).
 
 ## Scope
 - IN: scraper+extractor, 4 agenta, scoring, CLI, docs, testovi, primjer outputa, honeypot guard.

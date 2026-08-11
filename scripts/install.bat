@@ -50,10 +50,14 @@ copy .env.example .env >nul
 
 :done
 echo.
-echo Done. Quick checks:
+echo Done. The venv is NOT active in a new terminal, so first activate it:
+echo   .\.venv\Scripts\activate
+echo Then:
 echo   lexi-evaluator --help
 echo   lexi-evaluator --dry-run --fixture tests\fixtures\sample_article.html --output md
 echo   python -m pytest -q
+echo Or use the full path without activating:
+echo   .\.venv\Scripts\lexi-evaluator.exe --help
 echo Next: edit .env and set OPENAI_API_KEY (it is never committed).
 endlocal
 exit /b 0

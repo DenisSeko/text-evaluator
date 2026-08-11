@@ -16,18 +16,38 @@ echo === Lexi Evaluator install (Windows) ===
 REM --- 1. Python -------------------------------------------------------------
 set "PY="
 where py >nul 2>nul && set "PY=py -3"
-if not defined PY where python >nul 2>nul && set "PY=python"
 if not defined PY (
+  where python >nul 2>nul && set "PY=python"
+)
+if defined PY (
+  REM "python" na PATH-u moze biti Microsoft Store "app execution alias" (stub
+  REM koji ispisuje "Python was not found..."). Provjeri radi li stvarno.
+  %PY% -c "import sys" >nul 2>nul
+  if errorlevel 1 set "PY="
+)
+if not defined PY (
+  echo.
   echo error: Python 3.11+ is required but was not found.
-  echo        Download: https://www.python.org/downloads/windows/
-  echo        During install tick "Add Python to PATH", then reopen this shell.
+  echo        Ovaj racun nema pravi Python (ili postoji samo Microsoft Store
+  echo        "app execution alias", sto NIJE pravi Python).
+  echo.
+  echo Fix: instaliraj Python sa https://www.python.org/downloads/windows/
+  echo      i tijekom instalacije OZNACI:
+  echo        - "Add Python to PATH"
+  echo        - zadrzi "py launcher" ukljucenim
+  echo      Zatim ZATVORI i PONOVNO OTVORI terminal i pokreni installer opet.
+  echo.
+  pause
   exit /b 1
 )
 
 %PY% -c "import sys; raise SystemExit(0 if sys.version_info >= (3, 11) else 1)"
 if errorlevel 1 (
-  echo error: need Python 3.11+.
+  echo.
+  echo error: need Python 3.11+ (found: %PY%).
   echo        Download: https://www.python.org/downloads/windows/
+  echo.
+  pause
   exit /b 1
 )
 

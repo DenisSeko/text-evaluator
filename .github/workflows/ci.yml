@@ -7,6 +7,13 @@ on:
     branches: [main]
   pull_request:
 
+# Hardening: najmanje privilegije + bez gomilanja redundantnih run-ova.
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   checks:
     name: pytest + ruff + secrets (ubuntu-latest)

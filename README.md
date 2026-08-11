@@ -1,6 +1,5 @@
 # Lexi Evaluator
 
-[![CI](https://github.com/DenisSeko/text-evaluator/actions/workflows/ci.yml/badge.svg)](https://github.com/DenisSeko/text-evaluator/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![Last commit](https://img.shields.io/github/last-commit/DenisSeko/text-evaluator)](https://github.com/DenisSeko/text-evaluator)
 [![Repo size](https://img.shields.io/github/repo-size/DenisSeko/text-evaluator)](https://github.com/DenisSeko/text-evaluator)
@@ -184,6 +183,10 @@ Repo ima **automatizirani "code review" gate**:
   **pull request** automatski provjerava na **Ubuntu** (besplatni runner):
   `pytest` (offline, bez ključa/mreže), `ruff check`, `ruff format --check` i honeypot scan.
   Bez zelenih provjera PR se ne može "reviewati" kao čist.
+
+> **Status:** workflow je **pripremljen i spreman** — automatski se pokreće na `push`/PR.
+> Trenutno ne starta jer je GitHub račun zaključan zbog billinga; nakon rješavanja
+> (https://github.com/settings/billing) pokreni "Re-run" ili napravi novi push.
 - **Lokalni gate prije pusha** — pokreni prije `git push`:
   ```bash
   bash scripts/check_all.sh     # pytest + ruff + format + honeypot

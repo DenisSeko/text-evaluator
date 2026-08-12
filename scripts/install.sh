@@ -99,6 +99,34 @@ if [ ! -f .env ]; then
   cp .env.example .env
 fi
 
+# --- 5. Bash convenience: make `lexi` available without activating the venv --
+if [ -d "$ROOT/.venv/bin" ]; then
+  LEXI_BIN="$ROOT/.venv/bin"
+elif [ -d "$ROOT/.venv/Scripts" ]; then
+  LEXI_BIN="$ROOT/.venv/Scripts"
+else
+  LEXI_BIN=""
+fi
+if [ -f "$HOME/.bash_profile" ] && [ ! -f "$HOME/.bashrc" ]; then
+  SHELL_RC="$HOME/.bash_profile"
+elif [ -f "$HOME/.zshrc" ] && [ ! -f "$HOME/.bashrc" ] && [ ! -f "$HOME/.bash_profile" ]; then
+  SHELL_RC="$HOME/.zshrc"
+else
+  SHELL_RC="$HOME/.bashrc"
+fi
+if [ -n "$LEXI_BIN" ]; then
+  if grep -qF "# lexi CLI" "$SHELL_RC" 2>/dev/null; then
+    echo "==> $SHELL_RC already has the lexi PATH entry"
+  else
+    {
+      echo ""
+      echo "# lexi CLI (added by install.sh) — venv bin on PATH so 'lexi' works without activation"
+      echo "export PATH=\"$LEXI_BIN:\$PATH\""
+    } >> "$SHELL_RC"
+    echo "==> Added lexi PATH entry to $SHELL_RC (open a new terminal to use 'lexi')"
+  fi
+fi
+
 echo
 echo "Done. Quick checks:"
 echo "  lexi --help"

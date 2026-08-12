@@ -61,10 +61,14 @@ set "TMPPS=%TEMP%\lexi-profile-add.ps1"
 powershell -NoProfile -Command "$p=$PROFILE; $d=Split-Path $p -Parent; if(-not(Test-Path $d)){New-Item -ItemType Directory -Path $d -Force|Out-Null}; if(-not(Test-Path $p)){New-Item -ItemType File -Path $p -Force|Out-Null}; $c=Get-Content -Raw $p -ErrorAction SilentlyContinue; if($c -notmatch 'function lexi'){Add-Content -Path $p -Value (Get-Content -Raw '%TMPPS%')}"
 del "%TMPPS%" >nul 2>nul
 
+REM --- 5. Windows user PATH (so `lexi` also works in cmd / Git Bash) ----------
+powershell -NoProfile -Command "$dir='%ROOT%\.venv\Scripts'; $p=[Environment]::GetEnvironmentVariable('Path','User'); if(-not $p){$p=''}; if($p -split ';' -notcontains $dir){ [Environment]::SetEnvironmentVariable('Path', ($p.TrimEnd(';') + ';' + $dir), 'User'); Write-Host ('Added to user PATH: ' + $dir) } else { Write-Host ('Already in user PATH: ' + $dir) }"
+
 :done
 echo.
 echo Done. In a NEW PowerShell terminal you can now just run:
 echo   lexi "URL"                (funkcija 'lexi' je dodana u tvoj profil)
+echo   (dodan je i u Windows user PATH, pa radi i u cmd / Git Bashu)
 echo Or activate the venv and use the full command:
 echo   .\.venv\Scripts\activate
 echo   lexi --help

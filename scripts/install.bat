@@ -58,7 +58,7 @@ set "TMPPS=%TEMP%\lexi-profile-add.ps1"
 >> "%TMPPS%" echo   if (-not (Test-Path $exe)) { Write-Error "Nije pronađeno: $exe"; return }
 >> "%TMPPS%" echo   ^& $exe @args
 >> "%TMPPS%" echo }
-powershell -NoProfile -Command "$p=$PROFILE; $d=Split-Path $p -Parent; if(-not(Test-Path $d)){New-Item -ItemType Directory -Path $d -Force|Out-Null}; if(-not(Test-Path $p)){New-Item -ItemType File -Path $p -Force|Out-Null}; $c=Get-Content -Raw $p -ErrorAction SilentlyContinue; if($c -notmatch 'function lexi'){Add-Content -Path $p -Value (Get-Content -Raw '%TMPPS%')}"
+powershell -NoProfile -Command "try{ $p=$PROFILE; $d=Split-Path $p -Parent; if(-not(Test-Path $d)){New-Item -ItemType Directory -Path $d -Force -ErrorAction SilentlyContinue|Out-Null}; if((Test-Path $d) -and -not(Test-Path $p)){New-Item -ItemType File -Path $p -Force -ErrorAction SilentlyContinue|Out-Null}; if(Test-Path $p){$c=Get-Content -Raw $p -ErrorAction SilentlyContinue; if($c -notmatch 'function lexi'){Add-Content -Path $p -Value (Get-Content -Raw '%TMPPS%')}} }catch{ Write-Warning ('Skipping PowerShell profile shortcut: ' + $_) }"
 del "%TMPPS%" >nul 2>nul
 
 REM --- 5. Windows user PATH (so `lexi` also works in cmd / Git Bash) ----------

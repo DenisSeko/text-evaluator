@@ -32,7 +32,7 @@ Web UI (Streamlit/FastAPI) dodaje površinu bez dodatne vrijednosti za ocjenu za
 **Alternativa odbačena:** FastAPI server — previše infrastrukture, a spec ne traži servis.
 
 ### ADR-002: Samostalan projekt, zaseban git repo
-**Odluka:** projekt živi u vlastitom root folderu `lexi-evaluator/` s vlastitim git repoom,
+**Odluka:** projekt živi u vlastitom root folderu `lexi/` s vlastitim git repoom,
 van postojećeg monorepa u kojem je nastao.
 **Zašto:** zadatak traži javni GitHub repo; miješanje sa servisnim monorepom (CI, docs-sync,
 pnpm workspace) donosi rizike i buku. Potpuna izolacija.
@@ -44,9 +44,9 @@ pnpm workspace) donosi rizike i buku. Potpuna izolacija.
 svugdje; `uv`/`poetry` su opcija, ali pip + pinned je najmanje ovisnosti i najpredvidljivije.
 Ruff za lint/format (isti standard kao i okolina iz koje projekt potječe).
 **Dopuna (iz live verifikacije):** `pyproject.toml` definira `[project.scripts]`
-(`lexi-evaluator = "lexi_evaluator.cli:main"`), pa nakon `pip install -e .` postoji ista
-komanda `lexi-evaluator <URL>` na sva tri OS-a (stvara `.venv/bin/lexi-evaluator` na
-Linux/macOS i `.venv\Scripts\lexi-evaluator.exe` na Windowsu). `.env` se učitava relativno
+(`lexi = "lexi_evaluator.cli:main"`), pa nakon `pip install -e .` postoji ista
+komanda `lexi <URL>` na sva tri OS-a (stvara `.venv/bin/lexi` na
+Linux/macOS i `.venv\Scripts\lexi.exe` na Windowsu). `.env` se učitava relativno
 na projektni root (`config.py`), ne na CWD — komanda radi iz bilo kojeg foldera.
 **Convenience:** postoje opcionalne instalacijske skripte `scripts/install.sh`
 (Linux/macOS) i `scripts/install.bat` (Windows) — automatiziraju venv + ovisnosti + `.env`.

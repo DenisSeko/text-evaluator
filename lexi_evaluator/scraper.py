@@ -7,7 +7,7 @@ from pathlib import Path
 
 import httpx
 
-DEFAULT_USER_AGENT = "lexi-evaluator/0.1 (job-task demo)"
+DEFAULT_USER_AGENT = "lexi/0.1 (job-task demo)"
 
 
 async def fetch_html(

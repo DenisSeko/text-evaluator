@@ -54,7 +54,7 @@ REM --- 4. PowerShell "lexi" shortcut (optional, non-fatal) --------------------
 set "TMPPS=%TEMP%\lexi-profile-add.ps1"
 >  "%TMPPS%" echo.
 >> "%TMPPS%" echo function lexi {
->> "%TMPPS%" echo   $exe = "%ROOT%\.venv\Scripts\lexi-evaluator.exe"
+>> "%TMPPS%" echo   $exe = "%ROOT%\.venv\Scripts\lexi.exe"
 >> "%TMPPS%" echo   if (-not (Test-Path $exe)) { Write-Error "Nije pronađeno: $exe"; return }
 >> "%TMPPS%" echo   ^& $exe @args
 >> "%TMPPS%" echo }
@@ -67,11 +67,11 @@ echo Done. In a NEW PowerShell terminal you can now just run:
 echo   lexi "URL"                (funkcija 'lexi' je dodana u tvoj profil)
 echo Or activate the venv and use the full command:
 echo   .\.venv\Scripts\activate
-echo   lexi-evaluator --help
-echo   lexi-evaluator --dry-run --fixture tests\fixtures\sample_article.html --output md
+echo   lexi --help
+echo   lexi --dry-run --fixture tests\fixtures\sample_article.html --output md
 echo   python -m pytest -q
 echo Or use the full path without activating:
-echo   .\.venv\Scripts\lexi-evaluator.exe --help
+echo   .\.venv\Scripts\lexi.exe --help
 echo Next: edit .env and set OPENAI_API_KEY (it is never committed).
 endlocal
 exit /b 0

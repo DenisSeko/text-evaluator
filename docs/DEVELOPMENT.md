@@ -30,7 +30,7 @@ URL → scraper → extractor → Article
 ## 2. Stablo projekta (s objašnjenjima)
 
 ```
-lexi-evaluator/
+lexi/
 ├── README.md                 # upute za korisnika: instalacija, pokretanje, testovi
 ├── PLAN.md                   # planiranje + ADR-ovi ("zašto tako")
 ├── pyproject.toml            # paket, [project.scripts] (komanda), ruff + pytest konfig
@@ -38,6 +38,9 @@ lexi-evaluator/
 ├── requirements-dev.txt      # test/lint: pytest, pytest-asyncio, ruff
 ├── .env.example              # TEMPLATE za .env — nikad pravi ključ!
 ├── .gitignore
+├── .github/
+│   └── workflows/ci.yml      # CI gate (pytest + ruff + honeypot) na push/PR
+├── .githooks/                # pre-push hook (opcionalno)
 ├── lexi_evaluator/           # ← glavni paket
 │   ├── __main__.py           # python -m lexi_evaluator → cli.main()
 │   ├── cli.py                # argparse + tok run-a (fetch → extract → evaluate → render)
@@ -149,7 +152,7 @@ JSON izvještaj = `EvaluationResult.model_dump(mode="json")` (ključevi = nazivi
 3. **Dodaj težinu** u `.env` (`LEXI_WEIGHT_NOVI=0.20`) i polje + `agent_weights()` u `config.py`
    (ostale težine prilagodi da zbroj = 1.0; logika renormalizacije je u `scoring.py`).
 
-4. **Testiraj** offline: `lexi-evaluator --dry-run --fixture tests/fixtures/sample_article.html --agents novi`
+4. **Testiraj** offline: `lexi --dry-run --fixture tests/fixtures/sample_article.html --agents novi`
    (mock vraća deterministički JSON).
 
 ### 5.2 Novi LLM provider
@@ -226,10 +229,10 @@ Dry-run/testovi **ne smiju** ovisiti o mreži ni ključu — koristi `MockProvid
 
 ```bash
 # pokretanje
-lexi-evaluator <URL>                                            # živi run (MD na stdout)
-lexi-evaluator <URL> --output json --out-file rezultat.json     # JSON u fajl
-lexi-evaluator --dry-run --fixture tests/fixtures/sample_article.html   # offline (mock)
-lexi-evaluator --help
+lexi <URL>                                            # živi run (MD na stdout)
+lexi <URL> --output json --out-file rezultat.json     # JSON u fajl
+lexi --dry-run --fixture tests/fixtures/sample_article.html   # offline (mock)
+lexi --help
 
 # kvaliteta
 python -m pytest -q                     # testovi (23)

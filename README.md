@@ -85,11 +85,11 @@ URL ──► scraper ──► ekstraktor ──► 4 agenta (paralelno) ──
 curl -fsSL https://raw.githubusercontent.com/DenisSeko/text-evaluator/main/scripts/install.sh | bash
 ```
 
-Skripta sama klonira repo (u `~/lexi-evaluator`), stvori `.venv`, instalira ovisnosti +
+Skripta sama klonira repo (u `~/lexi`), stvori `.venv`, instalira ovisnosti +
 CLI i napravi `.env`. Ako je repo hostiran negdje drugdje, postavi URL prije pokretanja:
 
 ```bash
-LEXI_REPO_URL="https://github.com/TVOJ-ORG/lexi-evaluator" \
+LEXI_REPO_URL="https://github.com/TVOJ-ORG/lexi" \
   curl -fsSL https://raw.githubusercontent.com/DenisSeko/text-evaluator/main/scripts/install.sh | bash
 ```
 
@@ -117,27 +117,27 @@ LEXI_REPO_URL="https://github.com/TVOJ-ORG/lexi-evaluator" \
 # PowerShell moze blokirati .ps1 aktivaciju zbog execution policy — dopusti za sesiju:
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 .\.venv\Scripts\Activate.ps1
-lexi-evaluator --help
+lexi --help
 ```
 
 Ili preskoči aktivaciju i koristi punu putanju:
 
 ```powershell
-.\.venv\Scripts\lexi-evaluator.exe --help
+.\.venv\Scripts\lexi.exe --help
 ```
 
 Skripte rade sve automatski: stvore `.venv`, instaliraju pinned ovisnosti + CLI komandu
-`lexi-evaluator`, i kreiraju `.env` iz `.env.example` (samo upiši ključ).
+`lexi`, i kreiraju `.env` iz `.env.example` (samo upiši ključ).
 
 ### Ručna instalacija
 
 ```bash
-cd lexi-evaluator
+cd lexi
 python3 -m venv .venv
 # Windows: .venv\Scripts\activate     macOS/Linux: source .venv/bin/activate
 python -m pip install -r requirements-dev.txt
 
-# Instaliraj CLI kao komandu (stvara `lexi-evaluator` na sva tri OS-a)
+# Instaliraj CLI kao komandu (stvara `lexi` na sva tri OS-a)
 python -m pip install -e .
 
 # Konfiguracija (ključ se NIKAD ne commit-a)
@@ -146,7 +146,7 @@ cp .env.example .env        # Windows: copy .env.example .env
 ```
 
 > Nakon `pip install -e .` imaš **istu komandu na Linuxu, macOS-u i Windows 10/11**:
-> `lexi-evaluator <URL>`. Radi iz bilo kojeg foldera jer se `.env` traži relativno na
+> `lexi <URL>`. Radi iz bilo kojeg foldera jer se `.env` traži relativno na
 > projektni root (ne na trenutni direktorij). Ako ne želiš instalirati, koristi
 > `python -m lexi_evaluator <URL>` iz projektnog root foldera.
 
@@ -154,21 +154,21 @@ cp .env.example .env        # Windows: copy .env.example .env
 
 ```bash
 # Evaluacija pravog Lexi posta (ista komanda na svim OS-ovima)
-lexi-evaluator "https://lexi.hr/why-writing-sounds-generic/"
+lexi "https://lexi.hr/why-writing-sounds-generic/"
 
 # Snimi izvještaj kao Markdown i/ili JSON
-lexi-evaluator <URL> --output md  --out-file examples/run.md
-lexi-evaluator <URL> --output json --out-file examples/run.json
+lexi <URL> --output md  --out-file examples/run.md
+lexi <URL> --output json --out-file examples/run.json
 
 # Offline demo bez API ključa i bez mreže (mock LLM + spremljeni fixture)
-lexi-evaluator --dry-run --fixture tests/fixtures/sample_article.html
+lexi --dry-run --fixture tests/fixtures/sample_article.html
 # ili: python scripts/demo_dry.py
 
 # Opcije
-lexi-evaluator <URL> --agents structure,rubric   # podskup agenata
-lexi-evaluator <URL> --no-synth                  # bez finalnog suda
-lexi-evaluator <URL> --no-cache                  # bez cache-a HTML-a
-lexi-evaluator --help                            # sve opcije
+lexi <URL> --agents structure,rubric   # podskup agenata
+lexi <URL> --no-synth                  # bez finalnog suda
+lexi <URL> --no-cache                  # bez cache-a HTML-a
+lexi --help                            # sve opcije
 ```
 
 > **Napomena o testiranju:** `--fixture` očekuje putanju do HTML fajla, a `--dry-run`
@@ -193,9 +193,9 @@ Windowsu (PyInstaller ne podržava cross-compile, pa se ne može graditi s Linux
 ```powershell
 .venv\Scripts\activate
 python -m pip install pyinstaller
-pyinstaller --onefile --name lexi-evaluator lexi_evaluator\__main__.py
-# rezultat: dist\lexi-evaluator.exe — pokreće se kao:
-#   dist\lexi-evaluator.exe <URL>
+pyinstaller --onefile --name lexi lexi_evaluator\\__main__.py
+# rezultat: dist\\lexi.exe — pokreće se kao:
+#   dist\\lexi.exe <URL>
 # Napomena: za ključ i dalje treba .env u radnom folderu ili OPENAI_API_KEY env varijabla.
 ```
 
@@ -253,7 +253,7 @@ Repo ima **automatizirani "code review" gate**:
 > agenata/providera, konvencije): [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md).
 
 ```
-lexi-evaluator/
+lexi/
   lexi_evaluator/
     cli.py            # CLI ulaz (argparse) + tok run-a
     config.py         # pydantic-settings (.env, projekt-relative)
@@ -277,6 +277,8 @@ lexi-evaluator/
     PLANNING.md       # originalni plan sesije
     DEVELOPMENT.md    # vodič za razvoj (gdje/kako/što)
   PLAN.md             # planiranje + arhitekturalne odluke (ADR)
+  .github/workflows/ci.yml   # CI gate (pytest + ruff + honeypot)
+  .githooks/                 # pre-push hook (opcionalno)
 ```
 
 ## Odluke (ukratko)
@@ -305,5 +307,5 @@ dok se `demo-dry.*` (mock, bez ključa/mreže) generira lokalno i ne commit-a:
   - `examples/lexi-how-to-respond-to-a-negative-review.{md,json}` → **7.7/10, C (Good)**
 - **Offline demo** (mock, bez ključa/mreže): `python scripts/demo_dry.py`
   → stvara lokalno `examples/demo-dry.{md,json}` (igitnovan)
-- Novi živi run za vlastiti test: `lexi-evaluator <URL> --output md --out-file examples/run.md`
+- Novi živi run za vlastiti test: `lexi <URL> --output md --out-file examples/run.md`
   (i `--output json --out-file examples/run.json`)

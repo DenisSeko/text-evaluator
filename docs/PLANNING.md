@@ -13,7 +13,7 @@
 Samostalna Python CLI aplikacija koja: (1) scrape-a Lexi blog post s URL-a, (2) izvuče čisti sadržaj članka (bez navigacije/footera/cookie banner/"Pročitaj još"), (3) pokrene ≥4 AI agenata s vlastitim promptima/perspektivama koji ocjenjuju kvalitetu teksta, (4) agregira u ukupnu ocjenu + obrazloženje po agentu. Bez DB/deploya/autha (per task). Python 3.12, pip + requirements.txt (pinned), Ruff. Cross-OS (Windows/macOS/Linux).
 
 ## Ključne odluke (potvrđene s korisnikom)
-- **Lokacija:** samostalan projekt na `/home/work/Projects/lexi-evaluator` — zaseban root i zaseban git repo (✅ dovršeno; premješteno iz monorepa nakon početnog postavljanja).
+- **Lokacija:** samostalan projekt na `/home/work/Projects/lexi` — zaseban root i zaseban git repo (✅ dovršeno; premješteno iz monorepa nakon početnog postavljanja).
 - **Sučelje:** CLI (argparse), `python -m lexi_evaluator <URL>`, output JSON + Markdown u stdout/fajl. Cross-OS: čist Python, pathlib, UTF-8, bez shell skripti.
 - **Provider:** OpenAI default (dani ključ) + tanak apstrakcijski sloj `providers/` spreman za Anthropic/Gemini/Ollama (samo OpenAI implementiran; uz Mock provider za offline run).
 - **Sigurnost ključa (KRITIČNO / honeypot):** ključ NIKAD ne pisati ni u jedan fajl repo-a. `.env` gitignored, `.env.example` placeholder. `scripts/check_no_secrets.py` scan-ira repo za `sk-proj-` pattern i fail-a. Verifikacija `git status` + grep.
@@ -22,7 +22,7 @@ Samostalna Python CLI aplikacija koja: (1) scrape-a Lexi blog post s URL-a, (2) 
 ## Arhitektura — faze (ovisnosti u zagradama)
 
 ### Faza 1 — Scaffold ✅
-1. Kreirati `lexi-evaluator/` (requirements.txt pinned: httpx, beautifulsoup4, trafilatura, openai, pydantic, pydantic-settings, python-dotenv, pytest, ruff), `.env.example` (placeholder key), `.gitignore` (.env, .venv, __pycache__, .cache/), pyproject.toml (ruff config).
+1. Kreirati `lexi/` (requirements.txt pinned: httpx, beautifulsoup4, trafilatura, openai, pydantic, pydantic-settings, python-dotenv, pytest, ruff), `.env.example` (placeholder key), `.gitignore` (.env, .venv, __pycache__, .cache/), pyproject.toml (ruff config).
 2. `git init` novi repo u folderu; Python venv `.venv`; pip install. ✅
 3. `config.py` (pydantic-settings: OPENAI_API_KEY, LEXI_MODEL, LEXI_MODEL_SYNTH, LEXI_MAX_CHARS, agent weights). Jasan error ako ključ fali. ✅
 4. `models.py` (pydantic): `Article`, `Criterion`, `AgentVerdict`, `EvaluationResult`. ✅
@@ -67,7 +67,7 @@ Samostalna Python CLI aplikacija koja: (1) scrape-a Lexi blog post s URL-a, (2) 
 - `scripts/check_no_secrets.py` — honeypot guard
 
 ## Verifikacija
-1. ✅ `cd lexi-evaluator && .venv/bin/pytest -q` — offline, zeleno (12 passed).
+1. ✅ `cd lexi && .venv/bin/pytest -q` — offline, zeleno (12 passed).
 2. ✅ `.venv/bin/ruff check . && .venv/bin/ruff format --check .` — čisto.
 3. ✅ `.venv/bin/python -m lexi_evaluator https://lexi.hr/why-writing-sounds-generic/ --out-file examples/...` (živi, s ključem) → validan JSON + MD (ukupno 7.0/10, C — Good).
 4. ✅ `.venv/bin/python -m lexi_evaluator <url> --dry-run` (ili `--fixture`) — pipeline bez ključa/mreže.
@@ -84,4 +84,4 @@ Samostalna Python CLI aplikacija koja: (1) scrape-a Lexi blog post s URL-a, (2) 
 ## Further considerations
 1. ✅ Model: `gpt-4.1-mini` za agente + `gpt-5-mini` za sintetizator (konfigurabilno preko `.env`); početna preporuka `gpt-4o-mini` je zamijenjena nakon rasprave o novijim modelima.
 2. ✅ Jezik outputa: cijeli izvještaj (verdict, snage, slabosti, notes i nazivi kriterija) **samo na jeziku članka**, bez engleskih glosa u zagradi. Datumi/vrijeme se lokaliziraju prema jeziku članka (HR dugi oblik / američki oblik; JSON ostaje ISO). Jezik se **auto-detektira** iz članka (heuristika: hrvatski dijakritici `čćšžđ` → HR, inače EN; `extractor.detect_language`) i prosljeđuje u prompt svih agenata (`agents/base.build_messages`), tako da model piše cijeli review na jeziku članka.
-3. ✅ Git: samostalan repo u `lexi-evaluator/` (branch `main`), premješten iz monorepa.
+3. ✅ Git: samostalan repo u `lexi/` (branch `main`), premješten iz monorepa.

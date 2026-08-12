@@ -39,7 +39,7 @@ class Settings(BaseSettings):
     cache_dir: str = Field(default=".cache", validation_alias="LEXI_CACHE_DIR")
     request_timeout: float = Field(default=60.0, validation_alias="LEXI_REQUEST_TIMEOUT")
     user_agent: str = Field(
-        default="lexi-evaluator/0.1 (job-task demo; contact: support@lexi.hr)",
+        default="lexi/0.1 (job-task demo; contact: support@lexi.hr)",
         validation_alias="LEXI_USER_AGENT",
     )
 

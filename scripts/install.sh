@@ -9,19 +9,19 @@
 #      The script then clones the repo itself (see LEXI_REPO_URL below).
 #
 # It finds Python 3.11+, creates a .venv, installs pinned requirements +
-# the `lexi-evaluator` CLI command, and creates .env from .env.example.
+# the `lexi` CLI command, and creates .env from .env.example.
 #
 # Env overrides:
 #   LEXI_REPO_URL  - git URL cloned by the direct curl install
 #                    (default: https://github.com/DenisSeko/text-evaluator)
 #   LEXI_REPO_BRANCH - branch to clone (default: main)
 #   LEXI_DIR       - target directory for the direct curl install
-#                    (default: $HOME/lexi-evaluator)
+#                    (default: $HOME/lexi)
 set -euo pipefail
 
 REPO_URL="${LEXI_REPO_URL:-https://github.com/DenisSeko/text-evaluator}"
 REPO_BRANCH="${LEXI_REPO_BRANCH:-main}"
-INSTALL_DIR="${LEXI_DIR:-$HOME/lexi-evaluator}"
+INSTALL_DIR="${LEXI_DIR:-$HOME/lexi}"
 
 # --- 0. Running inside a checkout, or direct curl install? --------------------
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-.}")" && pwd)"
@@ -85,7 +85,7 @@ fi
 
 echo
 echo "Done. Quick checks:"
-echo "  lexi-evaluator --help"
-echo "  lexi-evaluator --dry-run --fixture tests/fixtures/sample_article.html --output md"
+echo "  lexi --help"
+echo "  lexi --dry-run --fixture tests/fixtures/sample_article.html --output md"
 echo "  python -m pytest -q"
 echo "Next: edit .env and set OPENAI_API_KEY (it is never committed)."

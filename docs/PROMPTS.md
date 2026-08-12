@@ -68,10 +68,13 @@ svih agenata — oni su **sci** ne **copywriteri**.
 **Kriteriji:** Concreteness · Reader benefit · Tone & emotional resonance ·
 Avoiding generic filler · Examples & storytelling · Trust & authority
 
-> **Napomena o jeziku:** nazivi kriterija i sav narativ se pri izvršavanju lokaliziraju
-> prema auto-detektiranom jeziku članka (HR/EN) — npr. za hrvatski članak "Clarity" →
-> "Jasnoća", "Logical flow" → "Logički tok" (`agents/base.build_messages` dodaje
-> instrukciju; bez engleskih glosa u zagradi).
+> **Napomena o jeziku:** cijeli izvještaj (LLM sadržaj i report chrome — naslovi,
+> labele, imena agenata, ocjene A–F) prati auto-detektirani jezik članka (HR/EN).
+> Prompti agenata lokaliziraju verdict/notes/kriterije (`agents/base.build_messages`),
+> a statički dio izvještaja `report.py` (rječnik `_L`, `_GRADE_LABELS`) + dvojezični
+> nazivi agenata (`name_hr/en`, `perspective_hr/en`). Npr. za hrvatski članak
+> "Clarity" → "Započetak"/"Jasnoća", a za engleski članak sve — i chrome i sadržaj —
+> ostaje engleski; bez engleskih glosa u zagradi.
 
 **Dizajn:** ova perspektiva je "zašto tekst radi (ili ne)". Konkretnost > apstrakcija,
 jer apstraktno ne pogađa čitatelja; benefit je ono što čitatelja zadržava; ton gradi

@@ -29,124 +29,123 @@
   "agent_verdicts": [
     {
       "agent_id": "structure",
-      "agent_name": "Struktura i tok",
-      "perspective": "Vodi li tekst čitatelja logično kroz sadržaj — jasnoća, organizacija i ritam.",
+      "agent_name": "Structure and flow",
+      "perspective": "Does the text guide the reader logically through the content — clarity, organisation and rhythm.",
       "score": 8.0,
       "criteria": [
         {
           "name": "Hook",
           "score": 8.0,
-          "note": "The opening uses a relatable scenario and clearly sets the expectation of learning how to respond to negative reviews effectively."
+          "note": "The opening effectively draws the reader in with a relatable scenario and clearly sets expectations for the guide."
         },
         {
           "name": "Logical flow",
           "score": 8.0,
-          "note": "Sections progress logically from the importance of responding to practical rules and then to actionable advice, with minimal jumps."
+          "note": "Sections build logically from why responding matters to practical rules, with minimal jumps and clear progression."
         },
         {
           "name": "Heading structure",
           "score": 7.0,
-          "note": "Headings are generally informative and organized, but some could be more parallel and consistent in style for stronger navigation."
+          "note": "Headings are mostly informative and organized, though some could be more parallel and consistent in style."
         },
         {
           "name": "Clarity",
           "score": 9.0,
-          "note": "Language is clear, precise, and easy to follow, using simple sentences and concrete examples to illustrate points."
+          "note": "The language is clear, precise, and easy to follow, with helpful examples that enhance understanding."
         },
         {
           "name": "Pacing & transitions",
           "score": 7.0,
-          "note": "Paragraphs are mostly digestible, though some transitions between sections could be smoother to enhance reader guidance."
+          "note": "Paragraphs are generally digestible, but some transitions between ideas could be smoother to improve rhythm."
         }
       ],
       "strengths": [
-        "Engaging and relatable introduction that draws readers in.",
+        "Engaging and relatable introduction that sets the tone well.",
         "Clear, actionable advice with concrete examples.",
-        "Effective use of statistics to support key points.",
-        "Friendly and conversational tone that aids comprehension."
+        "Language is straightforward and accessible."
       ],
       "weaknesses": [
-        "Heading formatting and style lack full consistency and parallelism.",
-        "Some transitions between major sections feel abrupt.",
-        "The conclusion and call to action could be more clearly separated from the main content."
+        "Heading hierarchy and parallelism could be improved for better skimmability.",
+        "Some transitions between sections feel abrupt, slightly disrupting flow.",
+        "The ending could better summarize key takeaways before the call to action."
       ],
-      "verdict": "This article is well structured and guides the reader effectively through the topic of responding to negative reviews. The introduction hooks the reader and the content flows logically with clear, practical advice. However, improvements in heading consistency and smoother transitions would enhance navigation and overall readability. Overall, it is a strong, reader-friendly piece that balances information and engagement well.",
+      "verdict": "This article is well structured overall, guiding the reader smoothly from understanding the importance of responding to negative reviews to practical steps for doing so. The introduction hooks effectively, and the clarity of language supports comprehension. However, refining heading consistency and smoothing transitions would enhance the reader’s navigation and engagement. With minor adjustments, this piece would offer an even stronger, more cohesive reading experience.",
       "error": null
     },
     {
       "agent_id": "psychology",
-      "agent_name": "Psihologija pisanja",
-      "perspective": "Koristi li tekst psihološke principe dobrog pisanja — konkretnost, benefit za čitatelja i ton.",
+      "agent_name": "Psychology of writing",
+      "perspective": "Does the text apply psychological principles of good writing — concreteness, reader benefit and tone.",
       "score": 8.0,
       "criteria": [
         {
           "name": "Concreteness",
           "score": 8.0,
-          "note": "The article uses concrete examples and specific phrases to illustrate how to respond, avoiding vague abstractions."
+          "note": "The article uses concrete examples and specific phrases to illustrate how to respond to reviews, making ideas vivid rather than abstract."
         },
         {
           "name": "Reader benefit",
           "score": 9.0,
-          "note": "The reader clearly understands the practical benefits of learning how to respond to negative reviews, including trust-building and customer retention."
+          "note": "It clearly communicates the benefits of responding well to negative reviews, including trust-building and customer retention."
         },
         {
           "name": "Tone & emotional resonance",
           "score": 8.0,
-          "note": "The tone is warm, empathetic, and human, engaging readers emotionally by acknowledging their feelings and offering reassurance."
+          "note": "The tone is warm, empathetic, and human, with direct address and encouragement that emotionally engages the reader."
         },
         {
           "name": "Avoiding generic filler",
           "score": 7.0,
-          "note": "The article mostly avoids clichés and buzzwords, though some phrases like 'turn a critic into a loyal customer' are somewhat familiar marketing language."
+          "note": "While mostly avoiding clichés, it occasionally uses somewhat generic phrases like 'show you care' or 'calm frustration,' but overall stays specific."
         },
         {
           "name": "Examples & storytelling",
           "score": 8.0,
-          "note": "It uses vivid scenarios and concrete examples, such as personalized response templates and a bedtime phone-scrolling story, to engage readers."
+          "note": "The article uses relatable mini-stories and concrete examples of responses that help readers visualize how to apply the advice."
         },
         {
           "name": "Trust & authority",
           "score": 9.0,
-          "note": "The article supports claims with up-to-date statistics and credible sources, enhancing its authority and trustworthiness."
+          "note": "It supports claims with recent, credible statistics and references, enhancing the article’s authority and trustworthiness."
         }
       ],
       "strengths": [
-        "Clear, actionable advice with specific examples.",
-        "Warm, empathetic tone that connects emotionally.",
-        "Strong use of credible data to back claims."
+        "Clear, actionable advice with concrete examples.",
+        "Strong emotional connection through empathetic tone and direct reader address.",
+        "Well-supported by relevant data and reputable sources."
       ],
       "weaknesses": [
-        "Some phrases border on marketing clichés.",
-        "Could include more varied storytelling beyond response examples."
+        "Some phrases verge on generic and could be more original.",
+        "Could include a more vivid overarching story or metaphor to unify the message."
       ],
-      "verdict": "This article effectively combines concrete advice with emotional engagement, making the reader feel understood and empowered. Its use of credible statistics and specific examples enhances trust and clarity. While it occasionally leans on familiar marketing phrases, its overall tone remains genuine and helpful. For readers seeking practical guidance on handling negative reviews, this piece offers both psychological insight and actionable steps.",
+      "verdict": "This article effectively combines concrete advice with emotional warmth and credible data to engage and benefit readers. Its human tone and specific examples help demystify a stressful situation, making the guidance feel accessible and practical. Minor overuse of some generic expressions slightly weakens originality but does not detract significantly from its persuasive impact. Overall, it is a strong example of psychologically informed, reader-centered writing.",
       "error": null
     },
     {
       "agent_id": "rubric",
-      "agent_name": "Kvantitativna rubrika",
-      "perspective": "Konzistentna kvantitativna ocjena po fiksnoj rubrici s obrazloženjem po kriteriju.",
+      "agent_name": "Quantitative rubric",
+      "perspective": "A consistent quantitative score against a fixed rubric with per-criterion justification.",
       "score": 8.0,
       "criteria": [
         {
           "name": "Clarity",
           "score": 9.0,
-          "note": "The article is clear and straightforward, with minimal ambiguity and precise explanations."
+          "note": "The article is clear and straightforward with minimal ambiguity, making the advice easy to understand."
         },
         {
           "name": "Structure",
           "score": 8.0,
-          "note": "The article is well-organized with clear headings and a logical flow, though some transitions could be smoother."
+          "note": "The article is well-organized with clear headings and logical flow, though some transitions could be smoother."
         },
         {
           "name": "Specificity",
           "score": 8.0,
-          "note": "It provides concrete examples and relevant statistics, but some advice remains somewhat general."
+          "note": "It provides concrete examples and relevant statistics, but some claims could be supported with more detailed explanations."
         },
         {
           "name": "Reader-benefit",
           "score": 9.0,
-          "note": "Readers gain practical, actionable guidance on responding to negative reviews that can improve their customer relations."
+          "note": "Readers gain practical, actionable advice that can be immediately applied to responding to negative reviews."
         },
         {
           "name": "Tone & voice",
@@ -156,60 +155,60 @@
         {
           "name": "Readability",
           "score": 7.0,
-          "note": "The article is mostly easy to read, but some paragraphs are dense and could be broken up for better scannability."
+          "note": "The article is generally easy to read, but longer paragraphs and some dense sections reduce scannability."
         }
       ],
       "strengths": [
-        "Clear and practical advice with strong use of statistics to support points.",
-        "Engaging and empathetic tone that connects well with readers.",
-        "Logical structure with helpful headings guiding the reader."
+        "Clear and practical guidance with real-world examples.",
+        "Effective use of statistics to support key points.",
+        "Engaging and empathetic tone that connects with readers."
       ],
       "weaknesses": [
-        "Some paragraphs are lengthy and reduce scannability.",
-        "Transitions between sections could be smoother to enhance flow.",
-        "Certain recommendations could be more detailed or nuanced."
+        "Some paragraphs are lengthy, affecting quick scanning.",
+        "Transitions between sections could be more fluid.",
+        "Certain claims could benefit from deeper elaboration."
       ],
-      "verdict": "This article effectively guides readers on how to respond to negative reviews with clarity and empathy, supported by relevant data and examples. Its logical structure and engaging tone make it accessible, though improvements in paragraph length and transitions would enhance readability. Overall, it offers strong practical value with minor areas for refinement.",
+      "verdict": "This article provides a well-structured, clear, and practical guide on responding to negative reviews, supported by relevant data and examples. Its empathetic tone and actionable advice offer strong reader value. However, readability suffers slightly due to longer paragraphs and occasional abrupt transitions, and some points could be more thoroughly explained. Overall, it is a solid resource that effectively balances clarity and engagement.",
       "error": null
     },
     {
       "agent_id": "humanity",
-      "agent_name": "Ljudski glas / anti-generic",
-      "perspective": "Zvuči li tekst ljudski, autentično i prepoznatljivo — ili generički i AI-slično.",
+      "agent_name": "Human voice / anti-generic",
+      "perspective": "Does the text sound human, authentic and distinctive — or generic and AI-like.",
       "score": 6.0,
       "criteria": [
         {
           "name": "Authenticity",
           "score": 6.0,
-          "note": "The article uses conversational elements like 'Take a breath' and direct address ('you'), which feel somewhat authentic, but overall it reads like polished advice rather than a spontaneous human voice."
+          "note": "The article uses conversational elements like 'Take a breath' and 'Nobody ever died from a bad review,' which add some human touch, but overall it feels like a polished guide rather than a spontaneous personal voice."
         },
         {
           "name": "Anti-cliché / anti-template",
           "score": 5.0,
-          "note": "While it avoids some extreme clichés, it still relies on common phrases like 'turn a critic into a loyal customer' and 'show empathy without losing authority,' which are typical in business advice content."
+          "note": "While it avoids some corporate jargon, it still relies on common phrases such as 'turn a critic into a loyal customer' and 'show empathy without losing authority,' which feel somewhat formulaic."
         },
         {
           "name": "Personal voice",
           "score": 5.0,
-          "note": "There is an attempt at personality with examples using names and first-person references ('I’m Marko, the café owner'), but the overall tone remains quite generic and instructional rather than distinctive or opinionated."
+          "note": "The article occasionally uses first-person plural ('We know it’s not easy') and direct address, but it lacks a strong, distinctive personality or unique perspective that would make it stand out."
         },
         {
           "name": "AI-sounding markers",
           "score": 7.0,
-          "note": "The article is well-structured with clear, logical flow and numbered lists, which is common in AI-generated or template-based writing, but it avoids overly robotic phrasing and includes some natural-sounding empathy."
+          "note": "The structure is clear and logical with some natural phrasing, but the presence of bullet points, numbered lists, and repeated phrases like 'how to respond to a negative review' give it a somewhat templated feel."
         }
       ],
       "strengths": [
-        "Uses direct address and conversational tone to engage the reader.",
-        "Includes concrete examples and practical advice that feel helpful.",
-        "Maintains a calm and empathetic tone throughout."
+        "Conversational tone with direct address to the reader.",
+        "Use of concrete examples and specific advice adds credibility.",
+        "Inclusion of empathy and practical steps feels human-centered."
       ],
       "weaknesses": [
-        "Relies on somewhat generic business advice phrases and common expressions.",
-        "Lacks a strong, unique personality or distinctive viewpoint.",
-        "Some transitions and phrasing feel formulaic and polished rather than naturally human."
+        "Frequent use of common business clichés and phrases.",
+        "Lacks a distinctive, personal storytelling voice or unique viewpoint.",
+        "Some phrasing and transitions feel formulaic and rehearsed."
       ],
-      "verdict": "The article reads like a carefully crafted business advice piece rather than a spontaneous, personal reflection. It uses some conversational touches and empathy that lend it partial authenticity, but it still leans heavily on familiar phrases and a neutral, instructional tone. Overall, it sounds like it could be produced by a skilled content writer or AI trained on typical customer service guidance, lacking a truly distinctive human voice.",
+      "verdict": "This article strikes a balance between professional guidance and conversational tone, making it moderately human in voice. However, it leans heavily on familiar business advice clichés and structured formatting, which reduces its distinctiveness and authenticity. It reads more like a carefully crafted corporate blog post than a genuinely personal or spontaneous piece. Overall, it feels helpful but somewhat generic.",
       "error": null
     }
   ],
@@ -230,6 +229,6 @@
       "humanity": 6.0
     }
   },
-  "synthesis": "Final verdict: This is a well-written, practical guide that clearly teaches readers how to respond to negative reviews and will be immediately useful for most small businesses — though it sometimes reads like polished, template-driven advice rather than a distinct human voice. Biggest strengths: clear, actionable guidance with concrete response examples; and an empathetic, engaging tone backed by credible statistics. Biggest weaknesses: inconsistent heading style and a few abrupt transitions that hinder quick navigation; and a somewhat generic voice that relies on familiar business phrases. Top 3 actionable recommendations (prioritised): 1) Standardize and tighten headings — make them parallel, bite-sized, and add brief signpost sentences between sections (and separate the conclusion/CTA clearly) to smooth flow; 2) Improve scannability by splitting long paragraphs, using short bullets or numbered steps for key takeaways, and visually highlighting templates/examples; 3) Inject more authentic voice — add one short personal anecdote or a distinctive viewpoint, swap cliché lines for specific micro-details, and vary example scenarios beyond the current templates.",
-  "created_at": "2026-08-12T18:32:28+00:00"
+  "synthesis": "Final verdict: This is a well-written, practical guide on how to respond to a negative review — clear, empathetic and full of usable examples — that only needs light editing to reach a polished, distinctive finish. Biggest strengths: it delivers concrete, actionable responses readers can copy or adapt, and it uses an empathetic, reader-first tone backed by credible data. Biggest weaknesses: the heading hierarchy and some long paragraphs hurt scannability and flow, and the voice leans on familiar business clichés rather than a memorable, personal perspective. Top 3 actionable recommendations (prioritised): 1) Restructure headings for parallelism and skimmability (clear step labels, consistent hierarchy) and break long sections into shorter chunks or bullets; 2) Smooth transitions and add a brief concluding summary of the key takeaways before the call to action to improve rhythm and closure; 3) Replace 3–5 generic phrases with more specific wording and insert a short, vivid micro-story or concrete detail to strengthen the article’s authentic voice (think “take a breath” + one short real example).",
+  "created_at": "2026-08-12T19:11:57+00:00"
 }

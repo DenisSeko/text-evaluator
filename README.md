@@ -41,9 +41,11 @@ URL ──► scraper ──► ekstraktor ──► 4 agenta (paralelno) ──
 | **Kvantitativna rubrika** | Fiksna rubrika, konzistentna ocjena | Clarity, Structure, Specificity, Reader-benefit, Tone, Readability |
 | **Ljudski glas / anti-generic** | Zvuči li ljudski ili AI-generično | Authenticity, Anti-cliché, Personal voice, AI-markers |
 
-> Jezici: nazivi kriterija i sav narativ (verdict, snage, slabosti, notes) **prate jezik
-> članka** (auto-detektiran, HR ili EN), bez engleskih glosa. Datumi i vrijeme u
-> izvještaju lokalizirani su isto — HR oblik (npr. "24. srpnja 2025.") ili američki
+> Jezici: **cijeli izvještaj** — od naslova i labela do naziva kriterija, verdict-a,
+> snaga, slabosti i notes-a — prati auto-detektirani jezik članka (HR ili EN), bez
+> engleskih glosa. To vrijedi i za JSON (imena agenata, kriterija) i za Markdown
+> (uključujući "chrome" — naslove tablica, Snage/Slabosti, labele). Datumi i vrijeme
+> su lokalizirani isto — HR oblik (npr. "24. srpnja 2025.") ili američki
 > ("July 24, 2025"); JSON ostaje ISO 8601.
 
 ### Sustav ocjenjivanja

@@ -1,118 +1,118 @@
-# Lexi tekst evaluacija: Why Writing Sounds Generic: The Psychology Behind It
+# Lexi text evaluation: Why Writing Sounds Generic: The Psychology Behind It
 
 - **URL:** https://lexi.hr/why-writing-sounds-generic/
-- **Autor:** Team Lexi
-- **Objavljeno:** January 28, 2026
-- **Duljina:** 453 riječi · 2 min
-- **Model (agenti):** gpt-4.1-mini · **Model (sintetizator):** gpt-5-mini
-- **Vrijeme izrade:** August 12, 2026, 18:31 (UTC)
+- **Author:** Team Lexi
+- **Published:** January 28, 2026
+- **Length:** 453 words · 2 min
+- **Model (agents):** gpt-4.1-mini · **Model (synthesizer):** gpt-5-mini
+- **Created:** August 12, 2026, 19:05 (UTC)
 
-## Ukupna ocjena: **6.7 / 10 — D (Adequate)**
+## Overall score: **7.0 / 10 — C (Good)**
 
-| Agent | Ocjena | Težina |
+| Agent | Score | Weight |
 |---|---|---|
-| Struktura i tok | 6.0 | 30% |
-| Psihologija pisanja | 7.0 | 25% |
-| Kvantitativna rubrika | 7.0 | 30% |
-| Ljudski glas / anti-generic | 7.0 | 15% |
+| Structure and flow | 7.0 | 30% |
+| Psychology of writing | 7.0 | 25% |
+| Quantitative rubric | 7.0 | 30% |
+| Human voice / anti-generic | 7.0 | 15% |
 
-## Finalni sud (sintetizator)
+## Final assessment (synthesizer)
 
-Final verdict: The article is well written and engaging — it explains the psychology behind why writing sounds generic in a clear, conversational way, but it needs structural and evidentiary sharpening to reach its full impact. Biggest strengths: an inviting, relatable opening and a consistently approachable tone that makes the psychology accessible; plus a numbered list that gives readers clear takeaways. Biggest weaknesses: missing clear headings and looser transitions that hurt skimmability and flow; and a shortage of vivid examples/data alongside occasional reliance on familiar buzzphrases that undercut the “anti-generic” message. Top 3 actionable recommendations (prioritised): 1) Add a clear heading/subheading hierarchy and tighter signposted transitions (break the numbered list into labelled sections and anchor the side-box to the closest point) to improve navigation and reduce repetition; 2) Insert one or two vivid anecdotes or before/after sentence rewrites and cite a specific study or statistic (e.g., the HBR finding) to increase concreteness and credibility; 3) Audit and replace generic phrases with specific alternatives and include sample rewrites or quick Lexi prompts so readers can see practical, non-generic options.
+Final verdict: This is a well-written, approachable explainer that convincingly shows how mental shortcuts and cognitive biases make writing sound generic, but it needs crisper structure and more vivid concreteness to fully land. Biggest strengths: a hooky, conversational voice that feels human and an effective, persuasive explanation of the psychological causes behind generic writing. Biggest weaknesses: weak structural signposts (minimal headings and a side-box that interrupts the rhythm) and a tendency to stay abstract—occasionally using the same familiar phrases it aims to critique. Top 3 actionable recommendations (prioritised): 1) Add clear, consistent headings and either integrate the side-box as a labeled section or move it inline with smoother transitions to restore flow; 2) Add one or two vivid, concrete examples or a short personal anecdote (plus a specific citation or data point) to increase specificity and trust; 3) Tighten sentences and replace generic phrases with concrete verbs and sensory detail to practice what the article preaches.
 
-## Struktura i tok — 6.0 / 10
+## Structure and flow — 7.0 / 10
 
-*Vodi li tekst čitatelja logično kroz sadržaj — jasnoća, organizacija i ritam.*
+*Does the text guide the reader logically through the content — clarity, organisation and rhythm.*
 
-| Kriterij | Ocjena | Obrazloženje |
+| Criterion | Score | Rationale |
 |---|---|---|
-| Hook | 7.0 | The opening sentence is engaging and relatable, setting a clear expectation about the topic of generic writing. |
-| Logical flow | 5.0 | The article generally progresses logically from problem identification to explanation and solution, but some sections feel slightly repetitive or loosely connected. |
-| Heading structure | 4.0 | The article lacks clear, consistent headings and subheadings, which makes it harder to scan and follow the argument structure. |
-| Clarity | 7.0 | The language is mostly clear and accessible, though some sentences are dense and could benefit from more concise phrasing. |
-| Pacing & transitions | 6.0 | Paragraphs are generally digestible, but transitions between ideas sometimes feel abrupt or underdeveloped, affecting smooth reading. |
+| Hook | 8.0 | The opening sentence is engaging and relatable, effectively setting expectations about the topic of generic writing. |
+| Logical flow | 6.0 | The article generally builds logically from problem identification to causes and then to solution, but some transitions feel abrupt and the side-box interrupts the flow. |
+| Heading structure | 5.0 | Headings are minimal and inconsistent; only one explicit heading ('Three reasons') is present, and the side-box is not clearly integrated as a heading or section. |
+| Clarity | 7.0 | The language is mostly clear and accessible, though some sentences are dense and could be broken down for easier comprehension. |
+| Pacing & transitions | 6.0 | Paragraphs are generally digestible, but transitions between sections and ideas sometimes feel rushed or disconnected, especially around the introduction of the product Lexi and the side-box. |
 
-**Snage:**
-- Engaging and relatable opening that draws readers in.
+**Strengths:**
+- Engaging and relatable opening that hooks the reader.
 - Clear explanation of psychological reasons behind generic writing.
-- Use of numbered list to organize key reasons adds some structure.
+- Logical progression from problem to solution concept.
 
-**Slabosti:**
-- Absence of formal headings reduces readability and skimmability.
-- Some repetition and loosely connected ideas disrupt logical flow.
-- Transitions between sections could be smoother to guide the reader better.
+**Weaknesses:**
+- Lack of clear, consistent headings to guide the reader through sections.
+- Abrupt transitions that occasionally disrupt the reading flow.
+- Side-box feels tacked on and interrupts the article’s rhythm.
 
-The article presents an interesting and relevant topic with an engaging start and clear explanations. However, the lack of structured headings and occasional jumps in logic make it harder for readers to follow the argument seamlessly. Improving the heading hierarchy and smoothing transitions would significantly enhance clarity and reader guidance.
+The article presents an interesting topic with an engaging start and mostly clear language, but its structural weaknesses limit reader guidance. The absence of well-defined headings and some abrupt transitions make it harder to follow the argument smoothly. Improving heading clarity and integrating supplementary content more seamlessly would enhance the overall flow and reader experience.
 
-## Psihologija pisanja — 7.0 / 10
+## Psychology of writing — 7.0 / 10
 
-*Koristi li tekst psihološke principe dobrog pisanja — konkretnost, benefit za čitatelja i ton.*
+*Does the text apply psychological principles of good writing — concreteness, reader benefit and tone.*
 
-| Kriterij | Ocjena | Obrazloženje |
+| Criterion | Score | Rationale |
 |---|---|---|
-| Concreteness | 7.0 | The article uses some concrete examples like the phrase 'We apologize for the inconvenience' but often remains somewhat abstract in discussing psychological concepts. |
-| Reader benefit | 8.0 | The reader clearly understands why their writing might sound generic and is introduced to a tool (Lexi) that promises to help, providing a tangible benefit. |
-| Tone & emotional resonance | 7.0 | The tone is conversational and approachable, with some emotional engagement around the struggle of generic writing, but it could be warmer or more personal. |
-| Avoiding generic filler | 6.0 | While it critiques generic language, the article occasionally uses somewhat familiar phrases and buzzwords, which slightly undermines its message. |
-| Examples & storytelling | 6.0 | The article includes a few examples and a metaphor about survival strategies but lacks richer storytelling or vivid anecdotes to fully engage the reader. |
-| Trust & authority | 7.0 | The article references psychological concepts and cites Harvard Business Review, which adds credibility, though more explicit evidence or data could strengthen trust. |
+| Concreteness | 7.0 | The article uses some concrete examples like common phrases and cognitive biases but remains somewhat abstract in parts. |
+| Reader benefit | 8.0 | The reader is clearly shown why their writing might sound generic and how understanding this can help improve it. |
+| Tone & emotional resonance | 7.0 | The tone is conversational and approachable, with some emotional engagement around the frustration of generic writing. |
+| Avoiding generic filler | 6.0 | While the article warns against generic language, it occasionally uses somewhat familiar phrases and buzzwords itself. |
+| Examples & storytelling | 6.0 | The article uses some examples and a metaphor about brain survival strategies but lacks vivid storytelling or personal anecdotes. |
+| Trust & authority | 7.0 | The article references psychological concepts and cites Harvard Business Review, lending credibility, though more sources could strengthen it. |
 
-**Snage:**
-- Clear explanation of psychological reasons behind generic writing.
-- Engaging conversational tone that invites reader reflection.
-- Provides a clear benefit by introducing a solution to the problem.
+**Strengths:**
+- Clear explanation of psychological reasons behind generic writing
+- Engaging, conversational tone that feels human
+- Good focus on reader benefit by linking understanding to improved writing
 
-**Slabosti:**
-- Occasional use of somewhat generic phrases undermines the message.
-- Lacks vivid storytelling or detailed examples to deepen engagement.
-- Could provide more concrete evidence or research to bolster authority.
+**Weaknesses:**
+- Some abstract phrasing reduces vividness
+- Occasional use of generic or familiar language contradicts the message
+- Limited use of rich examples or stories to deepen engagement
 
-This article effectively explains why writing often sounds generic by tapping into psychological principles, making the problem relatable and understandable. It offers a clear benefit by presenting a tool designed to counteract these tendencies. However, it could improve emotional resonance and concreteness by incorporating richer stories and avoiding some familiar phrases that feel generic. Overall, it balances informative content with a human tone but misses opportunities to fully captivate and convince through vivid examples and stronger evidence.
+This article effectively explains why writing often sounds generic by tapping into cognitive biases, making the reader aware of hidden mental shortcuts. Its conversational tone and clear reader benefit create emotional resonance, though it could improve with more vivid examples and less reliance on familiar phrases. Overall, it balances psychological insight with practical value, but occasionally falls into the very generic language it critiques.
 
-## Kvantitativna rubrika — 7.0 / 10
+## Quantitative rubric — 7.0 / 10
 
-*Konzistentna kvantitativna ocjena po fiksnoj rubrici s obrazloženjem po kriteriju.*
+*A consistent quantitative score against a fixed rubric with per-criterion justification.*
 
-| Kriterij | Ocjena | Obrazloženje |
+| Criterion | Score | Rationale |
 |---|---|---|
-| Clarity | 8.0 | The article is generally easy to understand with clear explanations of why writing sounds generic, though a few sentences could be more concise. |
-| Structure | 6.0 | The article has some logical flow and a numbered list, but lacks clear headings and the side-box feels somewhat disconnected. |
-| Specificity | 5.0 | The article provides some concrete examples and references (e.g., Harvard Business Review), but mostly relies on general claims without detailed data or varied examples. |
-| Reader-benefit | 7.0 | Readers gain insight into psychological reasons behind generic writing and are introduced to a tool (Lexi) to help improve their writing. |
-| Tone & voice | 8.0 | The tone is conversational, engaging, and consistent, with a distinctive voice that balances professionalism and approachability. |
-| Readability | 7.0 | Sentence and paragraph lengths are mostly manageable, but the text could benefit from more subheadings or bullet points for easier scanning. |
+| Clarity | 8.0 | The article is generally clear and easy to understand, with precise explanations of why writing sounds generic. |
+| Structure | 6.0 | The article has some logical flow and a numbered list, but lacks clear headings and could benefit from better section separation. |
+| Specificity | 5.0 | The article uses some concrete examples and references (e.g., Harvard Business Review), but mostly relies on general claims without detailed data. |
+| Reader-benefit | 7.0 | Readers gain insight into the psychological reasons behind generic writing and are introduced to a tool to help improve their writing. |
+| Tone & voice | 8.0 | The tone is consistent, conversational, and engaging, with a distinctive voice that balances professionalism and approachability. |
+| Readability | 7.0 | Sentences and paragraphs are mostly concise and scannable, though some longer sentences and the lack of subheadings reduce ease of scanning. |
 
-**Snage:**
+**Strengths:**
 - Clear explanation of psychological reasons behind generic writing.
-- Engaging and consistent tone that maintains reader interest.
-- Introduction of a practical solution (Lexi) adds value.
+- Engaging and consistent tone that holds reader interest.
+- Provides actionable insight by introducing a tool to disrupt generic writing.
 
-**Slabosti:**
-- Lack of clear headings reduces navigability and structure.
-- Limited concrete examples and data to support claims.
-- Side-box feels somewhat detached from the main text.
+**Weaknesses:**
+- Lacks clear section headings which would improve navigation.
+- Limited use of concrete examples or data to support claims.
+- Some sentences are long and could be broken up for better readability.
 
-This article effectively explains why writing often sounds generic and offers a compelling psychological perspective, supported by a conversational tone and some practical advice. However, it falls short in structural clarity due to missing headings and limited use of concrete examples or data. Improving organization and adding more specific evidence would enhance reader engagement and comprehension. Overall, it is a solid, accessible piece with room for refinement in presentation and detail.
+This article effectively explains why writing often sounds generic by focusing on cognitive biases, making it clear and engaging for readers. However, it falls short in structural clarity due to missing headings and limited concrete examples, which somewhat weakens its impact. The tone and voice are strong and consistent, and the article offers practical reader benefits by introducing a writing tool. Overall, it is a solid piece that could be improved with better organization and more specific evidence.
 
-## Ljudski glas / anti-generic — 7.0 / 10
+## Human voice / anti-generic — 7.0 / 10
 
-*Zvuči li tekst ljudski, autentično i prepoznatljivo — ili generički i AI-slično.*
+*Does the text sound human, authentic and distinctive — or generic and AI-like.*
 
-| Kriterij | Ocjena | Obrazloženje |
+| Criterion | Score | Rationale |
 |---|---|---|
-| Authenticity | 7.0 | The article uses conversational phrasing like 'Nobody wakes up and says...' which feels natural, but some parts feel slightly polished or instructional. |
-| Anti-cliché / anti-template | 6.0 | While it avoids many corporate buzzwords, phrases like 'mental shortcuts,' 'curse of knowledge,' and 'cognitive economy' are somewhat common in writing advice, making it feel partly template-driven. |
-| Personal voice | 7.0 | The article has a clear point of view on why writing sounds generic and includes a direct address to the reader, but it lacks strong personal anecdotes or distinctive stylistic flourishes. |
-| AI-sounding markers | 8.0 | The writing flows logically and avoids robotic repetition or overly formal constructions, though some transitions and phrasing ('That’s why advice alone rarely works') are typical of AI-generated content. |
+| Authenticity | 7.0 | The article uses conversational phrasing like 'Nobody wakes up and says...' which feels natural, but some parts lean toward explanatory and generic. |
+| Anti-cliché / anti-template | 6.0 | It avoids many corporate clichés but still relies on somewhat familiar phrases like 'safe because everyone says it' and 'mental shortcuts.' |
+| Personal voice | 7.0 | The piece shows a clear point of view about why writing sounds generic and includes a persuasive tone, though it remains fairly neutral and professional. |
+| AI-sounding markers | 7.0 | Transitions such as 'That’s why,' 'However,' and numbered lists are common but not overly robotic; the style is mostly fluid and human-like. |
 
-**Snage:**
-- Conversational tone with direct reader engagement.
+**Strengths:**
+- Conversational opening that draws the reader in.
 - Clear explanation of psychological reasons behind generic writing.
-- Logical structure with numbered points and side-box for emphasis.
+- Persuasive and coherent argument with a consistent point of view.
 
-**Slabosti:**
-- Use of somewhat common jargon and phrases from writing advice.
-- Lacks distinctive personal anecdotes or unique stylistic voice.
-- Some phrasing feels polished and instructional rather than naturally spontaneous.
+**Weaknesses:**
+- Some phrases feel slightly formulaic or familiar, reducing distinctiveness.
+- The tone is professional and polished but lacks strong personal anecdotes or unique stylistic flourishes.
+- Certain transitions and structures echo common corporate writing patterns.
 
-The article reads mostly like a thoughtfully composed human text with a clear point of view and conversational style. However, it leans on familiar writing-advice concepts and phrases that reduce its distinctiveness and personal voice. It avoids robotic or overly formal language, but the overall tone remains somewhat polished and instructional rather than deeply personal or idiosyncratic. This makes it feel authentic but not highly distinctive or uniquely human.
+The article reads as written by a thoughtful human with a clear perspective on writing challenges. It avoids heavy corporate jargon and sounds approachable, though it occasionally slips into somewhat familiar phrasing and structures. Overall, it strikes a good balance between professionalism and personality, making it feel authentic but not highly distinctive or deeply personal.

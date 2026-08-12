@@ -25,6 +25,14 @@ class HumanityAgent(Agent):
     id = "humanity"
     name = "Ljudski glas / anti-generic"
     perspective = "Zvuči li tekst ljudski, autentično i prepoznatljivo — ili generički i AI-slično."
+    name_hr = "Ljudski glas / anti-generic"
+    name_en = "Human voice / anti-generic"
+    perspective_hr = (
+        "Zvuči li tekst ljudski, autentično i prepoznatljivo — ili generički i AI-slično."
+    )
+    perspective_en = (
+        "Does the text sound human, authentic and distinctive — or generic and AI-like."
+    )
 
     def system_prompt(self) -> str:
         return _SYSTEM

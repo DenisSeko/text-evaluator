@@ -37,6 +37,46 @@ _EN_MONTHS = {
 }
 _DATE_FORMATS = ("%Y-%m-%dT%H:%M:%S%z", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d")
 
+# Grade label localization (canonical label -> HR / EN display).
+_GRADE_LABELS = {
+    "Excellent": ("Odličan", "Excellent"),
+    "Very good": ("Vrlo dobar", "Very good"),
+    "Good": ("Dobar", "Good"),
+    "Adequate": ("Dovoljan", "Adequate"),
+    "Weak": ("Slab", "Weak"),
+    "Poor": ("Loš", "Poor"),
+}
+
+# Report chrome localization: {key: (hr, en)}. The whole report follows the
+# article's language so an EN article never sees Croatian chrome (and vice versa).
+_L = {
+    "title_prefix": ("Lexi tekst evaluacija", "Lexi text evaluation"),
+    "url": ("URL", "URL"),
+    "author": ("Autor", "Author"),
+    "published": ("Objavljeno", "Published"),
+    "length": ("Duljina", "Length"),
+    "words": ("riječi", "words"),
+    "model_agents": ("Model (agenti)", "Model (agents)"),
+    "model_synth": ("Model (sintetizator)", "Model (synthesizer)"),
+    "created": ("Vrijeme izrade", "Created"),
+    "overall": ("Ukupna ocjena", "Overall score"),
+    "agent": ("Agent", "Agent"),
+    "score": ("Ocjena", "Score"),
+    "weight": ("Težina", "Weight"),
+    "failed": ("neuspjeh", "failed"),
+    "final_synthesis": ("Finalni sud (sintetizator)", "Final assessment (synthesizer)"),
+    "criterion": ("Kriterij", "Criterion"),
+    "rationale": ("Obrazloženje", "Rationale"),
+    "strengths": ("Snage", "Strengths"),
+    "weaknesses": ("Slabosti", "Weaknesses"),
+    "agent_failed": ("Agent nije uspio", "Agent failed"),
+}
+
+
+def _t(language: str, key: str) -> str:
+    hr, en = _L[key]
+    return hr if language == "hr" else en
+
 
 def _parse_datetime(value: str) -> datetime | None:
     for fmt in _DATE_FORMATS:
@@ -77,36 +117,43 @@ def render_markdown(result: EvaluationResult) -> str:
     """Render a Markdown report that makes the reasoning behind every score visible."""
     article = result.article
     overall = result.overall
+    lang = article.language if article.language in ("hr", "en") else "en"
+    gr_label_hr, gr_label_en = _GRADE_LABELS.get(overall.label, (overall.label, overall.label))
+    grade_label = gr_label_hr if lang == "hr" else gr_label_en
     lines: list[str] = []
 
-    lines.append(f"# Lexi tekst evaluacija: {article.title or article.url}")
+    lines.append(f"# {_t(lang, 'title_prefix')}: {article.title or article.url}")
     lines.append("")
-    lines.append(f"- **URL:** {article.url}")
+    lines.append(f"- **{_t(lang, 'url')}:** {article.url}")
     if article.author:
-        lines.append(f"- **Autor:** {article.author}")
+        lines.append(f"- **{_t(lang, 'author')}:** {article.author}")
     if article.published_at:
-        lines.append(f"- **Objavljeno:** {format_date(article.published_at, article.language)}")
-    lines.append(f"- **Duljina:** {article.word_count} riječi · {article.read_time}")
+        lines.append(f"- **{_t(lang, 'published')}:** {format_date(article.published_at, lang)}")
     lines.append(
-        f"- **Model (agenti):** {result.model} · **Model (sintetizator):** {result.synth_model or '—'}"
+        f"- **{_t(lang, 'length')}:** {article.word_count} {_t(lang, 'words')} · {article.read_time}"
     )
-    lines.append(f"- **Vrijeme izrade:** {format_datetime(result.created_at, article.language)}")
+    lines.append(
+        f"- **{_t(lang, 'model_agents')}:** {result.model} · "
+        f"**{_t(lang, 'model_synth')}:** {result.synth_model or '—'}"
+    )
+    lines.append(f"- **{_t(lang, 'created')}:** {format_datetime(result.created_at, lang)}")
     lines.append("")
 
     lines.append(
-        f"## Ukupna ocjena: **{overall.score:.1f} / 10 — {overall.letter_grade} ({overall.label})**"
+        f"## {_t(lang, 'overall')}: **{overall.score:.1f} / 10 — "
+        f"{overall.letter_grade} ({grade_label})**"
     )
     lines.append("")
-    lines.append("| Agent | Ocjena | Težina |")
+    lines.append(f"| {_t(lang, 'agent')} | {_t(lang, 'score')} | {_t(lang, 'weight')} |")
     lines.append("|---|---|---|")
     for verdict in result.agent_verdicts:
         weight = overall.weights.get(verdict.agent_id, 0.0)
-        status = "❌ neuspjeh" if verdict.error else f"{verdict.score:.1f}"
+        status = f"❌ {_t(lang, 'failed')}" if verdict.error else f"{verdict.score:.1f}"
         lines.append(f"| {verdict.agent_name} | {status} | {weight:.0%} |")
     lines.append("")
 
     if result.synthesis:
-        lines.append("## Finalni sud (sintetizator)")
+        lines.append(f"## {_t(lang, 'final_synthesis')}")
         lines.append("")
         lines.append(result.synthesis.strip())
         lines.append("")
@@ -117,24 +164,26 @@ def render_markdown(result: EvaluationResult) -> str:
         lines.append(f"*{verdict.perspective}*")
         lines.append("")
         if verdict.error:
-            lines.append(f"> Agent nije uspio: `{verdict.error}`")
+            lines.append(f"> {_t(lang, 'agent_failed')}: `{verdict.error}`")
             lines.append("")
             continue
 
         if verdict.criteria:
-            lines.append("| Kriterij | Ocjena | Obrazloženje |")
+            lines.append(
+                f"| {_t(lang, 'criterion')} | {_t(lang, 'score')} | {_t(lang, 'rationale')} |"
+            )
             lines.append("|---|---|---|")
             for criterion in verdict.criteria:
                 lines.append(f"| {criterion.name} | {criterion.score:.1f} | {criterion.note} |")
             lines.append("")
 
         if verdict.strengths:
-            lines.append("**Snage:**")
+            lines.append(f"**{_t(lang, 'strengths')}:**")
             lines.extend(f"- {s}" for s in verdict.strengths)
             lines.append("")
 
         if verdict.weaknesses:
-            lines.append("**Slabosti:**")
+            lines.append(f"**{_t(lang, 'weaknesses')}:**")
             lines.extend(f"- {w}" for w in verdict.weaknesses)
             lines.append("")
 

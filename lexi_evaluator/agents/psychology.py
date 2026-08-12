@@ -27,6 +27,16 @@ class PsychologyAgent(Agent):
         "Koristi li tekst psihološke principe dobrog pisanja — konkretnost, benefit "
         "za čitatelja i ton."
     )
+    name_hr = "Psihologija pisanja"
+    name_en = "Psychology of writing"
+    perspective_hr = (
+        "Koristi li tekst psihološke principe dobrog pisanja — konkretnost, benefit "
+        "za čitatelja i ton."
+    )
+    perspective_en = (
+        "Does the text apply psychological principles of good writing — concreteness, "
+        "reader benefit and tone."
+    )
 
     def system_prompt(self) -> str:
         return _SYSTEM

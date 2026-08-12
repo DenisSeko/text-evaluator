@@ -49,9 +49,21 @@ class Agent(ABC):
     independently (in parallel) by the orchestrator."""
 
     id: str
-    name: str
-    perspective: str
+    name: str  # canonical (HR) name
+    perspective: str  # canonical (HR) perspective
+    name_hr: str = ""  # localized display name
+    name_en: str = ""
+    perspective_hr: str = ""
+    perspective_en: str = ""
     model: str | None = None  # optional per-agent model override
+
+    def display_name(self, language: str) -> str:
+        value = self.name_hr if language == "hr" else self.name_en
+        return value or self.name
+
+    def display_perspective(self, language: str) -> str:
+        value = self.perspective_hr if language == "hr" else self.perspective_en
+        return value or self.perspective
 
     @abstractmethod
     def system_prompt(self) -> str:

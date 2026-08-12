@@ -43,12 +43,15 @@ async def _run_agent(
     try:
         messages = agent.build_messages(article, max_chars)
         raw = await client.complete(messages, json_mode=True, temperature=temperature)
-        return agent.parse_verdict(raw)
+        verdict = agent.parse_verdict(raw)
+        verdict.agent_name = agent.display_name(article.language)
+        verdict.perspective = agent.display_perspective(article.language)
+        return verdict
     except (LLMError, LLMParseError, ValueError) as exc:
         return AgentVerdict(
             agent_id=agent.id,
-            agent_name=agent.name,
-            perspective=agent.perspective,
+            agent_name=agent.display_name(article.language),
+            perspective=agent.display_perspective(article.language),
             score=0.0,
             verdict="",
             error=str(exc),

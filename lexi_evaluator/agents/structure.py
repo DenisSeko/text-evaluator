@@ -24,6 +24,10 @@ class StructureAgent(Agent):
     id = "structure"
     name = "Struktura i tok"
     perspective = "Vodi li tekst čitatelja logično kroz sadržaj — jasnoća, organizacija i ritam."
+    name_hr = "Struktura i tok"
+    name_en = "Structure and flow"
+    perspective_hr = "Vodi li tekst čitatelja logično kroz sadržaj — jasnoća, organizacija i ritam."
+    perspective_en = "Does the text guide the reader logically through the content — clarity, organisation and rhythm."
 
     def system_prompt(self) -> str:
         return _SYSTEM

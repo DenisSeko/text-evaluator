@@ -189,6 +189,15 @@ Dry-run/testovi **ne smiju** ovisiti o mreži ni ključu — koristi `MockProvid
 
 - Detekcija jezika: `extractor.detect_language` (heuristika `čćšžđ` → hr, inače en).
 - Instrukcija jezika za LLM: `agents/base.build_messages` (jedno središnje mjesto).
+- **Cijeli izvještaj prati jezik članka** (HR ili EN):
+  - LLM sadržaj (verdict, snage, slabosti, notes i nazivi kriterija) — prompt
+    lokalizira u `build_messages`.
+  - Report "chrome" (naslovi, labele, tablice, "Snage/Slabosti", "strengths", ...) —
+    rječnik `_L` u `report.py` (`render_markdown`), bira se prema `article.language`.
+  - Nazivi/perspektive agenata — dvojezični atributi `name_hr/en`, `perspective_hr/en`
+    na svakom agentu; `orchestrator` upisuje lokaliziranu verziju u `AgentVerdict`
+    (pa je i JSON dosljedan na jeziku članka).
+  - Ocjena label (Excellent…Poor) — `_GRADE_LABELS` u `report.py` (npr. "Vrlo dobar").
 - Datumi/vrijeme: `report.format_date` / `format_datetime` (HR dugi oblik / američki);
   JSON ostaje ISO 8601.
 
@@ -223,7 +232,7 @@ lexi-evaluator --dry-run --fixture tests/fixtures/sample_article.html   # offlin
 lexi-evaluator --help
 
 # kvaliteta
-python -m pytest -q                     # testovi (21)
+python -m pytest -q                     # testovi (23)
 ruff check . && ruff format --check .   # lint + format
 python scripts/check_no_secrets.py      # honeypot (obavezno prije pusha)
 python scripts/demo_dry.py              # regenerira examples/demo-dry.*

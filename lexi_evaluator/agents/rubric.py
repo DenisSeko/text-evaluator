@@ -26,6 +26,14 @@ class RubricAgent(Agent):
     perspective = (
         "Konzistentna kvantitativna ocjena po fiksnoj rubrici s obrazloženjem po kriteriju."
     )
+    name_hr = "Kvantitativna rubrika"
+    name_en = "Quantitative rubric"
+    perspective_hr = (
+        "Konzistentna kvantitativna ocjena po fiksnoj rubrici s obrazloženjem po kriteriju."
+    )
+    perspective_en = (
+        "A consistent quantitative score against a fixed rubric with per-criterion justification."
+    )
 
     def system_prompt(self) -> str:
         return _SYSTEM

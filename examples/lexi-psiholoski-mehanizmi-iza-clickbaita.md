@@ -5,47 +5,47 @@
 - **Objavljeno:** 24. srpnja 2025.
 - **Duljina:** 2007 riječi · 10 min
 - **Model (agenti):** gpt-4.1-mini · **Model (sintetizator):** gpt-5-mini
-- **Vrijeme izrade:** 12. kolovoza 2026. u 18:32 (UTC)
+- **Vrijeme izrade:** 12. kolovoza 2026. u 19:11 (UTC)
 
-## Ukupna ocjena: **7.7 / 10 — C (Good)**
+## Ukupna ocjena: **8.0 / 10 — B (Vrlo dobar)**
 
 | Agent | Ocjena | Težina |
 |---|---|---|
-| Struktura i tok | 7.0 | 30% |
+| Struktura i tok | 8.0 | 30% |
 | Psihologija pisanja | 8.0 | 25% |
 | Kvantitativna rubrika | 8.0 | 30% |
 | Ljudski glas / anti-generic | 8.0 | 15% |
 
 ## Finalni sud (sintetizator)
 
-Zaključak: Članak je dobro napisan — topao, angažiran i informativan — te učinkovito objašnjava psihološke mehanizme clickbaita, ali može profitirati od manje uredničke dorade da postane još pregledniji i uvjerljiviji.  
-Najveće snage: autentičan, humorističan osobni glas koji drži čitatelja angažiranim; obilje konkretnih primjera, anegdota i praktičnih savjeta uz referencije koje daju vrijednost.  
-Najveće slabosti: naslovi i prijelazi ponekad nisu dosljedni pa tekst djeluje blago skokovito; duži odlomci i složenije rečenice otežavaju brzo skeniranje i mogu zamagliti ključne poruke.  
-Preporuke (po prioritetu): 1) urediti hijerarhiju naslova i dodati dosljedne podnaslove i glatke prijelaze; 2) skratiti odlomke i pojednostavniti rečenice (ili ubaciti istaknute točke/bullete za ključne savjete) radi bolje čitljivosti; 3) zamijeniti nekoliko klišejiziranih fraza svježijim izrazima i dopuniti ključne tvrdnje konkretnim citatima/studijama ili brojčanim podacima radi veće vjerodostojnosti.
+Konačna ocjena: članak je vrlo dobro napisan — informativan, angažiran i čitljiv, uspješno prenosi psihološke uvide na razumljiv i zabavan način.  
+Najveće snage: autentičan, razgovorni glas s osobnim anegdotama koji čitatelja povezuje s temom; obilje konkretnih primjera i praktičnih savjeta koji tekst čine korisnim.  
+Najveće slabosti: predugačak uvod i povremeno dugački odlomci/podnaslovi koji smanjuju preglednost i ritam; povremena upotreba generičkih fraza i nedovoljno precizno navođenje izvora.  
+Preporuke (prioritetno): 1) skratiti uvod na 2–3 rečenice i podijeliti dugačke odlomke radi bolje scannability i glatkijih prijelaza; 2) standardizirati i skratiti podnaslove (paralelne, jasne fraze) kako bi čitatelj brže locirao ključne točke; 3) ukloniti ili zamijeniti klišejizirane izraze, a gdje se navode studije dodati precizne reference (autor/godina/link) za veću vjerodostojnost.
 
-## Struktura i tok — 7.0 / 10
+## Struktura i tok — 8.0 / 10
 
 *Vodi li tekst čitatelja logično kroz sadržaj — jasnoća, organizacija i ritam.*
 
 | Kriterij | Ocjena | Obrazloženje |
 |---|---|---|
-| Zaglavlje | 8.0 | Uvod jasno postavlja teme i budi znatiželju čitatelja, dobro uvodi u sadržaj. |
-| Logički tijek | 7.0 | Sekcije su uglavnom povezane i nadovezuju se jedna na drugu, ali ponekad prelazi između tema djeluje blago skokovito. |
-| Struktura naslova | 6.0 | Naslovi postoje i informativni su, no nisu uvijek dosljedno organizirani niti potpuno paralelni, što može zbuniti čitatelja. |
-| Jasnoća | 7.0 | Jezik je uglavnom jasan i pristupačan, no povremeno se gubi fokus zbog dužih i složenijih rečenica. |
-| Ritam i prijelazi | 6.0 | Paragrafska duljina varira, a prijelazi između dijelova nisu uvijek glatki, što može usporiti čitanje. |
+| Zamah | 8.0 | Uvod jasno postavlja teme i budi znatiželju, ali je pomalo razvučen i mogao bi biti sažetiji za jači efekt. |
+| Logički tok | 9.0 | Sekcije su dobro povezane i nadovezuju se jedna na drugu, stvarajući koherentnu priču o clickbaitu. |
+| Struktura naslova | 7.0 | Naslovi su informativni i relevantni, no nisu uvijek dosljedno paralelni i ponekad su predugački. |
+| Jasnoća | 8.0 | Jezik je uglavnom jasan i pristupačan, no povremeno se koristi kolokvijalni ton koji može malo usporiti razumijevanje. |
+| Ritam i prijelazi | 8.0 | Paragrafi su uglavnom pregledni, a prijelazi između tema su glatki, iako bi neki dijelovi mogli biti sažetiji za bolji tempo. |
 
 **Snage:**
-- Uvod je zanimljiv i jasno postavlja očekivanja.
-- Tematski dijelovi su dobro povezani i prate logičan slijed od problema do rješenja.
-- Upotreba primjera i psiholoških objašnjenja pomaže u razumijevanju teme.
+- Jasno postavljanje teme i održavanje fokusa na clickbait kroz cijeli tekst.
+- Dobro povezivanje psiholoških aspekata s primjerima i praktičnim savjetima.
+- Upotreba podnaslova koji pomažu u orijentaciji čitatelja kroz duži tekst.
 
 **Slabosti:**
-- Naslovi nisu u potpunosti dosljedni u stilu i hijerarhiji, što može zbuniti čitatelja.
-- Neki prijelazi između odlomaka i tema su nagli i ne uvijek dovoljno povezani.
-- Duljina pojedinih odlomaka i složenost rečenica povremeno otežavaju brzo praćenje teksta.
+- Uvod je predugačak i može izgubiti pažnju čitatelja prije nego što se dođe do glavne teme.
+- Neki naslovi su predugački i ne uvijek dosljedno strukturirani, što može zbuniti čitatelja.
+- Povremeno previše kolokvijalnog tona koji može smanjiti jasnoću i profesionalnost.
 
-Članak uspješno uvodi i vodi čitatelja kroz kompleksnu temu clickbaita, koristeći zanimljive primjere i psihološke uvide. Ipak, struktura naslova i prijelazi između dijelova mogli bi biti jasniji i dosljedniji kako bi se poboljšala čitljivost i zadržala pažnja. Uz manje dorade u organizaciji i ritmu, tekst bi bio još učinkovitiji u vođenju čitatelja do zaključaka.
+Članak je dobro strukturiran i vodi čitatelja kroz kompleksnu temu na razumljiv način, s jasnim podjelama i dobrim primjerima. Iako uvod i neki naslovi mogu biti sažetiji, ukupni tok i jasnoća su na visokoj razini, što omogućuje lako praćenje i zadržavanje interesa. Preporučljivo je dodatno poraditi na sažetosti i dosljednosti naslova za još bolju čitljivost.
 
 ## Psihologija pisanja — 8.0 / 10
 
@@ -53,23 +53,25 @@ Preporuke (po prioritetu): 1) urediti hijerarhiju naslova i dodati dosljedne pod
 
 | Kriterij | Ocjena | Obrazloženje |
 |---|---|---|
-| Konkretost | 8.0 | Članak koristi konkretne primjere i opise, no povremeno se oslanja na općenite tvrdnje koje bi mogle biti još živopisnije. |
-| Korist za čitatelja | 9.0 | Jasno je što čitatelj može naučiti i kako prepoznati clickbait te kako se zaštititi, što donosi konkretnu vrijednost. |
-| Ton i emocionalni odjek | 9.0 | Ton je prijateljski, iskren i često humorističan, što stvara toplu i angažiranu atmosferu. |
-| Izbjegavanje generičkih fraza | 7.0 | Iako je tekst uglavnom svjež, povremeno koristi uobičajene izraze poput 'hit dopamina' i 'toksična veza' koje su donekle klišejizirane. |
-| Primjeri i pripovijedanje | 9.0 | Članak obiluje konkretnim primjerima, osobnim iskustvima i metaforama koje pomažu razumijevanju i zadržavanju pažnje. |
-| Povjerenje i autoritet | 8.0 | Tekst dobro potkrepljuje tvrdnje relevantnim izvorima i studijama, ali ponekad bi mogao dodatno pojasniti neke reference za veću vjerodostojnost. |
+| Konkretost | 8.0 | Članak koristi konkretne primjere poput Supertalent videa i poznatih naslova, ali ponekad prelazi u općenite tvrdnje. |
+| Korist za čitatelja | 9.0 | Jasno ističe zašto je tema relevantna i kako prepoznati te izbjeći clickbait, što čitatelju donosi praktičnu vrijednost. |
+| Ton i emocionalni odjek | 9.0 | Ton je prijateljski, iskren i često humorističan, što potiče emocionalnu povezanost s čitateljem. |
+| Izbjegavanje generičkog sadržaja | 7.0 | Iako članak izbjegava klišeje, povremeno koristi uobičajene fraze i izraze poput „hit dopamina“ ili „kultura brzog čitanja“. |
+| Primjeri i pripovijedanje | 9.0 | Koristi brojne primjere, anegdote i metafore (npr. usporedba s kolegom s tračevima) koji čine tekst živim i razumljivim. |
+| Povjerenje i autoritet | 8.0 | Podupire tvrdnje relevantnim izvorima i studijama, ali ponekad bi tekst mogao biti precizniji u navođenju podataka. |
 
 **Snage:**
-- Topao i angažiran ton koji čitatelja vodi kroz temu s lakoćom.
-- Upotreba brojnih primjera i osobnih anegdota koje čine sadržaj pristupačnim i zanimljivim.
-- Jasno istaknute koristi za čitatelja i praktični savjeti za prepoznavanje i izbjegavanje clickbaita.
+- Prijateljski i iskren ton koji angažira čitatelja.
+- Jasno objašnjenje psiholoških mehanizama iza clickbaita.
+- Korištenje konkretnih primjera i anegdota koje ilustriraju poantu.
+- Praktični savjeti za prepoznavanje i izbjegavanje clickbaita.
 
 **Slabosti:**
-- Povremena upotreba klišejiziranih izraza koji mogu djelovati manje originalno.
-- Neke tvrdnje mogle su biti još konkretnije i detaljnije potkrijepljene za jači dojam stručnosti.
+- Povremena upotreba uobičajenih fraza koje smanjuju originalnost.
+- Neki dijelovi su pomalo općeniti i mogli bi biti konkretniji ili detaljniji.
+- Povremeno nedostaje dublja analiza ili kritička perspektiva na izvore.
 
-Članak uspješno spaja psihološke uvide s osobnim iskustvima i praktičnim savjetima, što ga čini korisnim i zanimljivim za čitatelja. Ton je prijateljski i emotivan, što dodatno potiče angažman. Iako povremeno koristi uobičajene fraze, ukupno gledano, tekst je dobro strukturiran, vjerodostojan i pruža jasnu vrijednost. Preporučujem ga kao dobar primjer pisanja koje kombinira znanost i pristupačnost.
+Članak je vrlo uspješan u prenošenju psiholoških spoznaja na pristupačan i angažirajući način, koristeći konkretne primjere i toplu ljudsku notu. Čitatelj jasno dobiva vrijedne informacije i praktične savjete, što povećava njegovu korisnost. Iako povremeno koristi generičke izraze i mogao bi biti još konkretniji u nekim dijelovima, ukupno gledano, tekst učinkovito balansira između znanstvene utemeljenosti i zabavnog stila pisanja.
 
 ## Kvantitativna rubrika — 8.0 / 10
 
@@ -77,24 +79,24 @@ Preporuke (po prioritetu): 1) urediti hijerarhiju naslova i dodati dosljedne pod
 
 | Kriterij | Ocjena | Obrazloženje |
 |---|---|---|
-| Jasnoća | 8.0 | Članak je većinom jasan i razumljiv, ali povremeno koristi kolokvijalne izraze koji mogu malo zbuniti čitatelja. |
-| Struktura | 9.0 | Dobro organiziran s jasno označenim dijelovima i logičnim slijedom koji vodi čitatelja kroz temu. |
-| Specifičnost | 8.0 | Sadrži konkretne primjere, reference na studije i autore, no ponekad bi dodatni podaci ili brojke mogli dodatno ojačati argumente. |
-| Korist za čitatelja | 9.0 | Čitatelj dobiva korisne informacije o psihologiji clickbaita i praktične savjete za prepoznavanje i izbjegavanje manipulativnih naslova. |
-| Ton i glas | 8.0 | Ton je prijateljski i pristupačan, s dozom humora i osobnog iskustva, što doprinosi zanimljivosti, ali ponekad može djelovati neformalno. |
-| Čitljivost | 7.0 | Dužina rečenica i odlomaka varira, što ponekad otežava brzo skeniranje teksta, a ponegdje bi dodatni podnaslovi poboljšali preglednost. |
+| Jasnoća | 8.0 | Članak je uglavnom jasan i razumljiv, iako povremeno koristi neformalne izraze koji mogu malo zbuniti čitatelja. |
+| Struktura | 7.0 | Tekst je dobro organiziran s jasnim podnaslovima, no ponekad je prijelaz između tema malo nagao i može narušiti tok čitanja. |
+| Specifičnost | 9.0 | Dobar broj konkretnih primjera, istraživanja i izvora čine tekst vrlo informativnim i vjerodostojnim. |
+| Korist za čitatelja | 9.0 | Čitatelj dobiva vrijedne uvide u psihologiju clickbaita i praktične savjete za prepoznavanje i izbjegavanje manipulativnih naslova. |
+| Ton i glas | 8.0 | Ton je prijateljski i pristupačan, s dozom humora i osobnog iskustva, što tekst čini zanimljivim i autentičnim. |
+| Čitljivost | 7.0 | Iako su rečenice uglavnom razumljive, duljina nekih odlomaka i povremena složenost izraza mogu otežati brzu preglednost. |
 
 **Snage:**
-- Jasna i logična struktura s dobro označenim dijelovima.
-- Korisni primjeri i reference na relevantne izvore.
-- Pristupačan i angažiran ton koji održava pažnju čitatelja.
+- Korištenje relevantnih i aktualnih izvora te primjera povećava vjerodostojnost.
+- Pristupačan i angažiran stil pisanja koji zadržava pažnju čitatelja.
+- Jasni savjeti i praktične upute za prepoznavanje clickbaita.
 
 **Slabosti:**
-- Povremena neformalnost i kolokvijalni izrazi mogu smanjiti jasnoću.
-- Nedostatak dodatnih podnaslova i predugački odlomci otežavaju brzu čitljivost.
-- Ponekad nedostaju detaljniji podaci ili brojke za potporu tvrdnjama.
+- Povremeni nagli prijelazi između tema mogu zbuniti čitatelja.
+- Duljina nekih odlomaka i složenost izraza smanjuju scannability.
+- Neformalni izrazi ponekad narušavaju formalnu jasnoću.
 
-Članak je vrlo informativan i dobro strukturiran, s jasnim primjerima i korisnim savjetima za čitatelja, što ga čini vrijednim za razumijevanje psihologije clickbaita. Iako je ton prijateljski i zanimljiv, povremena neformalnost i duljina odlomaka mogu otežati brzu orijentaciju u tekstu. Uz manje prilagodbe u čitljivosti i dodatne konkretne podatke, mogao bi biti izvrsno štivo za širu publiku.
+Članak je dobro napisan i informativan, s jasnim primjerima i korisnim savjetima za čitatelja, ali bi mogao poboljšati tok i preglednost teksta kroz bolje prijelaze i kraće odlomke. Ton i stil su ugodni i pristupačni, što doprinosi angažiranosti, dok specifičnost i izvori dodatno podižu kvalitetu sadržaja. Ukupno, tekst uspješno ispunjava svoju svrhu edukacije o clickbaitu i njegovim psihološkim aspektima.
 
 ## Ljudski glas / anti-generic — 8.0 / 10
 
@@ -102,19 +104,19 @@ Preporuke (po prioritetu): 1) urediti hijerarhiju naslova i dodati dosljedne pod
 
 | Kriterij | Ocjena | Obrazloženje |
 |---|---|---|
-| Autentičnost | 9.0 | Članak zvuči kao da ga je napisala stvarna osoba, s osobnim iskustvima poput 'ležim ja u krevetu… laptop u krilu… skrolam u nedogled…'. |
-| Izbjegavanje klišeja i šablona | 7.0 | Iako članak koristi neke često viđene izraze poput 'šokantno', 'najbolje ikad' i 'hit dopamina', uspijeva ih kontekstualizirati i dati im osobni ton. |
-| Osobni glas | 8.0 | Autorica koristi humor i samoironiju ('ja sam to napravila više puta nego što sam spremna priznati') te izražava vlastite misli i osjećaje, što daje snažan osobni pečat. |
-| Izbjegavanje AI-robotiziranih fraza | 8.0 | Tekst nema tipične generičke prijelaze ili prazne fraze, već teče prirodno i razgovorno, primjerice 'E Bože! Nikad na zelenu granu.' |
+| Autentičnost | 9.0 | Tekst zvuči kao da ga je napisala stvarna osoba, s osobnim iskustvima poput "ležim ja u krevetu… laptop u krilu… skrolam u nedogled…" što daje dojam iskrenosti. |
+| Izbjegavanje klišeja i šablona | 7.0 | Iako tekst koristi neke uobičajene izraze poput "šokantno", "najbolje ikad" i "hit dopamina", uspijeva ih kontekstualizirati i kritički komentirati, što smanjuje dojam generičnosti. |
+| Osobni glas | 8.0 | Autorica jasno izražava svoje stavove i osjećaje, primjerice kroz priznavanje vlastite slabosti prema Supertalent videima i humorističke usporedbe poput "toksična veza. Ili Kardashiansice." |
+| Znakovi AI-stila | 8.0 | Tekst je uglavnom prirodan i ne sadrži tipične robotske fraze ili previše formalne prijelaze; prijelazi su ležerni i razgovorni, primjerice "E Bože! Nikad na zelenu granu." |
 
 **Snage:**
-- Jasan osobni ton i humorističan pristup temi.
-- Kombinacija osobnog iskustva i stručnih izvora daje tekstu vjerodostojnost.
-- Prirodni, razgovorni stil koji čitatelja drži angažiranim.
+- Autentičan i iskren ton s osobnim anegdotama.
+- Kritički i humorističan pristup temi clickbaita.
+- Jasan i razgovorni stil koji čitatelja drži zainteresiranim.
 
 **Slabosti:**
-- Povremeno se osjete uobičajeni izrazi i klišeji povezani s clickbait temom.
-- Ponekad se stil može činiti previše ležernim za ozbiljniju analizu.
-- Neki dijelovi su vrlo informativni, ali donekle predvidivi u strukturi.
+- Povremeno se osjete uobičajeni izrazi i klišeji vezani uz clickbait.
+- Neki dijelovi su pomalo preopširni i mogu djelovati kao da ponavljaju iste ideje.
+- Povremeno previše nabrajanja i formalnih referenci koje donekle narušavaju lepršavost teksta.
 
-Članak zvuči vrlo ljudski i autentično, s jasno izraženim osobnim stavom i humorom. Autorica uspješno izbjegava robotski ili previše generički stil, unoseći u tekst vlastite misli i iskustva. Iako se povremeno koriste uobičajeni izrazi, cjelokupni dojam je prirodan i angažiran, što ga čini uvjerljivim i zanimljivim za čitatelja.
+Članak zvuči vrlo ljudski i osobno, s jasno izraženim stavom i humorom koji ga čine zanimljivim i autentičnim. Autorica ne skriva svoje slabosti i koristi svakodnevni jezik, što doprinosi dojmu da je tekst napisala stvarna osoba. Iako se povremeno koriste uobičajene fraze, one su često kritički obrađene, što smanjuje dojam generičnosti. Sve u svemu, tekst je svjež i uvjerljiv, bez tipičnih AI ili korporativnih šablona.

@@ -116,7 +116,10 @@ Mock provider omogućuje testove i demo **bez ključa i mreže**.
 - **Jezik reviewa** se auto-detektira iz članka (`extractor.detect_language`: hrvatski
   dijakritici `čćšžđ` → HR, inače EN) i prosljeđuje u prompt svih agenata — **cijeli
   izvještaj** (verdict, snage, slabosti, notes i nazivi kriterija) piše se **samo na
-  jeziku članka**, bez engleskih glosa u zagradi.
+  jeziku članka**, bez engleskih glosa u zagradi. I **report "chrome"** (naslovi, labele,
+  tablice, imena agenata, labeli ocjena A–F) prati jezik članka: dvojezični nazivi
+  agenata (`name_hr/en`, `perspective_hr/en`) + rječnik `_L`/`_GRADE_LABELS` u `report.py`;
+  za HR članak npr. "Very good" → "Vrlo dobar".
 - **Datumi i vrijeme** u izvještaju se lokaliziraju prema jeziku članka: HR dugi oblik
   ("24. srpnja 2025." / "u 22:09 (UTC)") za hrvatski, američki oblik ("July 24, 2025" /
   ", 22:09 (UTC)") za engleski (`report.format_date` / `format_datetime`; JSON ostaje
@@ -146,7 +149,7 @@ Zadatak izričito potiče korištenje AI-ja. Proces u ovom repou:
 
 ## 6. Verifikacija
 
-- [x] `pytest -q` — **21 test**, offline (ekstraktor na stvarnom fixtureu, scoring,
+- [x] `pytest -q` — **23 testa**, offline (ekstraktor na stvarnom fixtureu, scoring,
   report lokalizacija, dry-run pipeline) — detaljan popis u [§6.1](#61-popis-testova-detaljno)
   i u `tests/`. Pokreće se s `.venv/bin/python -m pytest -q` (ili `python -m pytest -q`
   uz aktiviran venv).
@@ -164,7 +167,7 @@ Zadatak izričito potiče korištenje AI-ja. Proces u ovom repou:
 
 ### 6.1 Popis testova (detaljno)
 
-Pokretanje: `.venv/bin/python -m pytest -q` → **21 passed**. Svi testovi su **offline**
+Pokretanje: `.venv/bin/python -m pytest -q` → **23 passed**. Svi testovi su **offline**
 (mock LLM, spremljeni HTML fixture, bez mreže i bez API ključa).
 
 **`tests/test_extractor.py` — ekstrakcija (10 testova)**
@@ -192,7 +195,7 @@ fixture = `tests/fixtures/sample_article.html` (pravi, trimani Lexi HTML).
 | `test_all_failed_gives_zero` | svi agenti uspali → 0.0 / F |
 | `test_grade_bands` | mapiranje svih pragova A–F → (grade, label) |
 
-**`tests/test_report.py` — lokalizacija datuma (5 testova)**
+**`tests/test_report.py` — lokalizacija datuma i report chrome-a (7 testova)**
 
 | Test | Provjerava |
 |---|---|
@@ -201,6 +204,8 @@ fixture = `tests/fixtures/sample_article.html` (pravi, trimani Lexi HTML).
 | `test_format_datetime_croatian` | ISO + hr → "10. kolovoza 2026. u 21:02 (UTC)" |
 | `test_format_datetime_american` | ISO + en → "August 10, 2026, 21:02 (UTC)" |
 | `test_format_date_unknown_value_passthrough` | "n/a"/"unknown" prolazi nepromijenjeno |
+| `test_report_chrome_localized_croatian` | HR članak → HR chrome: naslovi, labele, tablice, agenti ("Vrlo dobar", "Kriterij/Ocjena/Obrazloženje", "Snage/Slabosti") |
+| `test_report_chrome_localized_english` | EN članak → EN chrome: "Overall score", "Criterion/Score/Rationale", "Strengths/Weaknesses"; bez hrvatskih labela |
 
 **`tests/test_pipeline_dry.py` — end-to-end pipeline s mock LLM-om (2 testa)**
 

@@ -102,11 +102,19 @@ _CANNED_VERDICTS: dict[str, dict[str, Any]] = {
     },
 }
 
-_CANNED_SYNTHESIS = (
+_CANNED_SYNTHESIS_HR = (
     "Svi agenti su suglasni da je tekst iznad prosjeka: odlično strukturiran, "
     "psihološki utemeljen i ljudski u tonu. Najveće snage su konkretni primjeri i "
     "logičan tok; najslabija točka je čitljivost u par dužih odlomaka. Preporuka: "
     "skratiti najdulje rečenice i ukloniti preostale generičke prijelaze."
+)
+
+_CANNED_SYNTHESIS_EN = (
+    "All agents agree the article is above average: well structured, psychologically "
+    "grounded and human in tone. Its biggest strengths are concrete examples and a "
+    "logical flow; the weakest point is readability in a couple of longer paragraphs. "
+    "Recommendation: shorten the longest sentences and drop the remaining generic "
+    "transitions."
 )
 
 
@@ -129,7 +137,9 @@ class MockProvider(LLMClient):
         agent_id = match.group(1) if match else "structure"
 
         if agent_id == "synthesizer":
-            return _CANNED_SYNTHESIS
+            user = messages[-1]["content"] if messages else ""
+            is_croatian = "Croatian" in user
+            return _CANNED_SYNTHESIS_HR if is_croatian else _CANNED_SYNTHESIS_EN
 
         payload = _CANNED_VERDICTS.get(agent_id, _CANNED_VERDICTS["structure"])
         return json.dumps(payload, ensure_ascii=False)

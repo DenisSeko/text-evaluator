@@ -27,103 +27,103 @@
   "agent_verdicts": [
     {
       "agent_id": "structure",
-      "agent_name": "Struktura i tok",
-      "perspective": "Vodi li tekst čitatelja logično kroz sadržaj — jasnoća, organizacija i ritam.",
-      "score": 6.0,
+      "agent_name": "Structure and flow",
+      "perspective": "Does the text guide the reader logically through the content — clarity, organisation and rhythm.",
+      "score": 7.0,
       "criteria": [
         {
           "name": "Hook",
-          "score": 7.0,
-          "note": "The opening is engaging and relatable, setting up the topic well, but it could more clearly set expectations for the article's structure."
+          "score": 8.0,
+          "note": "The opening sentence is engaging and relatable, effectively setting the expectation that the article will explore why writing often sounds generic."
         },
         {
           "name": "Logical flow",
-          "score": 5.0,
-          "note": "The article covers relevant points but jumps somewhat abruptly between ideas without clear signposting or smooth progression."
+          "score": 6.0,
+          "note": "The article generally builds logically from problem identification to causes and then to a solution, but some transitions between ideas feel abrupt or underdeveloped."
         },
         {
           "name": "Heading structure",
           "score": 4.0,
-          "note": "Headings are sparse and inconsistent; only one explicit heading is present, limiting the reader’s ability to navigate or anticipate content."
+          "note": "The article lacks clear, consistent headings; the only heading present is a side-box that feels disconnected and the main points are embedded in the text without clear signposting."
         },
         {
           "name": "Clarity",
           "score": 7.0,
-          "note": "Language is generally clear and accessible, though some sentences are dense and could benefit from more concise phrasing."
+          "note": "The language is mostly clear and accessible, though some sentences are dense and could benefit from simpler phrasing or breaking up for easier digestion."
         },
         {
           "name": "Pacing & transitions",
-          "score": 5.0,
-          "note": "Paragraphs vary in length and the transitions between them are sometimes abrupt, which can disrupt reading rhythm."
+          "score": 6.0,
+          "note": "Paragraphs are generally digestible but transitions between sections and ideas sometimes feel rushed or missing, which can momentarily confuse the reader."
         }
       ],
       "strengths": [
-        "Engaging and relatable introduction that draws readers in.",
+        "Engaging and relatable introduction that hooks the reader.",
         "Clear explanation of psychological reasons behind generic writing.",
-        "Good use of examples to illustrate points."
+        "Good balance of professional tone and conversational style."
       ],
       "weaknesses": [
-        "Lack of consistent and informative headings to guide the reader.",
-        "Abrupt shifts between ideas reduce logical flow and coherence.",
-        "Some paragraphs are dense and could be broken up for better pacing."
+        "Lack of clear, informative headings to guide the reader through the structure.",
+        "Some abrupt transitions that disrupt the flow.",
+        "Dense paragraphs that could be broken down for better readability."
       ],
-      "verdict": "The article presents interesting insights and hooks the reader effectively at the start, but its structural weaknesses limit overall clarity and reader guidance. The absence of clear, consistent headings and smoother transitions makes it harder to follow the argument fully. Improving the organization with more signposting and breaking dense paragraphs would enhance flow and reader engagement.",
+      "verdict": "The article presents an interesting and relevant topic with an engaging start and mostly clear language. However, the absence of clear headings and occasional abrupt transitions hinder the reader’s ability to navigate the content smoothly. Improving the heading structure and enhancing transitions would significantly strengthen the overall flow and clarity.",
       "error": null
     },
     {
       "agent_id": "psychology",
-      "agent_name": "Psihologija pisanja",
-      "perspective": "Koristi li tekst psihološke principe dobrog pisanja — konkretnost, benefit za čitatelja i ton.",
+      "agent_name": "Psychology of writing",
+      "perspective": "Does the text apply psychological principles of good writing — concreteness, reader benefit and tone.",
       "score": 7.0,
       "criteria": [
         {
           "name": "Concreteness",
-          "score": 6.0,
-          "note": "The article uses some concrete examples like the phrase 'We apologize for the inconvenience,' but many ideas remain somewhat abstract or generalized."
+          "score": 7.0,
+          "note": "The article uses some concrete examples like common phrases and brain biases but remains somewhat abstract in parts."
         },
         {
           "name": "Reader benefit",
           "score": 8.0,
-          "note": "The reader is clearly shown why their writing might sound generic and how understanding brain biases can help improve it."
+          "note": "The reader gains insight into why writing sounds generic and how to overcome it, with a clear implication of improved writing."
         },
         {
           "name": "Tone & emotional resonance",
           "score": 7.0,
-          "note": "The tone is conversational and approachable, with some emotional engagement around the struggle to avoid generic writing."
+          "note": "The tone is conversational and approachable, with some emotional engagement through relatable frustrations about generic writing."
         },
         {
           "name": "Avoiding generic filler",
           "score": 6.0,
-          "note": "While it avoids many clichés, the article itself uses some buzzwords and phrases like 'disrupt your autopilot' that verge on jargon."
+          "note": "While it warns against generic language, the article itself uses some common phrases and buzzwords, slightly undermining its message."
         },
         {
           "name": "Examples & storytelling",
-          "score": 5.0,
-          "note": "There are a few examples and a metaphor about survival strategies, but no real stories or vivid scenarios to deeply engage the reader."
+          "score": 6.0,
+          "note": "The article offers a few examples and a metaphor about brain survival strategies but lacks vivid storytelling or detailed anecdotes."
         },
         {
           "name": "Trust & authority",
           "score": 7.0,
-          "note": "The article references psychological concepts and cites a Harvard Business Review source, lending credibility."
+          "note": "It references psychological concepts and a Harvard Business Review source, lending credibility, though more explicit evidence would strengthen trust."
         }
       ],
       "strengths": [
-        "Clear explanation of psychological reasons behind generic writing",
-        "Conversational and relatable tone",
-        "Good identification of reader benefit in understanding cognitive biases"
+        "Clear explanation of psychological reasons behind generic writing.",
+        "Engaging, conversational tone that connects with common writer experiences.",
+        "Useful insights that offer practical reader benefits."
       ],
       "weaknesses": [
-        "Lacks vivid, concrete examples and storytelling to fully engage",
-        "Some use of buzzwords and jargon reduces freshness",
-        "Abstract phrasing in parts makes ideas less tangible"
+        "Some abstract language reduces vividness and concreteness.",
+        "Occasional use of generic phrases weakens the article’s own advice.",
+        "Limited use of rich examples or storytelling to deepen engagement."
       ],
-      "verdict": "This article effectively explains why writing often sounds generic by tapping into cognitive psychology, which offers valuable insight to readers. Its tone is warm and human, helping to emotionally engage the audience. However, it could be improved by incorporating more vivid examples and stories to make the concepts more concrete and memorable. Overall, it balances authority and accessibility well but falls short of fully escaping some abstract and slightly jargon-heavy language.",
+      "verdict": "This article effectively explains why writing often sounds generic by tapping into psychological principles, making it relevant and useful for readers. Its conversational tone and relatable examples foster emotional connection, though it could improve by using more vivid, concrete language and richer storytelling. The credibility is decent but would benefit from stronger evidence and fewer generic phrases to fully embody its message. Overall, it offers a thoughtful perspective that challenges readers to rethink their writing habits.",
       "error": null
     },
     {
       "agent_id": "rubric",
-      "agent_name": "Kvantitativna rubrika",
-      "perspective": "Konzistentna kvantitativna ocjena po fiksnoj rubrici s obrazloženjem po kriteriju.",
+      "agent_name": "Quantitative rubric",
+      "perspective": "A consistent quantitative score against a fixed rubric with per-criterion justification.",
       "score": 7.0,
       "criteria": [
         {
@@ -134,87 +134,87 @@
         {
           "name": "Structure",
           "score": 6.0,
-          "note": "The article has a logical flow and uses numbered points, but the lack of clear section headings and some abrupt transitions reduce overall organization."
+          "note": "The article has a logical flow and uses some headings, but the organization feels somewhat informal and could benefit from clearer section divisions."
         },
         {
           "name": "Specificity",
           "score": 5.0,
-          "note": "The article relies mostly on abstract concepts and psychological explanations with minimal concrete examples or data to support claims."
+          "note": "The article relies mostly on general observations and psychological concepts without many concrete examples or data to support claims."
         },
         {
           "name": "Reader-benefit",
           "score": 7.0,
-          "note": "Readers gain insight into why writing sounds generic and are introduced to a tool to help improve writing, but practical actionable tips are limited."
+          "note": "Readers gain insight into why writing sounds generic and are introduced to a potential solution, though actionable advice is limited."
         },
         {
           "name": "Tone & voice",
           "score": 8.0,
-          "note": "The tone is consistent, approachable, and professional with a distinctive voice that engages the reader effectively."
+          "note": "The tone is conversational and approachable, maintaining a consistent and distinctive voice throughout."
         },
         {
           "name": "Readability",
           "score": 7.0,
-          "note": "Sentence and paragraph lengths are mostly balanced, but the text could benefit from more subheadings or bullet points to enhance scannability."
+          "note": "Sentence and paragraph lengths are mostly balanced, but some sections could be broken up more for easier scanning."
         }
       ],
       "strengths": [
         "Clear explanation of psychological reasons behind generic writing.",
-        "Engaging and consistent tone that maintains reader interest.",
-        "Logical progression of ideas with numbered points to clarify key reasons."
+        "Engaging, conversational tone that keeps reader interest.",
+        "Introduction of a specific product solution related to the topic."
       ],
       "weaknesses": [
-        "Lacks concrete examples or data to illustrate points more vividly.",
-        "Insufficient use of headings and formatting to improve structure and scannability.",
+        "Lacks concrete examples or data to substantiate claims.",
+        "Structure could be improved with clearer headings and more distinct sections.",
         "Limited actionable advice for readers to immediately apply."
       ],
-      "verdict": "This article provides a thoughtful exploration of why writing often sounds generic, supported by psychological insights and a clear voice. However, it falls short in providing concrete examples and practical tips, and its structure could be improved with clearer headings and formatting. Overall, it is informative and engaging but could be enhanced to better support readers in applying the concepts.",
+      "verdict": "This article effectively explains why writing often sounds generic by exploring psychological factors, using a clear and engaging tone. However, it falls short in providing concrete examples and actionable steps, and its structure could be more formally organized for better flow. Overall, it offers valuable reader insight but could be strengthened with more specificity and improved readability.",
       "error": null
     },
     {
       "agent_id": "humanity",
-      "agent_name": "Ljudski glas / anti-generic",
-      "perspective": "Zvuči li tekst ljudski, autentično i prepoznatljivo — ili generički i AI-slično.",
+      "agent_name": "Human voice / anti-generic",
+      "perspective": "Does the text sound human, authentic and distinctive — or generic and AI-like.",
       "score": 7.0,
       "criteria": [
         {
           "name": "Authenticity",
           "score": 7.0,
-          "note": "The article reads like a knowledgeable person explaining a concept, but some phrasing such as 'This explains why writing sounds generic even when people genuinely try to be clear' feels somewhat rehearsed rather than spontaneous."
+          "note": "The article reads like a thoughtful human reflection on writing habits, using conversational phrases like “Nobody wakes up and says...” which adds a natural tone."
         },
         {
           "name": "Anti-cliché / anti-template",
           "score": 6.0,
-          "note": "While it critiques clichés and templates, the article itself uses some common phrases like 'mental shortcuts' and 'safe because everyone says it,' which slightly undercut its anti-template stance."
+          "note": "While it critiques generic language effectively, it ironically uses some common phrases such as “We apologize for the inconvenience” and “safe because everyone says it,” which slightly undercuts its anti-template stance."
         },
         {
           "name": "Personal voice",
           "score": 7.0,
-          "note": "There is a clear point of view about the psychology behind generic writing and a purpose to disrupt it, but the tone remains somewhat formal and instructive rather than deeply personal or distinctive."
+          "note": "The piece has a clear point of view about the psychology behind generic writing and the need to disrupt autopilot language, though it remains somewhat formal and generalized rather than deeply personal or idiosyncratic."
         },
         {
           "name": "AI-sounding markers",
-          "score": 8.0,
-          "note": "The writing avoids robotic or formulaic constructions and uses varied sentence structures, but the logical, structured flow and some buzzword-like phrases hint at a polished, possibly AI-assisted origin."
+          "score": 7.0,
+          "note": "The structure is logical and well-organized with some natural rhetorical questions and asides, but some phrasing like “Templates feel efficient in the moment, but over time they erase voice” borders on formulaic exposition."
         }
       ],
       "strengths": [
+        "Conversational opening that engages the reader.",
         "Clear explanation of psychological reasons behind generic writing.",
-        "Engaging use of rhetorical questions and direct address ('Nobody wakes up and says...').",
-        "Good balance of professional tone with accessible language."
+        "A distinct purpose and point of view about writing authenticity."
       ],
       "weaknesses": [
-        "Some phrases feel slightly overused or cliché despite the article’s theme.",
-        "Tone is more instructive than conversational or deeply personal.",
-        "Occasional corporate buzzwords and abstract concepts reduce distinctiveness."
+        "Occasional reliance on familiar corporate phrases undermines the anti-generic message.",
+        "Tone is somewhat formal and lacks strong personal anecdotes or unique stylistic flourishes.",
+        "Some sentences feel like textbook explanations rather than spontaneous human expression."
       ],
-      "verdict": "The article sounds like it was written by a thoughtful professional aiming to educate about writing habits, with a moderate personal touch. It avoids many AI giveaways but still leans on some familiar phrases and a formal tone that make it less distinctive and humanly idiosyncratic. Overall, it reads as authentic but polished, likely crafted with care or some AI assistance rather than spontaneous personal storytelling.",
+      "verdict": "This article feels like it was written by a knowledgeable human with a clear point of view, aiming to educate and persuade about writing habits. It avoids robotic phrasing fairly well but does slip into some common corporate clichés that weaken its distinctiveness. Overall, it strikes a balance between professional clarity and conversational authenticity, though it could benefit from more personal voice and less reliance on familiar templates.",
       "error": null
     }
   ],
   "overall": {
-    "score": 6.7,
-    "letter_grade": "D",
-    "label": "Adequate",
+    "score": 7.0,
+    "letter_grade": "C",
+    "label": "Good",
     "weights": {
       "structure": 0.3,
       "psychology": 0.25,
@@ -222,12 +222,12 @@
       "humanity": 0.15
     },
     "agent_scores": {
-      "structure": 6.0,
+      "structure": 7.0,
       "psychology": 7.0,
       "rubric": 7.0,
       "humanity": 7.0
     }
   },
-  "synthesis": "Final verdict: This is a thoughtful, readable piece that convincingly explains why writing sounds generic by pointing to mental shortcuts and cognitive biases, but it stops short of fully helping readers escape the “autopilot” that produces generic phrasing. Biggest strengths: an engaging, relatable opening and a clear application of psychological concepts that give readers a real reason to care; a warm, conversational tone that balances authority and approachability. Biggest weaknesses: the structure is weak—sparse headings, abrupt transitions and some dense paragraphs hurt scannability—and the article lacks vivid, concrete examples or before/after rewrites, so much advice remains abstract and occasionally buzzwordy. Top 3 actionable recommendations (prioritised): 1) Add clear section headings and signposts and break dense paragraphs to improve flow and skimmability; 2) Insert vivid, short examples or a brief anecdote plus before/after rewrites of generic lines to make concepts concrete; 3) Strip jargon by replacing buzzwords with plain phrasing and end with a concise, practical checklist (3–5 edits readers can apply immediately) to help disrupt the writing “autopilot.”",
-  "created_at": "2026-08-12T18:30:23+00:00"
+  "synthesis": "Final verdict: The piece is a well-written, conversational exploration of why writing sounds generic that clearly explains the psychology behind autopilot language and is useful to readers, but it undercuts its own advice at times and needs tighter structure and more concreteness. Biggest strengths: an engaging, relatable opening that hooks the reader, and a clear explanation of psychological drivers (templates, brain survival strategies) delivered in an accessible voice. Biggest weaknesses: a lack of clear headings/signposting and abrupt transitions that impede flow, and occasional reliance on the same generic corporate phrases the article warns against. Top 3 prioritized recommendations: (1) Add explicit, informative headings and a brief roadmap so readers can follow the structure; (2) Replace buzzwords and canned phrases with concrete examples, vivid anecdotes or short model rewrites to demonstrate anti-template language; (3) Break up dense paragraphs, smooth transitions between points, and add one or two concrete citations or data points to boost credibility.",
+  "created_at": "2026-08-12T19:05:19+00:00"
 }

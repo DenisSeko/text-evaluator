@@ -269,7 +269,7 @@ lexi-evaluator/
     check_no_secrets.py  # honeypot scan
     demo_dry.py       # offline demo → examples/
   tests/              # pytest (ekstraktor, scoring, report, dry-run pipeline) + fixture
-  examples/           # prazan folder (samo .gitkeep) — izvještaji se generiraju lokalno
+  examples/           # živi izvještaji s realnih Lexi postova (JSON + MD) + .gitkeep
   docs/
     PROMPTS.md        # svi promptovi verbatim + razlozi dizajna
     PLANNING.md       # originalni plan sesije
@@ -294,10 +294,14 @@ Detaljno u [PLAN.md](PLAN.md). Ključno:
 
 ## Primjeri outputa
 
-Folder `examples/` se u repou drži **praznim** (samo `.gitkeep`) — izvještaji se
-**generiraju lokalno** i ne commit-aju:
+Folder `examples/` sadrži **žive izvještaje s realnih Lexi postova** (dio ovog repoa),
+dok se `demo-dry.*` (mock, bez ključa/mreže) generira lokalno i ne commit-a:
 
-- Offline demo (mock, bez ključa/mreže): `python scripts/demo_dry.py`
-  → stvara `examples/demo-dry.{md,json}`
-- Živi run: `lexi-evaluator <URL> --output md --out-file examples/run.md`
+- **Živi run** (komitano u repou), recimo:
+  - `examples/lexi-why-writing-sounds-generic.{md,json}` → **6.7/10, D (Adequate)**
+  - `examples/lexi-psiholoski-mehanizmi-iza-clickbaita.{md,json}` → **7.7/10, C (Good)**
+  - `examples/lexi-how-to-respond-to-a-negative-review.{md,json}` → **7.7/10, C (Good)**
+- **Offline demo** (mock, bez ključa/mreže): `python scripts/demo_dry.py`
+  → stvara lokalno `examples/demo-dry.{md,json}` (igitnovan)
+- Novi živi run za vlastiti test: `lexi-evaluator <URL> --output md --out-file examples/run.md`
   (i `--output json --out-file examples/run.json`)

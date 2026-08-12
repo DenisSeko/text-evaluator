@@ -146,16 +146,68 @@ Zadatak izričito potiče korištenje AI-ja. Proces u ovom repou:
 
 ## 6. Verifikacija
 
-- [x] `pytest -q` — 12 testova, offline (ekstraktor na stvarnom fixtureu, scoring, dry-run pipeline)
+- [x] `pytest -q` — **21 test**, offline (ekstraktor na stvarnom fixtureu, scoring,
+  report lokalizacija, dry-run pipeline) — detaljan popis u [§6.1](#61-popis-testova-detaljno)
+  i u `tests/`. Pokreće se s `.venv/bin/python -m pytest -q` (ili `python -m pytest -q`
+  uz aktiviran venv).
 - [x] `ruff check .` + `ruff format --check .` — čisto
 - [x] `python scripts/demo_dry.py` — cijeli pipeline bez ključa/mreže, generira `examples/`
 - [x] `python scripts/check_no_secrets.py` — nema ključeva u repou
 - [x] Live run na stvarnom Lexi postu s pravim ključem → `examples/` (ključ u `.env`)
-  - 3 URL-a: `why-writing-sounds-generic` (7.0/10, C), `psiholoski-mehanizmi-iza-clickbaita` (7.7/10, C), `how-to-respond-to-a-negative-review` (7.7/10, C) — JSON + MD u `examples/`
-  - (kasnije uklonjeno iz repoa — `examples/` se drži praznim, samo `.gitkeep`)
+  - 3 URL-a (JSON + MD u `examples/`): `why-writing-sounds-generic`
+    (**6.7/10, D — Adequate**), `psiholoski-mehanizmi-iza-clickbaita`
+    (**7.7/10, C — Good**), `how-to-respond-to-a-negative-review`
+    (**7.7/10, C — Good**)
 - [x] CI/CD gate: `.github/workflows/ci.yml` (GitHub Actions, Ubuntu: pytest + ruff +
   format + honeypot) + lokalna `scripts/check_all.sh` (validirana) + pre-push hook
   (`git config core.hooksPath .githooks`)
+
+### 6.1 Popis testova (detaljno)
+
+Pokretanje: `.venv/bin/python -m pytest -q` → **21 passed**. Svi testovi su **offline**
+(mock LLM, spremljeni HTML fixture, bez mreže i bez API ključa).
+
+**`tests/test_extractor.py` — ekstrakcija (10 testova)**
+fixture = `tests/fixtures/sample_article.html` (pravi, trimani Lexi HTML).
+
+| Test | Provjerava |
+|---|---|
+| `test_article_extracted` | plain_text je neprazan, riječi > 50, char_count == len(plain_text) |
+| `test_title_detected` | naslov postoji i sadrži "generic" |
+| `test_contains_article_body` | stvarna rečenica iz članka ("nobody wakes up"/"generic") je preživjela |
+| `test_boilerplate_removed` | "kolačići", "pročitaj još", "all rights reserved", "© 2026" NE procuruju |
+| `test_headings_detected` | ≥1 heading, među njima "generic" |
+| `test_source_is_set` | source je "trafilatura" ili "beautifulsoup" |
+| `test_article_language` | detektiran "en" (fixture je engleski članak) |
+| `test_detect_language_english` | rječnik bez dijakritika → "en" |
+| `test_detect_language_croatian` | rječnik s `čćšžđ` → "hr" |
+| `test_detect_language_empty` | prazan string → "en" |
+
+**`tests/test_scoring.py` — agregacija ocjena (4 testa)**
+
+| Test | Provjerava |
+|---|---|
+| `test_weighted_mean` | težinski prosjek 30/30/25/15 je točan i zaokružen na 2 decimale |
+| `test_failed_agent_renormalises_weights` | uspali agent (error!) se izbaci, težine se renormaliziraju 50/50 |
+| `test_all_failed_gives_zero` | svi agenti uspali → 0.0 / F |
+| `test_grade_bands` | mapiranje svih pragova A–F → (grade, label) |
+
+**`tests/test_report.py` — lokalizacija datuma (5 testova)**
+
+| Test | Provjerava |
+|---|---|
+| `test_format_date_croatian` | "2026-01-28" + hr → "28. siječnja 2026." |
+| `test_format_date_american` | "2026-01-28" + en → "January 28, 2026" |
+| `test_format_datetime_croatian` | ISO + hr → "10. kolovoza 2026. u 21:02 (UTC)" |
+| `test_format_datetime_american` | ISO + en → "August 10, 2026, 21:02 (UTC)" |
+| `test_format_date_unknown_value_passthrough` | "n/a"/"unknown" prolazi nepromijenjeno |
+
+**`tests/test_pipeline_dry.py` — end-to-end pipeline s mock LLM-om (2 testa)**
+
+| Test | Provjerava |
+|---|---|
+| `test_dry_run_pipeline` | 4 verdicta bez grešaka, ocjene 0–10, kriteriji i verdict postoje, overall > 0 s validnim letter grade, sinteza postoji, **4 agent poziva + 1 sintetizator** |
+| `test_dry_run_without_synthesizer` | samo 2 odabrana agenta, sinteza i synth model = None |
 
 ## 7. Napomena o modelima (iz live verifikacije)
 
@@ -165,7 +217,7 @@ Zadatak izričito potiče korištenje AI-ja. Proces u ovom repou:
   Ostali `BadRequestError`-i se pretvaraju u `LLMError` da ne sruše cijeli run
   (usklađeno s ADR-007 — neuspjeh jednog agenta se izolira).
 
-## 7. Known limitations / future work
+## 8. Known limitations / future work
 
 - Provideri: samo OpenAI implementiran; Anthropic/Gemini/Ollama zahtijevaju jednu klasu svaki.
 - Ekstraktor pretpostavlja tekstualni sadržaj; video/infografika nisu evaluirani.

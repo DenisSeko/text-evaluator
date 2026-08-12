@@ -15,9 +15,11 @@ venv/
 # Runtime cache (raw HTML)
 .cache/
 
-# Generated example reports (folder kept via .gitkeep)
+# Generated example reports: live run outputs are committed, dry-run demo stays local
 examples/*
 !examples/.gitkeep
+!examples/lexi-*.json
+!examples/lexi-*.md
 
 # OS
 .DS_Store

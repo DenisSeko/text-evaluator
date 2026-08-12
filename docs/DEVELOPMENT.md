@@ -1,126 +1,126 @@
-# DEVELOPMENT.md — Vodič za razvoj
+# DEVELOPMENT.md — Development guide
 
-> Kako se snaći u kodu: **gdje je što**, **kako što dodati** i **koje konvencije** slijediti.
-> Prije ovog pročitaj: [`README.md`](../README.md) (kako pokrenuti) i [`PLAN.md`](../PLAN.md)
-> (zašto baš tako — ADR-ovi). Prompte agenata (srž zadatka) vidi u [`PROMPTS.md`](./PROMPTS.md).
+> How to navigate the code: **where is what**, **how to add what** and **which conventions** to follow.
+> Read this first: [`README.md`](../README.md) (how to run) and [`PLAN.md`](../PLAN.md)
+> (why exactly this — the ADRs). Agent prompts (the core of the task) are in [`PROMPTS.md`](./PROMPTS.md).
 
 ---
 
-## 1. Mentalni model
+## 1. Mental model
 
-Jedan CLI poziv = jedan evaluacijski run:
+One CLI call = one evaluation run:
 
 ```
 URL → scraper → extractor → Article
-                              │  (jezik članka: hr / en)
+                              │  (article language: hr / en)
                               ▼
-       4 agenta (paralelno) ──► 4 × AgentVerdict ──► scoring (težinski) ──► OverallScore
+       4 agents (parallel) ──► 4 × AgentVerdict ──► scoring (weighted) ──► OverallScore
                               │                          │
-                              └─────────► sintetizator ──►┘
+                              └─────────► synthesizer ──►┘
                                                    ▼
                                         EvaluationResult ──► report ──► Markdown + JSON
 ```
 
-- Sve glavne entitete koje pipeline prenosi definira **`models.py`**.
-- Svi ulazni parametri (modeli, težine, ključ) dolaze iz **`.env`** preko **`config.py`** — kod ih nikad ne hardkodira.
-- Pipeline je async (`asyncio`); agenti se pokreću paralelno, `--dry-run` koristi mock provider (bez ključa/mreže).
+- All main entities the pipeline carries are defined in **`models.py`**.
+- All input parameters (models, weights, key) come from **`.env`** via **`config.py`** — the code never hardcodes them.
+- The pipeline is async (`asyncio`); agents run in parallel, `--dry-run` uses a mock provider (no key/network).
 
 ---
 
-## 2. Stablo projekta (s objašnjenjima)
+## 2. Project tree (with explanations)
 
 ```
 lexi/
-├── README.md                 # upute za korisnika: instalacija, pokretanje, testovi
-├── PLAN.md                   # planiranje + ADR-ovi ("zašto tako")
-├── pyproject.toml            # paket, [project.scripts] (komanda), ruff + pytest konfig
-├── requirements.txt          # runtime ovisnosti (pinned)
+├── README.md                 # user instructions: install, run, tests
+├── PLAN.md                   # planning + ADRs ("why exactly this")
+├── pyproject.toml            # package, [project.scripts] (command), ruff + pytest config
+├── requirements.txt          # runtime dependencies (pinned)
 ├── requirements-dev.txt      # test/lint: pytest, pytest-asyncio, ruff
-├── .env.example              # TEMPLATE za .env — nikad pravi ključ!
+├── .env.example              # TEMPLATE for .env — never a real key!
 ├── .gitignore
 ├── .github/
-│   └── workflows/ci.yml      # CI gate (pytest + ruff + honeypot) na push/PR
-├── .githooks/                # pre-push hook (opcionalno)
-├── lexi_evaluator/           # ← glavni paket
+│   └── workflows/ci.yml      # CI gate (pytest + ruff + honeypot) on push/PR
+├── .githooks/                # pre-push hook (optional)
+├── lexi_evaluator/           # ← main package
 │   ├── __main__.py           # python -m lexi_evaluator → cli.main()
-│   ├── cli.py                # argparse + tok run-a (fetch → extract → evaluate → render)
-│   ├── config.py             # pydantic-settings; .env (projekt-relative); težine, modeli, ključ
-│   ├── models.py             # pydantic tipovi: Article, Criterion, AgentVerdict, OverallScore, EvaluationResult
+│   ├── cli.py                # argparse + run flow (fetch → extract → evaluate → render)
+│   ├── config.py             # pydantic-settings; .env (project-relative); weights, models, key
+│   ├── models.py             # pydantic types: Article, Criterion, AgentVerdict, OverallScore, EvaluationResult
 │   ├── scraper.py            # httpx fetch (User-Agent, timeout) + HTML cache
-│   ├── extractor.py          # trafilatura / BS4 → čisti Article; detect_language()
-│   ├── orchestrator.py       # paralelni agenti (gather) + sintetizator → EvaluationResult
-│   ├── scoring.py            # težinski prosjek, grade A–F, renormalizacija neuspjelih
-│   ├── report.py             # render Markdown (+ lokalizacija datuma) i to_json()
-│   ├── agents/               # ← evaluacijski agenti (perspektive)
-│   │   ├── __init__.py       # REGISTAR: AGENTS dict + get_agents()
-│   │   ├── base.py           # Agent ABC; build_messages (jezična instrukcija); parse_verdict (pydantic)
-│   │   ├── structure.py      # Struktura i tok
-│   │   ├── psychology.py     # Psihologija pisanja
-│   │   ├── rubric.py         # Kvantitativna rubrika
-│   │   └── humanity.py       # Ljudski glas / anti-generic
-│   └── providers/            # ← LLM apstrakcija
+│   ├── extractor.py          # trafilatura / BS4 → clean Article; detect_language()
+│   ├── orchestrator.py       # parallel agents (gather) + synthesizer → EvaluationResult
+│   ├── scoring.py            # weighted average, A–F grade, renormalization of failures
+│   ├── report.py             # Markdown render (+ date localization) and to_json()
+│   ├── agents/               # ← evaluation agents (perspectives)
+│   │   ├── __init__.py       # REGISTRY: AGENTS dict + get_agents()
+│   │   ├── base.py           # Agent ABC; build_messages (language instruction); parse_verdict (pydantic)
+│   │   ├── structure.py      # Structure and flow
+│   │   ├── psychology.py     # Writing psychology
+│   │   ├── rubric.py         # Quantitative rubric
+│   │   └── humanity.py       # Human voice / anti-generic
+│   └── providers/            # ← LLM abstraction
 │       ├── __init__.py       # build_client(settings, dry_run, model)
 │       ├── base.py           # LLMClient ABC; LLMError, LLMParseError
-│       ├── openai_provider.py# OpenAI (JSON mode, retry, temperature za gpt-5/o-seriju)
-│       └── mock_provider.py  # deterministički canned odgovori (--dry-run / testovi)
+│       ├── openai_provider.py# OpenAI (JSON mode, retry, temperature for gpt-5/o-series)
+│       └── mock_provider.py  # deterministic canned responses (--dry-run / tests)
 ├── scripts/
-│   ├── install.sh            # instalacija Linux/macOS (i curl | bash)
-│   ├── install.bat           # instalacija Windows 10/11
-│   ├── check_no_secrets.py   # honeypot: scan repoa na ključeve
-│   └── demo_dry.py           # offline demo (mock) → regenerira examples/
+│   ├── install.sh            # Linux/macOS installation (and curl | bash)
+│   ├── install.bat           # Windows 10/11 installation
+│   ├── check_no_secrets.py   # honeypot: scans the repo for keys
+│   └── demo_dry.py           # offline demo (mock) → regenerates examples/
 ├── tests/
-│   ├── conftest.py           # fixture sample_article.html (pravi Lexi HTML)
-│   ├── test_extractor.py     # ekstrakcija (bez boilerplate-a) + detect_language
-│   ├── test_scoring.py       # matematika agregacije / grade
-│   ├── test_report.py        # lokalizacija datuma (HR/US)
-│   └── test_pipeline_dry.py  # cijeli pipeline s mock LLM-om, bez mreže
-├── examples/                 # živi izvještaji s realnih Lexi postova (JSON + MD); demo-dry.* lokalno
+│   ├── conftest.py           # fixture sample_article.html (real Lexi HTML)
+│   ├── test_extractor.py     # extraction (without boilerplate) + detect_language
+│   ├── test_scoring.py       # aggregation / grade math
+│   ├── test_report.py        # date localization (HR/US)
+│   └── test_pipeline_dry.py  # full pipeline with a mock LLM, no network
+├── examples/                 # live reports from real Lexi posts (JSON + MD); demo-dry.* local
 └── docs/
-    ├── PROMPTS.md            # svi promptovi verbatim + razlog dizajna
-    ├── PLANNING.md           # originalni plan sesije
-    └── DEVELOPMENT.md        # ← OVO — vodič za razvoj
+    ├── PROMPTS.md            # all prompts verbatim + design rationale
+    ├── PLANNING.md           # original session plan
+    └── DEVELOPMENT.md        # ← THIS — development guide
 ```
 
 ---
 
-## 3. "Gdje je što" (brza mapa)
+## 3. "Where is what" (quick map)
 
-| Želiš promijeniti... | Fajl(ovi) |
+| You want to change... | File(s) |
 |---|---|
-| **Prompt nekog agenta** | `lexi_evaluator/agents/<id>.py` (i `docs/PROMPTS.md`) |
-| **Dodati novog agenta** | novi `agents/<id>.py` + registar `agents/__init__.py` + težina u `.env` |
-| **Težine / agregaciju** | `.env` (`LEXI_WEIGHT_*`) + `config.py`; logika u `scoring.py` |
-| **Pragove ocjena (A–F)** | `scoring.py` → `GRADE_BANDS` |
-| **Dodati LLM provider** | novi `providers/<x>.py` + `build_client` u `providers/__init__.py` |
-| **Model za agente/sintetizator** | `.env` (`LEXI_MODEL`, `LEXI_MODEL_SYNTH`) |
-| **Novu CLI opciju** | `cli.py` (argparse + `_run`) |
-| **Izgled/format izvještaja** | `report.py` (MD), `models.py` (JSON struktura) |
-| **Jezik/lokalizaciju** | `extractor.detect_language`, `agents/base.build_messages`, `report.format_date/format_datetime` |
-| **Scraping / ekstrakciju** | `scraper.py`, `extractor.py` |
-| **Sigurnost ključa / novu tajnu** | `config.py`, `.env.example`, `scripts/check_no_secrets.py` |
-| **Novu env varijablu** | `config.py` (polje + alias) + `.env.example` |
+| **An agent's prompt** | `lexi_evaluator/agents/<id>.py` (and `docs/PROMPTS.md`) |
+| **Add a new agent** | new `agents/<id>.py` + registry `agents/__init__.py` + weight in `.env` |
+| **Weights / aggregation** | `.env` (`LEXI_WEIGHT_*`) + `config.py`; logic in `scoring.py` |
+| **Grade thresholds (A–F)** | `scoring.py` → `GRADE_BANDS` |
+| **Add an LLM provider** | new `providers/<x>.py` + `build_client` in `providers/__init__.py` |
+| **Model for agents/synthesizer** | `.env` (`LEXI_MODEL`, `LEXI_MODEL_SYNTH`) |
+| **New CLI option** | `cli.py` (argparse + `_run`) |
+| **Report look/format** | `report.py` (MD), `models.py` (JSON structure) |
+| **Language/localization** | `extractor.detect_language`, `agents/base.build_messages`, `report.format_date/format_datetime` |
+| **Scraping / extraction** | `scraper.py`, `extractor.py` |
+| **Key security / a new secret** | `config.py`, `.env.example`, `scripts/check_no_secrets.py` |
+| **New env variable** | `config.py` (field + alias) + `.env.example` |
 
 ---
 
-## 4. Ključni tipovi (`models.py`)
+## 4. Key types (`models.py`)
 
-| Tip | Čemu služi |
+| Type | What it's for |
 |---|---|
-| `Article` | očišćeni članak: url, title, author, published_at, plain_text, word_count, headings, **language** |
-| `Criterion` | jedan kriterij: name, score 0–10, note |
-| `AgentVerdict` | output agenta: score, criteria[], strengths[], weaknesses[], verdict, error |
-| `OverallScore` | agregat: score, letter_grade, label, weights, agent_scores |
-| `EvaluationResult` | cijeli rezultat run-a: article, model, agent_verdicts, overall, synthesis, created_at |
+| `Article` | cleaned article: url, title, author, published_at, plain_text, word_count, headings, **language** |
+| `Criterion` | one criterion: name, score 0–10, note |
+| `AgentVerdict` | agent output: score, criteria[], strengths[], weaknesses[], verdict, error |
+| `OverallScore` | aggregate: score, letter_grade, label, weights, agent_scores |
+| `EvaluationResult` | the whole run result: article, model, agent_verdicts, overall, synthesis, created_at |
 
-JSON izvještaj = `EvaluationResult.model_dump(mode="json")` (ključevi = nazivi polja).
+The JSON report = `EvaluationResult.model_dump(mode="json")` (keys = field names).
 
 ---
 
-## 5. Recepti — kako dodati nešto novo
+## 5. Recipes — how to add something new
 
-### 5.1 Novi agent
+### 5.1 New agent
 
-1. **Kreiraj `lexi_evaluator/agents/novi.py`:**
+1. **Create `lexi_evaluator/agents/novi.py`:**
    ```python
    from .base import Agent
 
@@ -130,34 +130,34 @@ JSON izvještaj = `EvaluationResult.model_dump(mode="json")` (ključevi = nazivi
    class NoviAgent(Agent):
        id = "novi"
        name = "Nova perspektiva"
-       perspective = "Jedna rečenica o perspektivi."
+       perspective = "One sentence about the perspective."
 
        def system_prompt(self) -> str:
-           return "You are LexiEval... (na engleskom, kanonski)"
+           return "You are LexiEval... (in English, canonical)"
 
        def build_user_prompt(self, article_text: str) -> str:
            return f"""<ARTICLE>\n{article_text}\n</ARTICLE>\n... {_JSON_SCHEMA}"""
 
    novi_agent = NoviAgent()
    ```
-   > Nazivi kriterija u promptu drži **kanonski na engleskom** — jezik članka se lokalizira
-   > automatski u `Agent.build_messages` (vidi §6). Nemoj hardkodirati hrvatski naziv kriterija.
+   > Keep criterion names in the prompt **canonical in English** — the article language is localized
+   > automatically in `Agent.build_messages` (see §6). Don't hardcode a Croatian criterion name.
 
-2. **Registriraj u `agents/__init__.py`:**
+2. **Register it in `agents/__init__.py`:**
    ```python
    from .novi import novi_agent
    AGENTS = {a.id: a for a in (structure_agent, psychology_agent, rubric_agent, humanity_agent, novi_agent)}
    ```
 
-3. **Dodaj težinu** u `.env` (`LEXI_WEIGHT_NOVI=0.20`) i polje + `agent_weights()` u `config.py`
-   (ostale težine prilagodi da zbroj = 1.0; logika renormalizacije je u `scoring.py`).
+3. **Add a weight** in `.env` (`LEXI_WEIGHT_NOVI=0.20`) and a field + `agent_weights()` in `config.py`
+   (adjust the other weights so the sum = 1.0; the renormalization logic is in `scoring.py`).
 
-4. **Testiraj** offline: `lexi --dry-run --fixture tests/fixtures/sample_article.html --agents novi`
-   (mock vraća deterministički JSON).
+4. **Test** offline: `lexi --dry-run --fixture tests/fixtures/sample_article.html --agents novi`
+   (mock returns deterministic JSON).
 
-### 5.2 Novi LLM provider
+### 5.2 New LLM provider
 
-1. **Kreiraj `providers/novi_provider.py`** — implementiraj `LLMClient.complete`:
+1. **Create `providers/novi_provider.py`** — implement `LLMClient.complete`:
    ```python
    from .base import LLMClient
 
@@ -165,86 +165,86 @@ JSON izvještaj = `EvaluationResult.model_dump(mode="json")` (ključevi = nazivi
        name = "novi"
        def __init__(self, api_key, model, *, temperature=0.3, timeout=60.0): ...
        async def complete(self, messages, *, json_mode=False, temperature=None) -> str:
-           # json_mode=True → traži strogi JSON (response_format/ekvivalent)
+           # json_mode=True → request strict JSON (response_format/equivalent)
            ...
    ```
-   Pogledaj `openai_provider.py` kao referencu (retry, JSON mode, temperature za reasoning modele).
+   See `openai_provider.py` as a reference (retry, JSON mode, temperature for reasoning models).
 
-2. **Uključi u `build_client`** (`providers/__init__.py`) + dodaj env varijable/model u `config.py`
-   i `.env.example`.
+2. **Wire it into `build_client`** (`providers/__init__.py`) + add env variables/model in `config.py`
+   and `.env.example`.
 
-### 5.3 Promjena težina ili pragova ocjena
+### 5.3 Changing weights or grade thresholds
 
-- **Težine:** `.env` → `LEXI_WEIGHT_*` (defaultovi u `config.py`, moraju zbrojiti 1.0).
-- **Pragovi A–F / labeli:** `scoring.py` → `GRADE_BANDS`.
+- **Weights:** `.env` → `LEXI_WEIGHT_*` (defaults in `config.py`, must sum to 1.0).
+- **A–F thresholds / labels:** `scoring.py` → `GRADE_BANDS`.
 
-### 5.4 Nova CLI opcija
+### 5.4 New CLI option
 
-U `cli.py`: dodaj `parser.add_argument(...)` u `build_parser`, pročitaj vrijednost u `_run`,
-pa je proslijedi u `evaluate(...)` (orkestracija) ili u render dio. Novu opciju dokumentiraj u README.
+In `cli.py`: add `parser.add_argument(...)` in `build_parser`, read the value in `_run`,
+then pass it to `evaluate(...)` (orchestration) or to the render part. Document the new option in README.
 
-### 5.5 Novi test
+### 5.5 New test
 
-Dodaj u `tests/` (npr. `test_<modul>.py`). Koristi `python -m pytest -q`.
-Dry-run/testovi **ne smiju** ovisiti o mreži ni ključu — koristi `MockProvider`/`--dry-run`.
+Add it under `tests/` (e.g. `test_<module>.py`). Use `python -m pytest -q`.
+Dry-run/tests **must not** depend on network or a key — use `MockProvider`/`--dry-run`.
 
-### 5.6 Lokalizacija / jezik
+### 5.6 Localization / language
 
-- Detekcija jezika: `extractor.detect_language` (heuristika `čćšžđ` → hr, inače en).
-- Instrukcija jezika za LLM: `agents/base.build_messages` (jedno središnje mjesto).
-- **Cijeli izvještaj prati jezik članka** (HR ili EN):
-  - LLM sadržaj (verdict, snage, slabosti, notes i nazivi kriterija) — prompt
-    lokalizira u `build_messages`.
-  - Report "chrome" (naslovi, labele, tablice, "Snage/Slabosti", "strengths", ...) —
-    rječnik `_L` u `report.py` (`render_markdown`), bira se prema `article.language`.
-  - Nazivi/perspektive agenata — dvojezični atributi `name_hr/en`, `perspective_hr/en`
-    na svakom agentu; `orchestrator` upisuje lokaliziranu verziju u `AgentVerdict`
-    (pa je i JSON dosljedan na jeziku članka).
-  - Ocjena label (Excellent…Poor) — `_GRADE_LABELS` u `report.py` (npr. "Vrlo dobar").
-- Datumi/vrijeme: `report.format_date` / `format_datetime` (HR dugi oblik / američki);
-  JSON ostaje ISO 8601.
+- Language detection: `extractor.detect_language` (heuristic `čćšžđ` → hr, otherwise en).
+- Language instruction for the LLM: `agents/base.build_messages` (one central place).
+- **The whole report follows the article language** (HR or EN):
+  - LLM content (verdict, strengths, weaknesses, notes and criterion names) — the prompt
+    localizes it in `build_messages`.
+  - Report "chrome" (headings, labels, tables, "Strengths/Weaknesses", ...) —
+    the `_L` dict in `report.py` (`render_markdown`), selected by `article.language`.
+  - Agent names/perspectives — bilingual attributes `name_hr/en`, `perspective_hr/en`
+    on every agent; `orchestrator` writes the localized version into `AgentVerdict`
+    (so JSON is consistent in the article language too).
+  - Grade label (Excellent…Poor) — `_GRADE_LABELS` in `report.py` (e.g. "Vrlo dobar").
+- Dates/times: `report.format_date` / `format_datetime` (HR long form / US);
+  JSON stays ISO 8601.
 
-### 5.7 Sigurnost (nova tajna / env var)
+### 5.7 Security (a new secret / env var)
 
-- Dodaj polje u `config.py` + placeholder u `.env.example` (`.env` je gitignored).
-- **Prije svakog commit-a/pusha** pokreni: `python scripts/check_no_secrets.py`.
-- Error poruke nikad ne smiju sadržavati vrijednost ključa.
+- Add a field in `config.py` + a placeholder in `.env.example` (`.env` is gitignored).
+- **Before every commit/push** run: `python scripts/check_no_secrets.py`.
+- Error messages must never contain the key value.
 
 ---
 
-## 6. Konvencije
+## 6. Conventions
 
 - Python **3.11+**, `from __future__ import annotations`, `pathlib`, UTF-8 — cross-OS (Win/mac/Linux).
 - Lint/format: **Ruff** (`ruff check . && ruff format --check .`), line length 100, E501 ignored.
-- **JSON iz LLM-a se validira pydanticom** (`AgentOutput`), na neuspjeh → `LLMParseError`;
-  retry u provideru; **neuspjeh jednog agenta ne ruši cijeli run** (ADR-007).
-- **Nikad hardkodirati model ni ključ** — sve kroz `.env`/`config.py` (ADR-006, ADR-008).
-- **Prompti:** kanonski EN nazivi kriterija u promptima; cijeli izvještaj se lokalizira na
-  jezik članka pri izvršavanju (ADR-005 dopuna).
-- Testovi offline, deterministički (mock), bez mreže/ključa.
+- **LLM JSON is validated with pydantic** (`AgentOutput`), on failure → `LLMParseError`;
+  retry in the provider; **one agent's failure doesn't crash the whole run** (ADR-007).
+- **Never hardcode a model or a key** — everything via `.env`/`config.py` (ADR-006, ADR-008).
+- **Prompts:** canonical EN criterion names in prompts; the whole report is localized to
+  the article language at runtime (ADR-005 addendum).
+- Tests are offline, deterministic (mock), no network/key.
 
 ---
 
-## 7. Naredbe (brza referenca)
+## 7. Commands (quick reference)
 
 ```bash
-# pokretanje
-lexi <URL>                                            # živi run (MD na stdout)
-lexi <URL> --output json --out-file rezultat.json     # JSON u fajl
+# running
+lexi <URL>                                            # live run (MD to stdout)
+lexi <URL> --output json --out-file rezultat.json     # JSON to a file
 lexi --dry-run --fixture tests/fixtures/sample_article.html   # offline (mock)
 lexi --help
 
-# kvaliteta
-python -m pytest -q                     # testovi (23)
+# quality
+python -m pytest -q                     # tests (23)
 ruff check . && ruff format --check .   # lint + format
-python scripts/check_no_secrets.py      # honeypot (obavezno prije pusha)
-python scripts/demo_dry.py              # regenerira examples/demo-dry.*
+python scripts/check_no_secrets.py      # honeypot (required before push)
+python scripts/demo_dry.py              # regenerates examples/demo-dry.*
 
 # CI / pre-push gate
-bash scripts/check_all.sh               # pytest + ruff + format + honeypot (lokalni gate)
-git config core.hooksPath .githooks     # jednom: pre-push hook pokreće check_all.sh
+bash scripts/check_all.sh               # pytest + ruff + format + honeypot (local gate)
+git config core.hooksPath .githooks     # once: pre-push hook runs check_all.sh
 ```
 
-**CI/CD:** `.github/workflows/ci.yml` (GitHub Actions) pokreće iste provjere na svakom
-push/PR-u na **Ubuntu** — to je automatizirani "code review" (bez zelenih provjera
-PR se ne smatra čistim). Lokalni gate `scripts/check_all.sh` to zrcali prije pusha.
+**CI/CD:** `.github/workflows/ci.yml` (GitHub Actions) runs the same checks on every
+push/PR on **Ubuntu** — that's the automated "code review" (without green checks
+a PR isn't considered clean). The local gate `scripts/check_all.sh` mirrors it before push.

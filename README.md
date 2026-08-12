@@ -3,60 +3,60 @@
 [![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![Last commit](https://img.shields.io/github/last-commit/DenisSeko/text-evaluator)](https://github.com/DenisSeko/text-evaluator)
 
-Multi-agent AI aplikacija koja procjenjuje **koliko je dobro napisan** neki tekst s
-Lexi bloga (https://lexi.hr/blog/). Dobije URL, izvuče čisti sadržaj članka, pokrene
-**4 neovisna AI agenta** — svaki s vlastitom perspektivom i promptom — te spoji njihove
-ocjene u ukupnu ocjenu s obrazloženjem po agentu.
+A multi-agent AI application that evaluates **how well written** a piece of text from
+the Lexi blog (https://lexi.hr/blog/) is. It takes a URL, extracts the clean article content, runs
+**4 independent AI agents** — each with its own perspective and prompt — and combines their
+scores into an overall score with per-agent rationale.
 
-> Stack: Python 3.12 · CLI · OpenAI (s apstrakcijskim slojem za druge providere)
-> Bez baze, bez deploya, bez autentikacije — fokus na promptovima i orkestraciji.
+> Stack: Python 3.12 · CLI · OpenAI (with an abstraction layer for other providers)
+> No database, no deployment, no authentication — focus on prompts and orchestration.
 
 ---
 
-## Kako radi
+## How it works
 
 ```
-URL ──► scraper ──► ekstraktor ──► 4 agenta (paralelno) ──► sintetizator ──► izvještaj
-              (httpx)   (trafilatura/     (OpenAI, JSON)     (finalni sud)   (MD + JSON)
+URL ──► scraper ──► extractor ──► 4 agents (parallel) ──► synthesizer ──► report
+              (httpx)   (trafilatura/     (OpenAI, JSON)     (final assessment)   (MD + JSON)
                         BeautifulSoup)
 ```
 
-1. **Scraping** — `scraper.py` dohvati HTML (httpx, vlastiti `User-Agent`, on-disk cache).
-2. **Ekstrakcija** — `extractor.py` izvuče čisti sadržaj članka (naslov, autor, datum,
-   headings, paragrafe) i odbaci navigaciju, footer, cookie banner i "Pročitaj još".
-   Primarno `trafilatura`, fallback `BeautifulSoup`.
-3. **Agenti** — 4 neovisna agenta, svaki s vlastitim system promptom, rubrikom i JSON
-   schemom, pokrenuta paralelno (`asyncio.gather`). Vidi [docs/PROMPTS.md](docs/PROMPTS.md).
-4. **Sintetizator** — 1 dodatni poziv koji pročita sve verdict-ove i napiše finalni,
-   uravnotežen sud s prioritiziranim preporukama (opcionalno, `--no-synth`).
-5. **Ocjenjivanje** — ukupna ocjena = težinski prosjek agent ocjena, mapirana na
-   letter grade A–F + label. Vidi [Sustav ocjenjivanja](#sustav-ocjenjivanja).
+1. **Scraping** — `scraper.py` fetches the HTML (httpx, custom `User-Agent`, on-disk cache).
+2. **Extraction** — `extractor.py` extracts the clean article content (title, author, date,
+   headings, paragraphs) and discards navigation, footer, cookie banner and "Read more".
+   `trafilatura` primary, `BeautifulSoup` fallback.
+3. **Agents** — 4 independent agents, each with its own system prompt, rubric and JSON
+   schema, run in parallel (`asyncio.gather`). See [docs/PROMPTS.md](docs/PROMPTS.md).
+4. **Synthesizer** — 1 additional call that reads all verdicts and writes a final,
+   balanced assessment with prioritized recommendations (optional, `--no-synth`).
+5. **Scoring** — overall score = weighted average of agent scores, mapped to a
+   letter grade A–F + label. See [Scoring system](#scoring-system).
 
-### Agenti
+### Agents
 
-| Agent | Perspektiva | Kriteriji |
+| Agent | Perspective | Criteria |
 |---|---|---|
-| **Struktura i tok** | Vodi li tekst čitatelja logično kroz sadržaj | Hook, Logical flow, Heading structure, Clarity, Pacing |
-| **Psihologija pisanja** | Psihološki principi dobrog pisanja | Concreteness, Reader benefit, Tone, Anti-filler, Examples, Trust |
-| **Kvantitativna rubrika** | Fiksna rubrika, konzistentna ocjena | Clarity, Structure, Specificity, Reader-benefit, Tone, Readability |
-| **Ljudski glas / anti-generic** | Zvuči li ljudski ili AI-generično | Authenticity, Anti-cliché, Personal voice, AI-markers |
+| **Structure and flow** | Does the text guide the reader logically through the content | Hook, Logical flow, Heading structure, Clarity, Pacing |
+| **Writing psychology** | Psychological principles of good writing | Concreteness, Reader benefit, Tone, Anti-filler, Examples, Trust |
+| **Quantitative rubric** | Fixed rubric, consistent scoring | Clarity, Structure, Specificity, Reader-benefit, Tone, Readability |
+| **Human voice / anti-generic** | Does it sound human or AI-generic | Authenticity, Anti-cliché, Personal voice, AI-markers |
 
-> Jezici: **cijeli izvještaj** — od naslova i labela do naziva kriterija, verdict-a,
-> snaga, slabosti i notes-a — prati auto-detektirani jezik članka (HR ili EN), bez
-> engleskih glosa. To vrijedi i za JSON (imena agenata, kriterija) i za Markdown
-> (uključujući "chrome" — naslove tablica, Snage/Slabosti, labele). Datumi i vrijeme
-> su lokalizirani isto — HR oblik (npr. "24. srpnja 2025.") ili američki
-> ("July 24, 2025"); JSON ostaje ISO 8601.
+> Languages: **the whole report** — from the title and labels to criterion names, verdicts,
+> strengths, weaknesses and notes — follows the auto-detected article language (HR or EN), with no
+> English glosses. This applies to JSON (agent names, criteria) and Markdown
+> (including the "chrome" — table headings, Strengths/Weaknesses, labels). Dates and times
+> are localized too — HR form (e.g. "24. srpnja 2025.") or US
+> ("July 24, 2025"); JSON stays ISO 8601.
 
-### Sustav ocjenjivanja
+### Scoring system
 
-- Svaki agent vraća ocjenu **0–10** + kriterije + snage/slabosti + obrazloženje.
-- **Ukupna ocjena** = težinski prosjek: struktura **30%**, rubrika **30%**,
-  psihologija **25%**, humanost **15%** (konfigurabilno preko `.env`).
-- Ako agent ne uspije, isključi se i težine se renormaliziraju (ne ruši cijeli rezultat).
+- Each agent returns a **0–10** score + criteria + strengths/weaknesses + rationale.
+- **Overall score** = weighted average: structure **30%**, rubric **30%**,
+  psychology **25%**, humanity **15%** (configurable via `.env`).
+- If an agent fails, it is excluded and the weights are renormalized (doesn't crash the result).
 - Letter grade + label:
 
-| Ocjena | Grade | Label |
+| Score | Grade | Label |
 |---|---|---|
 | 9.0–10 | A | Excellent |
 | 8.0–8.9 | B | Very good |
@@ -67,84 +67,84 @@ URL ──► scraper ──► ekstraktor ──► 4 agenta (paralelno) ──
 
 ---
 
-## Instalacija i pokretanje (Windows / macOS / Linux)
+## Installation and usage (Windows / macOS / Linux)
 
-### Preduvjet: Python 3.11+
+### Prerequisite: Python 3.11+
 
 - **Windows 10/11:** [python.org/downloads/windows](https://www.python.org/downloads/windows/)
-  — pri instalaciji označi **"Add Python to PATH"**.
+  — during install tick **"Add Python to PATH"**.
 - **macOS:** [python.org/downloads/macos](https://www.python.org/downloads/macos/)
-- **Linux:** [python.org/downloads](https://www.python.org/downloads/) ili paketni menadžer
-  (`sudo apt install python3 python3-venv python3-pip` na Debian/Ubuntu).
+- **Linux:** [python.org/downloads](https://www.python.org/downloads/) or a package manager
+  (`sudo apt install python3 python3-venv python3-pip` on Debian/Ubuntu).
 
-### Brza instalacija
+### Quick install
 
-**Linux / macOS — direktno kroz terminal (curl, bez ručnog kloniranja):**
+**Linux / macOS — directly through the terminal (curl, no manual cloning):**
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/DenisSeko/text-evaluator/main/scripts/install.sh | bash
 ```
 
-Skripta sama klonira repo (u `~/lexi`), stvori `.venv`, instalira ovisnosti +
-CLI i napravi `.env`. Ako je repo hostiran negdje drugdje, postavi URL prije pokretanja:
+The script clones the repo (into `~/lexi`), creates `.venv`, installs dependencies +
+CLI and creates `.env`. If the repo is hosted elsewhere, set the URL before running:
 
 ```bash
 LEXI_REPO_URL="https://github.com/TVOJ-ORG/lexi" \
   curl -fsSL https://raw.githubusercontent.com/DenisSeko/text-evaluator/main/scripts/install.sh | bash
 ```
 
-> Env varijable koje `install.sh` čita (sve opcionalne; vrijednost u zagradi je default):
+> Environment variables read by `install.sh` (all optional; the value in parentheses is the default):
 
-| Varijabla | Default | Opis |
+| Variable | Default | Description |
 |---|---|---|
-| `LEXI_REPO_URL` | `https://github.com/DenisSeko/text-evaluator` | Repo koji se klonira u direct-install načinu |
-| `LEXI_REPO_BRANCH` | `main` | Grana koja se klonira |
-| `LEXI_DIR` | `~/lexi` (Windows: `%USERPROFILE%\lexi`) | Ciljni folder u koji se klonira |
+| `LEXI_REPO_URL` | `https://github.com/DenisSeko/text-evaluator` | Repo cloned in direct-install mode |
+| `LEXI_REPO_BRANCH` | `main` | Branch to clone |
+| `LEXI_DIR` | `~/lexi` (Windows: `%USERPROFILE%\lexi`) | Target folder to clone into |
 
-Primjer kloniranja na drugu lokaciju:
+Example of cloning to another location:
 
 ```bash
 LEXI_DIR="$HOME/Desktop/lexi-test" \
   curl -fsSL https://raw.githubusercontent.com/DenisSeko/text-evaluator/main/scripts/install.sh | bash
 ```
 
-> **Sigurnost:** `curl | bash` izvršava udaljeni skript. Prvo ga pogledaj:
-> `curl -fsSL <URL>` i pregledaj izlaz prije pipanja u `bash`.
-> Skripta radi i lokalno iz repoa: `bash scripts/install.sh`.
+> **Security:** `curl | bash` executes a remote script. Inspect it first:
+> `curl -fsSL <URL>` and review the output before piping it to `bash`.
+> The script also works locally from the repo: `bash scripts/install.sh`.
 
-**Windows 10/11** (iz projektnog root foldera):
+**Windows 10/11** (from the project root folder):
 
 ```bat
 :: cmd:          scripts\install.bat
 :: PowerShell:   .\scripts\install.bat
 ```
 
-> Napomena (PowerShell): skripte se ne pokreću iz trenutnog foldera bez prefiksa `.\`.
-> Ako si već unutar `scripts\` foldera, pokreni `.\install.bat`.
+> Note (PowerShell): scripts don't run from the current folder without the `.\` prefix.
+> If you're already inside the `scripts\` folder, run `.\install.bat`.
 
-> `install.bat` automatski dodaje PowerShell funkciju **`lexi`** u tvoj profil
-> (`$PROFILE`), pa u novom terminalu možeš odmah koristiti `lexi "URL"` — bez aktivacije
-> i bez pune putanje.
+> `install.bat` automatically adds a PowerShell **`lexi`** function to your profile
+> (`$PROFILE`), so in a new terminal you can use `lexi "URL"` right away — without activation
+> and without a full path.
 
-**Aktivacija venv-a u PowerShellu** (nakon `install.bat`, venv nije aktivan):
+**Activating the venv in PowerShell** (after `install.bat`, the venv is not active):
 
 ```powershell
-# PowerShell moze blokirati .ps1 aktivaciju zbog execution policy — dopusti za sesiju:
+# PowerShell may block .ps1 activation due to execution policy — allow it for the session:
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 .\.venv\Scripts\Activate.ps1
 lexi --help
 ```
 
-Ili preskoči aktivaciju i koristi punu putanju:
+Or skip activation and use the full path:
 
 ```powershell
 .\.venv\Scripts\lexi.exe --help
 ```
 
-Skripte rade sve automatski: stvore `.venv`, instaliraju pinned ovisnosti + CLI komandu
-`lexi`, i kreiraju `.env` iz `.env.example` (samo upiši ključ).
+The scripts do everything automatically: create `.venv`, install pinned dependencies + the CLI command
+`lexi`, and create `.env` from `.env.example` (just add the key).
 
-### Ručna instalacija
+### Manual installation
 
 ```bash
 cd lexi
@@ -152,176 +152,189 @@ python3 -m venv .venv
 # Windows: .venv\Scripts\activate     macOS/Linux: source .venv/bin/activate
 python -m pip install -r requirements-dev.txt
 
-# Instaliraj CLI kao komandu (stvara `lexi` na sva tri OS-a)
+# Install the CLI as a command (creates `lexi` on all three OSes)
 python -m pip install -e .
 
-# Konfiguracija (ključ se NIKAD ne commit-a)
+# Configuration (the key is NEVER committed)
 cp .env.example .env        # Windows: copy .env.example .env
-# uredi .env i upiši pravi OPENAI_API_KEY
+# edit .env and set the real OPENAI_API_KEY
 ```
 
-> Nakon `pip install -e .` imaš **istu komandu na Linuxu, macOS-u i Windows 10/11**:
-> `lexi <URL>`. Radi iz bilo kojeg foldera jer se `.env` traži relativno na
-> projektni root (ne na trenutni direktorij). Ako ne želiš instalirati, koristi
-> `python -m lexi_evaluator <URL>` iz projektnog root foldera.
+> After `pip install -e .` you have **the same command on Linux, macOS and Windows 10/11**:
+> `lexi <URL>`. It works from any folder because `.env` is resolved relative to the
+> project root (not the current directory). If you don't want to install, use
+> `python -m lexi_evaluator <URL>` from the project root folder.
 
-### Pokretanje
+### Running
 
 ```bash
-# Evaluacija pravog Lexi posta (ista komanda na svim OS-ovima)
+# Evaluate a real Lexi post (same command on all OSes)
 lexi "https://lexi.hr/why-writing-sounds-generic/"
 
-# Snimi izvještaj kao Markdown i/ili JSON
+# Save the report as Markdown and/or JSON
 lexi <URL> --output md  --out-file examples/run.md
 lexi <URL> --output json --out-file examples/run.json
 
-# Offline demo bez API ključa i bez mreže (mock LLM + spremljeni fixture)
+# Offline demo without an API key and without network (mock LLM + saved fixture)
 lexi --dry-run --fixture tests/fixtures/sample_article.html
-# ili: python scripts/demo_dry.py
+# or: python scripts/demo_dry.py
 
-# Opcije
-lexi <URL> --agents structure,rubric   # podskup agenata
-lexi <URL> --no-synth                  # bez finalnog suda
-lexi <URL> --no-cache                  # bez cache-a HTML-a
-lexi --help                            # sve opcije
+# Options
+lexi <URL> --agents structure,rubric   # subset of agents
+lexi <URL> --no-synth                  # without the final assessment
+lexi <URL> --no-cache                  # without the HTML cache
+lexi --help                            # all options
 ```
 
-> **Napomena o testiranju:** `--fixture` očekuje putanju do HTML fajla, a `--dry-run`
-> je zasebna zastavica — obavezno oboje: `--dry-run --fixture <path>`.
+> **Testing note:** `--fixture` expects a path to an HTML file, and `--dry-run`
+> is a separate flag — always use both: `--dry-run --fixture <path>`.
 
-### Testovi i lint
+### Tests and lint
 
-Pokreće se iz **projektnog root foldera** (`python -m` dodaje root na `sys.path`,
-pa je paket importabilan):
+Run from the **project root folder** (`python -m` adds the root to `sys.path`,
+so the package is importable):
 
 ```bash
-python -m pytest -q          # offline: ekstraktor, scoring, dry-run pipeline
-python scripts/check_no_secrets.py   # honeypot: provjera da nema ključeva u repou
+python -m pytest -q          # offline: extractor, scoring, dry-run pipeline
+python scripts/check_no_secrets.py   # honeypot: checks there are no keys in the repo
 ruff check . && ruff format --check .
 ```
 
-### (Opcionalno) Samostalni `.exe` (Windows 10/11)
+### (Optional) Standalone `.exe` (Windows 10/11)
 
-Ako želiš distribuirati **samostalni `.exe` bez Python instalacije**, napravi ga na
-Windowsu (PyInstaller ne podržava cross-compile, pa se ne može graditi s Linuxa/macOS-a):
+If you want to distribute a **standalone `.exe` without a Python installation**, build it on
+Windows (PyInstaller doesn't support cross-compilation, so it can't be built from Linux/macOS):
 
 ```powershell
 .venv\Scripts\activate
 python -m pip install pyinstaller
-pyinstaller --onefile --name lexi lexi_evaluator\\__main__.py
-# rezultat: dist\\lexi.exe — pokreće se kao:
-#   dist\\lexi.exe <URL>
-# Napomena: za ključ i dalje treba .env u radnom folderu ili OPENAI_API_KEY env varijabla.
+pyinstaller --onefile --name lexi lexi_evaluator\__main__.py
+# result: dist\lexi.exe — run as:
+#   dist\lexi.exe <URL>
+# Note: for the key you still need .env in the working folder or an OPENAI_API_KEY env variable.
 ```
 
-### CI/CD i provjere prije pusha
+### CI/CD and pre-push checks
 
-Repo ima **automatizirani "code review" gate**:
+The repo has an **automated "code review" gate**:
 
-- **GitHub Actions** (`.github/workflows/ci.yml`) — na svaki `push` na `main` i na svaki
-  **pull request** automatski provjerava na **Ubuntu** (besplatni runner):
-  `pytest` (offline, bez ključa/mreže), `ruff check`, `ruff format --check` i honeypot scan.
-  Bez zelenih provjera PR se ne može "reviewati" kao čist.
+- **GitHub Actions** (`.github/workflows/ci.yml`) — on every `push` to `main` and on every
+  **pull request** it automatically checks on **Ubuntu** (free runner):
+  `pytest` (offline, no key/network), `ruff check`, `ruff format --check` and honeypot scan.
+  Without green checks a PR can't be "reviewed" as clean.
 
-> **Status:** workflow je **pripremljen i spreman** — automatski se pokreće na `push`/PR.
-> Trenutno ne starta jer je GitHub račun zaključan zbog billinga; nakon rješavanja
-> (https://github.com/settings/billing) pokreni "Re-run" ili napravi novi push.
-- **Lokalni gate prije pusha** — pokreni prije `git push`:
+> **Status:** the workflow is **prepared and ready** — it runs automatically on `push`/PR.
+> It currently doesn't start because the GitHub account is locked due to billing; after resolving
+> (https://github.com/settings/billing) press "Re-run" or make a new push.
+- **Local gate before push** — run before `git push`:
   ```bash
   bash scripts/check_all.sh     # pytest + ruff + format + honeypot
   ```
-- **Pre-push git hook** (opcionalno, automatski pokreće gate prije svakog pusha):
+- **Pre-push git hook** (optional, runs the gate automatically before every push):
   ```bash
   git config core.hooksPath .githooks
   ```
 
 ---
 
-## Konfiguracija (`.env`)
+## Configuration (`.env`)
 
-| Varijabla | Default | Opis |
+| Variable | Default | Description |
 |---|---|---|
-| `OPENAI_API_KEY` | — | OpenAI ključ (iz env varijable, nikad u kodu/repou) |
-| `LEXI_MODEL` | `gpt-4.1-mini` | Model za 4 agenta (jeftin, dobar JSON) |
-| `LEXI_MODEL_SYNTH` | `gpt-5-mini` | Model za sintetizator (1 poziv po run-u) |
-| `LEXI_MAX_CHARS` | `40000` | Truncate članka poslanog agentima |
-| `LEXI_TEMPERATURE` | `0.3` | Sampling temperatura (niska = konzistentnije) |
-| `LEXI_WEIGHT_*` | vidi gore | Težine po agentu (zbroj = 1.0) |
-| `LEXI_CACHE_DIR` | `.cache` | Cache raw HTML (gitignored) |
-| `LEXI_REQUEST_TIMEOUT` | `60.0` | HTTP timeout za scraping (sekund) |
+| `OPENAI_API_KEY` | — | OpenAI key (from an env variable, never in code/repo) |
+| `LEXI_MODEL` | `gpt-4.1-mini` | Model for the 4 agents (cheap, good JSON) |
+| `LEXI_MODEL_SYNTH` | `gpt-5-mini` | Model for the synthesizer (1 call per run) |
+| `LEXI_MAX_CHARS` | `40000` | Truncate the article sent to the agents |
+| `LEXI_TEMPERATURE` | `0.3` | Sampling temperature (lower = more consistent) |
+| `LEXI_WEIGHT_*` | see above | Per-agent weights (sum = 1.0) |
+| `LEXI_CACHE_DIR` | `.cache` | Raw HTML cache (gitignored) |
+| `LEXI_REQUEST_TIMEOUT` | `60.0` | HTTP timeout for scraping (seconds) |
 
 ---
 
-## Sigurnost ključa (VAŽNO)
+## Key security (IMPORTANT)
 
-- Ključ se učitava isključivo iz **environment varijable** ili gitignoriranog `.env`.
-- `.env` je u `.gitignore`; u repo ide samo `.env.example` s placeholderom.
-- `scripts/check_no_secrets.py` scan-ira repo na `sk-proj-…` i slične pattern-e i
-  fail-a ako nađe bilo što — pokreni prije svakog commit-a/pusha.
-- **Nikada ne commit-aj `.env` ni ključ.** Ako se to dogodi, ključ se smatra
-  kompromitiranim.
+- The key is loaded exclusively from an **environment variable** or a gitignored `.env`.
+- `.env` is in `.gitignore`; only `.env.example` with a placeholder goes in the repo.
+- `scripts/check_no_secrets.py` scans the repo for `sk-proj-…` and similar patterns and
+  fails if it finds anything — run it before every commit/push.
+- **Never commit `.env` or the key.** If that happens, consider the key compromised.
 
 ---
 
-## Projektna struktura
+## Project structure
 
-> Detaljan vodič za razvoj (stablo s objašnjenjima, "gdje je što", recepti za dodavanje
-> agenata/providera, konvencije): [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md).
+> Detailed development guide (tree with explanations, "where is what", recipes for adding
+> agents/providers, conventions): [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md).
 
 ```
 lexi/
   lexi_evaluator/
-    cli.py            # CLI ulaz (argparse) + tok run-a
-    config.py         # pydantic-settings (.env, projekt-relative)
-    models.py         # pydantic modeli (Article, AgentVerdict, EvaluationResult, ...)
+    cli.py            # CLI entry (argparse) + run flow
+    config.py         # pydantic-settings (.env, project-relative)
+    models.py         # pydantic models (Article, AgentVerdict, EvaluationResult, ...)
     scraper.py        # httpx fetch + cache
-    extractor.py      # trafilatura / BeautifulSoup čisti sadržaj + detect_language
-    scoring.py        # agregacija + letter grade + renormalizacija
-    orchestrator.py   # paralelni agenti + sintetizator
-    report.py         # Markdown/JSON render (+ lokalizacija datuma)
-    providers/        # LLM apstrakcija (OpenAI + Mock) + build_client
-    agents/           # 4 agenta (prompt + schema) + registar
+    extractor.py      # trafilatura / BeautifulSoup cleans content + detect_language
+    scoring.py        # aggregation + letter grade + renormalization
+    orchestrator.py   # parallel agents + synthesizer
+    report.py         # Markdown/JSON render (+ date localization)
+    providers/        # LLM abstraction (OpenAI + Mock) + build_client
+    agents/           # 4 agents (prompt + schema) + registry
   scripts/
-    install.sh        # instalacija Linux/macOS (i curl | bash)
-    install.bat       # instalacija Windows 10/11
+    install.sh        # Linux/macOS installation (and curl | bash)
+    install.bat       # Windows 10/11 installation
     check_no_secrets.py  # honeypot scan
     demo_dry.py       # offline demo → examples/
-  tests/              # pytest (ekstraktor, scoring, report, dry-run pipeline) + fixture
-  examples/           # živi izvještaji s realnih Lexi postova (JSON + MD) + .gitkeep
+  tests/              # pytest (extractor, scoring, report, dry-run pipeline) + fixture
+  examples/           # live reports from real Lexi posts (JSON + MD) + .gitkeep
   docs/
-    PROMPTS.md        # svi promptovi verbatim + razlozi dizajna
-    PLANNING.md       # originalni plan sesije
-    DEVELOPMENT.md    # vodič za razvoj (gdje/kako/što)
-  PLAN.md             # planiranje + arhitekturalne odluke (ADR)
+    PROMPTS.md        # all prompts verbatim + design rationale
+    PLANNING.md       # original session plan
+    DEVELOPMENT.md    # development guide (where/how/what)
+  PLAN.md             # planning + architectural decisions (ADR)
   .github/workflows/ci.yml   # CI gate (pytest + ruff + honeypot)
-  .githooks/                 # pre-push hook (opcionalno)
+  .githooks/                 # pre-push hook (optional)
 ```
 
-## Odluke (ukratko)
+## Decisions (briefly)
 
-Detaljno u [PLAN.md](PLAN.md). Ključno:
+Details in [PLAN.md](PLAN.md). Key points:
 
-- **CLI, ne web** — task traži "bez over-engineeringa" (bez baze/deploya/autha).
-- **Python 3.12 + pip + pinned requirements** — cross-OS (Windows/macOS/Linux), bez shell skripti.
-- **`gpt-4.1-mini` za agente + `gpt-5-mini` za sintetizator** — bolji omjer cijene i
-  kvalitete od starijeg `gpt-4o-mini`; razlika u apsolutnom trošku je zanemariva
-  (par centi po run-u). Model je lako zamijeniti preko `.env`.
-- **4 perspektive, ne 3** — dodan "Ljudski glas / anti-generic" jer je to srž Lexi brenda.
-- **Sintetizator kao 5. poziv** — demonstrira suradnju agenata; deterministički zbroj
-  daje broj, sintetizator daje narativ (opcionalno).
+- **CLI, not web** — the task asks for "no over-engineering" (no database/deploy/auth).
+- **Python 3.12 + pip + pinned requirements** — cross-OS (Windows/macOS/Linux), no shell scripts.
+- **`gpt-4.1-mini` for agents + `gpt-5-mini` for the synthesizer** — better cost/quality ratio
+  than the older `gpt-4o-mini`; the absolute cost difference is negligible
+  (a few cents per run). The model is easy to change via `.env`.
+- **4 perspectives, not 3** — added "Human voice / anti-generic" because it's the core of the Lexi brand.
+- **Synthesizer as the 5th call** — demonstrates agent collaboration; the deterministic sum
+  gives the number, the synthesizer gives the narrative (optional).
 
 ---
 
-## Primjeri outputa
+## Example outputs
 
-Folder `examples/` sadrži **žive izvještaje s realnih Lexi postova** (dio ovog repoa),
-dok se `demo-dry.*` (mock, bez ključa/mreže) generira lokalno i ne commit-a:
+The `examples/` folder contains **live reports from real Lexi posts** (part of this repo),
+while `demo-dry.*` (mock, no key/network) is generated locally and not committed:
 
-- **Živi run** (komitano u repou), recimo:
+- **Live run** (committed in the repo), for example:
   - `examples/lexi-why-writing-sounds-generic.{md,json}` → **7.0/10, C (Good)**
   - `examples/lexi-psiholoski-mehanizmi-iza-clickbaita.{md,json}` → **7.7/10, C (Good)**
   - `examples/lexi-how-to-respond-to-a-negative-review.{md,json}` → **7.7/10, C (Good)**
-- **Offline demo** (mock, bez ključa/mreže): `python scripts/demo_dry.py`
-  → stvara lokalno `examples/demo-dry.{md,json}` (igitnovan)
-- Novi živi run za vlastiti test: `lexi <URL> --output md --out-file examples/run.md`
-  (i `--output json --out-file examples/run.json`)
+- **Offline demo** (mock, no key/network): `python scripts/demo_dry.py`
+  → creates `examples/demo-dry.{md,json}` locally (gitignored)
+- New live run for your own test: `lexi <URL> --output md --out-file examples/run.md`
+  (and `--output json --out-file examples/run.json`)
+
+---
+
+## License and copyright
+
+© 2026 Denis Sekovanić. **All rights reserved.**
+
+This repository and all code in it are the **intellectual property** of the author. The repo
+has no `LICENSE` file, which under copyright law means **no license is granted** — the code
+may not be copied, distributed, modified or used commercially without the author's prior written permission.
+
+The public visibility of the repository on GitHub permits **viewing and forking solely for
+review/collaboration** (per GitHub's terms of service), but does **not constitute a license**
+to download and use the code. Without explicit permission, copying the code is prohibited.

@@ -1,9 +1,9 @@
-# PROMPTS.md — Agent prompts i dizajn
+# PROMPTS.md — Agent prompts and design
 
-Ovo je **srž zadatka**: perspektive, promptovi i zašto su oblikovani tako. Promptovi u
-kodu (`.py`) i ovdje su isti — ovaj dokument je čitljiva referenca i obrazloženje.
+This is the **core of the task**: perspectives, prompts and why they're shaped the way they are. The prompts in
+the code (`.py`) and here are identical — this document is a readable reference and rationale.
 
-Zajednički **JSON schema** za sve agente (osim sintetizatora):
+Common **JSON schema** for all agents (except the synthesizer):
 
 ```json
 {
@@ -17,26 +17,26 @@ Zajednički **JSON schema** za sve agente (osim sintetizatora):
 
 ---
 
-## Dizajn perspektiva — zašto baš ovih 5
+## Perspective design — why exactly these 5
 
-Zadatak traži ≥3 perspektive i "tvoje razmišljanje o tome što čini dobar tekst".
-Moja teza: **dobar tekst** = *jasno strukturiran* (čitatelj se nikad ne izgubi) +
-*psihološki djelotvoran* (konkretan, usmjeren na čitateljev benefit, ljudski ton) +
-*kvantitativno dosljedan* (rubrika koja se može ponoviti) + *prepoznatljivo ljudski*
-(ne generički, ne AI). Svaka od te 4 dimenzije dobiva neovisnog agenta:
+The task asks for ≥3 perspectives and "your thinking about what makes a good text".
+My thesis: **a good text** = *clearly structured* (the reader never gets lost) +
+*psychologically effective* (concrete, focused on the reader's benefit, human tone) +
+*quantitatively consistent* (a repeatable rubric) + *recognizably human*
+(not generic, not AI). Each of those 4 dimensions gets an independent agent:
 
-| Perspektiva | Odgovara na pitanje | Zašto je vrijedna |
+| Perspective | Answers the question | Why it's valuable |
 |---|---|---|
-| Struktura | Je li tekst logički organiziran i vodi li čitatelja? | "Reader lost = content failed" — najčešći razlog napuštanja teksta |
-| Psihologija | Koristi li principe dobrog, persuasivnog pisanja? | Konkretnost i benefit su ono što čini copy djelotvornim (srž Lexi brenda) |
-| Rubrika | Koja je dosljedna, ponovljiva kvantitativna ocjena? | Osigurava konzistentnost i usporedivost među člancima |
-| Ljudski glas | Zvuči li ljudski ili kao generički/AI tekst? | Lexi postoji da riješi upravo "why writing sounds generic" |
+| Structure | Is the text logically organized and does it guide the reader? | "Reader lost = content failed" — the most common reason people abandon text |
+| Psychology | Does it apply the principles of good, persuasive writing? | Concreteness and benefit are what make copy effective (the core of the Lexi brand) |
+| Rubric | What is the consistent, repeatable quantitative score? | Ensures consistency and comparability across articles |
+| Human voice | Does it sound human or like generic/AI text? | Lexi exists to solve exactly "why writing sounds generic" |
 
-Sintetizator (5. uloga) ne ocjenjuje — **spaja** i piše finalni sud + prioritizirane preporuke.
+The synthesizer (5th role) doesn't score — it **combines** and writes the final assessment + prioritized recommendations.
 
 ---
 
-## 1. Struktura i tok (`structure`)
+## 1. Structure and flow (`structure`)
 
 **System prompt (verbatim):**
 > You are LexiEval, an expert structural editor for marketing and blog copy.
@@ -46,16 +46,16 @@ Sintetizator (5. uloga) ne ocjenjuje — **spaja** i piše finalni sud + priorit
 > logical flow, heading quality, paragraph rhythm and whether the reader is ever lost.
 > You judge and justify — you never rewrite the article.
 
-**Kriteriji:** Hook · Logical flow · Heading structure · Clarity · Pacing & transitions
+**Criteria:** Hook · Logical flow · Heading structure · Clarity · Pacing & transitions
 
-**Dizajn:** strukturiranje je "arhitektura" teksta — vodi li čitatelja od prvog retka do
-zaključka. Hook zasebno jer je uvod odluka čitatelja hoće li uopće nastaviti. Headings
-zasebno jer su navigacijska okosnica (skeniranje). "Never rewrite" je zajednički pravilo
-svih agenata — oni su **sci** ne **copywriteri**.
+**Design:** structuring is the "architecture" of the text — does it guide the reader from the first line to the
+conclusion. Hook is separate because the intro is the reader's decision whether to continue at all. Headings
+are separate because they're the navigational backbone (skimming). "Never rewrite" is a shared rule
+of all agents — they are **judges**, not **copywriters**.
 
 ---
 
-## 2. Psihologija pisanja (`psychology`)
+## 2. Writing psychology (`psychology`)
 
 **System prompt (verbatim):**
 > You are LexiEval, an expert in the psychology of persuasive, human writing.
@@ -65,25 +65,25 @@ svih agenata — oni su **sci** ne **copywriteri**.
 > engagement, specific examples and stories, and the absence of generic filler.
 > You judge and justify — you never rewrite the article.
 
-**Kriteriji:** Concreteness · Reader benefit · Tone & emotional resonance ·
+**Criteria:** Concreteness · Reader benefit · Tone & emotional resonance ·
 Avoiding generic filler · Examples & storytelling · Trust & authority
 
-> **Napomena o jeziku:** cijeli izvještaj (LLM sadržaj i report chrome — naslovi,
-> labele, imena agenata, ocjene A–F) prati auto-detektirani jezik članka (HR/EN).
-> Prompti agenata lokaliziraju verdict/notes/kriterije (`agents/base.build_messages`),
-> a statički dio izvještaja `report.py` (rječnik `_L`, `_GRADE_LABELS`) + dvojezični
-> nazivi agenata (`name_hr/en`, `perspective_hr/en`). Npr. za hrvatski članak
-> "Clarity" → "Započetak"/"Jasnoća", a za engleski članak sve — i chrome i sadržaj —
-> ostaje engleski; bez engleskih glosa u zagradi.
+> **Language note:** the whole report (LLM content and report chrome — headings,
+> labels, agent names, A–F grades) follows the auto-detected article language (HR/EN).
+> The agent prompts localize verdict/notes/criteria (`agents/base.build_messages`),
+> and the static part of the report uses `report.py` (the `_L`, `_GRADE_LABELS` dicts) + bilingual
+> agent names (`name_hr/en`, `perspective_hr/en`). E.g. for a Croatian article
+> "Clarity" → "Započetak"/"Jasnoća", and for an English article everything — chrome and content —
+> stays English; no English glosses in parentheses.
 
-**Dizajn:** ova perspektiva je "zašto tekst radi (ili ne)". Konkretnost > apstrakcija,
-jer apstraktno ne pogađa čitatelja; benefit je ono što čitatelja zadržava; ton gradi
-(ili ruši) odnos; primjeri i priče su najbrži put do memorabilnosti; povjerenje je
-temelj konverzije. Ovo je najbliže Lexijevoj vlastitoj metodologiji.
+**Design:** this perspective is "why the text works (or doesn't)". Concreteness > abstraction,
+because the abstract doesn't hit the reader; benefit is what keeps the reader; tone builds
+(or breaks) the relationship; examples and stories are the fastest path to memorability; trust is
+the basis of conversion. This is closest to Lexi's own methodology.
 
 ---
 
-## 3. Kvantitativna rubrika (`rubric`)
+## 3. Quantitative rubric (`rubric`)
 
 **System prompt (verbatim):**
 > You are LexiEval, a rigorous quantitative writing auditor.
@@ -93,18 +93,18 @@ temelj konverzije. Ovo je najbliže Lexijevoj vlastitoj metodologiji.
 > and never let one strong section inflate the overall score.
 > You judge and justify — you never rewrite the article.
 
-**Kriteriji (fiksni, 0-10):** Clarity · Structure · Specificity · Reader-benefit ·
+**Criteria (fixed, 0-10):** Clarity · Structure · Specificity · Reader-benefit ·
 Tone & voice · Readability
 
-**Dizajn:** rubrika je **stabilna mjera** — isti kriteriji za svaki članak → usporedivost.
-Namjerno preklapa s drugim agentima (npr. Structure kod agenta 1 i 3): rubrika je
-disciplinirana, numerička verzija; agenti 1/2 su interpretativni. To je sloj redundancije
-koji štiti od hirova pojedinog modela. "Never let one strong section inflate" sprječava
-halo-efekt.
+**Design:** the rubric is a **stable measure** — the same criteria for every article → comparability.
+It deliberately overlaps with the other agents (e.g. Structure in agents 1 and 3): the rubric is
+a disciplined, numeric version; agents 1/2 are interpretive. That's a layer of redundancy
+that protects against the whims of a single model. "Never let one strong section inflate" prevents
+the halo effect.
 
 ---
 
-## 4. Ljudski glas / anti-generic (`humanity`)
+## 4. Human voice / anti-generic (`humanity`)
 
 **System prompt (verbatim):**
 > You are LexiEval, a specialist in detecting generic, template and
@@ -115,16 +115,16 @@ halo-efekt.
 > with a point of view instead of generated default language.
 > You judge and justify — you never rewrite the article.
 
-**Kriteriji:** Authenticity · Anti-cliché / anti-template · Personal voice ·
+**Criteria:** Authenticity · Anti-cliché / anti-template · Personal voice ·
 AI-sounding markers
 
-**Dizajn:** dodana 4. perspektiva jer je to diferencijator Lexi brenda. Traži **dokaze** —
-citati kao konkretni primjeri u bilješkama (smanjuje vjerojatnost paušalne ocjene).
-U eri generativnog AI-ja, "zvuči li ljudski" postaje ključni kriterij kvalitete.
+**Design:** the 4th perspective was added because it's the Lexi brand differentiator. It demands **evidence** —
+quotes as concrete examples in the notes (reduces the chance of a generic verdict).
+In the era of generative AI, "does it sound human" becomes a key quality criterion.
 
 ---
 
-## 5. Sintetizator (`synthesizer`) — finalni sud
+## 5. Synthesizer (`synthesizer`) — final assessment
 
 **System prompt (verbatim):**
 > You are the LexiEval chair. You receive the independent verdicts of
@@ -134,29 +134,29 @@ U eri generativnog AI-ja, "zvuči li ljudski" postaje ključni kriterij kvalitet
 > Be concrete: name the article's biggest strengths and weaknesses, and give 3
 > prioritised, actionable recommendations. Do not just repeat the agents — synthesise.
 
-**User prompt (skeleton):** članak (naslov + URL) + svi agent verdict-ovi kao JSON.
+**User prompt (skeleton):** the article (title + URL) + all agent verdicts as JSON.
 
-**Dizajn:** sintetizator ne daje broj (broj dolazi iz determinističke agregacije) — daje
-**narativ**: finalni sud, 2 snage, 2 slabosti, top-3 prioritizirane preporuke. Time se
-razdvaja "matematika ocjene" (ponovljiva, transparentna) od "interpretacije" (LLM).
-Ovo je ključni primjer **suradnje agenata** u orkestraciji.
+**Design:** the synthesizer doesn't give a number (the number comes from deterministic aggregation) — it gives
+a **narrative**: final assessment, 2 strengths, 2 weaknesses, top-3 prioritized recommendations. This
+separates the "scoring math" (repeatable, transparent) from the "interpretation" (LLM).
+This is the key example of **agent collaboration** in the orchestration.
 
 ---
 
-## Zajednička pravila u svim agent promptima
+## Shared rules in all agent prompts
 
-1. **"You judge and justify — you never rewrite."** — agenti su ocjenjivači, ne autori.
-2. **Svaki kriterij ima one-sentence `note`** — bez obrazloženja nema ocjene.
-3. **`verdict` i bilješke na jeziku članka** (HR/EN) — output govori istim jezikom kao tekst.
-4. **"Respond with ONLY a JSON object"** + eksplicitna schema — stabilan parse; JSON se
-   dodatno validira pydanticom i po potrebi retry-ja.
-5. **Agent ID u system promptu** — omogućuje mock provideru da vrati odgovarajući canned
-   odgovor u `--dry-run` načinu i testovima.
+1. **"You judge and justify — you never rewrite."** — agents are judges, not authors.
+2. **Each criterion has a one-sentence `note`** — no rationale, no score.
+3. **`verdict` and notes in the article's language** (HR/EN) — the output speaks the same language as the text.
+4. **"Respond with ONLY a JSON object"** + an explicit schema — stable parsing; the JSON is
+   additionally validated with pydantic and retried as needed.
+5. **Agent ID in the system prompt** — lets the mock provider return the matching canned
+   response in `--dry-run` mode and tests.
 
-## Kako se promptovi lako mijenjaju
+## How prompts are changed easily
 
-- Promptovi su konstante u `lexi_evaluator/agents/*.py` (jedini izvor istine za kod).
-- Ovaj dokument (`docs/PROMPTS.md`) je čitljiva kopija za ocjenjivače.
-- Ako želiš promijeniti perspektivu: dodaj kriterij u prompt + po želji težinu u `.env`.
-- Novi agent: nova klasa u `lexi_evaluator/agents/`, registracija u `__init__.py`,
-  težina u `.env`.
+- Prompts are constants in `lexi_evaluator/agents/*.py` (single source of truth for the code).
+- This document (`docs/PROMPTS.md`) is a readable copy for reviewers.
+- To change a perspective: add a criterion to the prompt + optionally a weight in `.env`.
+- New agent: a new class in `lexi_evaluator/agents/`, registration in `__init__.py`,
+  weight in `.env`.

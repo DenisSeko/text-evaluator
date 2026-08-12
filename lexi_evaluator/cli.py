@@ -1,4 +1,4 @@
-"""Command-line interface: `python -m lexi_evaluator <url>`."""
+"""Command-line interface: `lexi <url>` (or `python -m lexi_evaluator <url>`)."""
 
 from __future__ import annotations
 
@@ -6,6 +6,7 @@ import argparse
 import asyncio
 import json
 import sys
+from contextlib import suppress
 from pathlib import Path
 
 from .agents import get_agents
@@ -19,10 +20,10 @@ from .scraper import fetch_html
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="lexi_evaluator",
+        prog="lexi",
         description=(
             "Evaluate the writing quality of a Lexi blog post using multiple AI agents. "
-            "Run from the project root, e.g.: python -m lexi_evaluator <URL>"
+            "Installed CLI: lexi <URL> (or from the project root: python -m lexi_evaluator <URL>)"
         ),
     )
     parser.add_argument(
@@ -57,6 +58,18 @@ def build_parser() -> argparse.ArgumentParser:
         help="Truncate article text to N chars (default: LEXI_MAX_CHARS)",
     )
     return parser
+
+
+def _configure_utf8_stdio() -> None:
+    """Force UTF-8 on stdout/stderr.
+
+    On Windows the legacy console codepage (cp1252/cp437) would mangle Croatian
+    diacritics (or raise UnicodeEncodeError when stdout is redirected). Git Bash
+    and Windows Terminal are UTF-8, so emitting UTF-8 is safe everywhere.
+    """
+    for stream in (sys.stdout, sys.stderr):
+        with suppress(AttributeError, ValueError, OSError):
+            stream.reconfigure(encoding="utf-8")
 
 
 def _log(message: str) -> None:
@@ -129,6 +142,7 @@ async def _run(args: argparse.Namespace) -> None:
 
 
 def main(argv: list[str] | None = None) -> None:
+    _configure_utf8_stdio()
     args = build_parser().parse_args(argv)
     asyncio.run(_run(args))
 

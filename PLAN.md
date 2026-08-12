@@ -158,7 +158,7 @@ Zadatak izričito potiče korištenje AI-ja. Proces u ovom repou:
 - [x] `python scripts/check_no_secrets.py` — nema ključeva u repou
 - [x] Live run na stvarnom Lexi postu s pravim ključem → `examples/` (ključ u `.env`)
   - 3 URL-a (JSON + MD u `examples/`): `why-writing-sounds-generic`
-    (**6.7/10, D — Adequate**), `psiholoski-mehanizmi-iza-clickbaita`
+    (**7.0/10, C — Good**), `psiholoski-mehanizmi-iza-clickbaita`
     (**7.7/10, C — Good**), `how-to-respond-to-a-negative-review`
     (**7.7/10, C — Good**)
 - [x] CI/CD gate: `.github/workflows/ci.yml` (GitHub Actions, Ubuntu: pytest + ruff +

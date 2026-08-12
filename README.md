@@ -233,6 +233,7 @@ Repo ima **automatizirani "code review" gate**:
 | `LEXI_TEMPERATURE` | `0.3` | Sampling temperatura (niska = konzistentnije) |
 | `LEXI_WEIGHT_*` | vidi gore | Težine po agentu (zbroj = 1.0) |
 | `LEXI_CACHE_DIR` | `.cache` | Cache raw HTML (gitignored) |
+| `LEXI_REQUEST_TIMEOUT` | `60.0` | HTTP timeout za scraping (sekund) |
 
 ---
 
@@ -302,7 +303,7 @@ Folder `examples/` sadrži **žive izvještaje s realnih Lexi postova** (dio ovo
 dok se `demo-dry.*` (mock, bez ključa/mreže) generira lokalno i ne commit-a:
 
 - **Živi run** (komitano u repou), recimo:
-  - `examples/lexi-why-writing-sounds-generic.{md,json}` → **6.7/10, D (Adequate)**
+  - `examples/lexi-why-writing-sounds-generic.{md,json}` → **7.0/10, C (Good)**
   - `examples/lexi-psiholoski-mehanizmi-iza-clickbaita.{md,json}` → **7.7/10, C (Good)**
   - `examples/lexi-how-to-respond-to-a-negative-review.{md,json}` → **7.7/10, C (Good)**
 - **Offline demo** (mock, bez ključa/mreže): `python scripts/demo_dry.py`

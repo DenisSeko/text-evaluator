@@ -45,11 +45,17 @@ cd "$ROOT"
 echo "==> Lexi Evaluator install (Linux/macOS)"
 
 # --- 1. Python ---------------------------------------------------------------
-if command -v python3 >/dev/null 2>&1; then
-  PY=python3
-elif command -v python >/dev/null 2>&1; then
-  PY=python
-else
+# On Git Bash (Windows) `python3` may be the Microsoft Store stub which is not
+# real Python — so test each candidate actually runs, not just that it exists.
+PY=""
+# Try the Windows py launcher first (matches install.bat), then python3/python.
+for cand in py python3 python; do
+  if command -v "$cand" >/dev/null 2>&1 && "$cand" -c "import sys" >/dev/null 2>&1; then
+    PY="$cand"
+    break
+  fi
+done
+if [ -z "$PY" ]; then
   echo "error: Python 3.11+ is required but was not found."
   echo "       macOS: https://www.python.org/downloads/macos/"
   echo "       Linux: https://www.python.org/downloads/"
@@ -69,7 +75,17 @@ if [ ! -d .venv ]; then
   "$PY" -m venv .venv
 fi
 # shellcheck disable=SC1091
-source .venv/bin/activate
+if [ -f .venv/bin/activate ]; then
+  # shellcheck disable=SC1091
+  source .venv/bin/activate
+elif [ -f .venv/Scripts/activate ]; then
+  # Git Bash / Windows: venv uses Scripts/ instead of bin/
+  # shellcheck disable=SC1091
+  source .venv/Scripts/activate
+else
+  echo "error: venv activation script not found (.venv/bin/activate or .venv/Scripts/activate)"
+  exit 1
+fi
 
 # --- 3. Dependencies + CLI ---------------------------------------------------
 echo "==> Installing pinned requirements (incl. dev/test tools)"

@@ -329,7 +329,7 @@ while `demo-dry.*` (mock, no key/network) is generated locally and not committed
 
 ## License and copyright
 
-© 2026 Denis Sekovanić. **All rights reserved.**
+© 2026 Denis Sekovanic. **All rights reserved.**
 
 This repository and all code in it are the **intellectual property** of the author. The repo
 has no `LICENSE` file, which under copyright law means **no license is granted** — the code

@@ -93,6 +93,21 @@ LEXI_REPO_URL="https://github.com/TVOJ-ORG/lexi" \
   curl -fsSL https://raw.githubusercontent.com/DenisSeko/text-evaluator/main/scripts/install.sh | bash
 ```
 
+> Env varijable koje `install.sh` čita (sve opcionalne; vrijednost u zagradi je default):
+
+| Varijabla | Default | Opis |
+|---|---|---|
+| `LEXI_REPO_URL` | `https://github.com/DenisSeko/text-evaluator` | Repo koji se klonira u direct-install načinu |
+| `LEXI_REPO_BRANCH` | `main` | Grana koja se klonira |
+| `LEXI_DIR` | `~/lexi` (Windows: `%USERPROFILE%\lexi`) | Ciljni folder u koji se klonira |
+
+Primjer kloniranja na drugu lokaciju:
+
+```bash
+LEXI_DIR="$HOME/Desktop/lexi-test" \
+  curl -fsSL https://raw.githubusercontent.com/DenisSeko/text-evaluator/main/scripts/install.sh | bash
+```
+
 > **Sigurnost:** `curl | bash` izvršava udaljeni skript. Prvo ga pogledaj:
 > `curl -fsSL <URL>` i pregledaj izlaz prije pipanja u `bash`.
 > Skripta radi i lokalno iz repoa: `bash scripts/install.sh`.

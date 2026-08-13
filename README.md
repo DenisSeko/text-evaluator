@@ -89,7 +89,7 @@ The script clones the repo (into `~/lexi-evaluator`), creates `.venv`, installs 
 CLI and creates `.env`. If the repo is hosted elsewhere, set the URL before running:
 
 ```bash
-LEXI_REPO_URL="https://github.com/TVOJ-ORG/lexi" \
+LEXI_REPO_URL="https://github.com/YOUR-ORG/lexi" \
   curl -fsSL https://raw.githubusercontent.com/DenisSeko/lexi-evaluator/main/scripts/install.sh | bash
 ```
 

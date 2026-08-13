@@ -147,7 +147,7 @@ The scripts do everything automatically: create `.venv`, install pinned dependen
 ### Manual installation
 
 ```bash
-cd lexi
+cd text-evaluator    # or the folder you cloned into
 python3 -m venv .venv
 # Windows: .venv\Scripts\activate     macOS/Linux: source .venv/bin/activate
 python -m pip install -r requirements-dev.txt
@@ -223,9 +223,8 @@ The repo has an **automated "code review" gate**:
   `pytest` (offline, no key/network), `ruff check`, `ruff format --check` and honeypot scan.
   Without green checks a PR can't be "reviewed" as clean.
 
-> **Status:** the workflow is **prepared and ready** — it runs automatically on `push`/PR.
-> It currently doesn't start because the GitHub account is locked due to billing; after resolving
-> (https://github.com/settings/billing) press "Re-run" or make a new push.
+> **Status:** the workflow is set up and runs automatically on every `push`/PR.
+> The same checks can also be run locally before pushing with `bash scripts/check_all.sh`.
 - **Local gate before push** — run before `git push`:
   ```bash
   bash scripts/check_all.sh     # pytest + ruff + format + honeypot
@@ -324,17 +323,3 @@ while `demo-dry.*` (mock, no key/network) is generated locally and not committed
   → creates `examples/demo-dry.{md,json}` locally (gitignored)
 - New live run for your own test: `lexi <URL> --output md --out-file examples/run.md`
   (and `--output json --out-file examples/run.json`)
-
----
-
-## License and copyright
-
-© 2026 Denis Sekovanic. **All rights reserved.**
-
-This repository and all code in it are the **intellectual property** of the author. The repo
-has no `LICENSE` file, which under copyright law means **no license is granted** — the code
-may not be copied, distributed, modified or used commercially without the author's prior written permission.
-
-The public visibility of the repository on GitHub permits **viewing and forking solely for
-review/collaboration** (per GitHub's terms of service), but does **not constitute a license**
-to download and use the code. Without explicit permission, copying the code is prohibited.

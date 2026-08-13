@@ -1,7 +1,7 @@
 # Lexi Evaluator
 
 [![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![Last commit](https://img.shields.io/github/last-commit/DenisSeko/text-evaluator)](https://github.com/DenisSeko/text-evaluator)
+[![Last commit](https://img.shields.io/github/last-commit/DenisSeko/lexi-evaluator)](https://github.com/DenisSeko/lexi-evaluator)
 
 A multi-agent AI application that evaluates **how well written** a piece of text from
 the Lexi blog (https://lexi.hr/blog/) is. It takes a URL, extracts the clean article content, runs
@@ -82,30 +82,30 @@ URL ──► scraper ──► extractor ──► 4 agents (parallel) ──�
 **Linux / macOS — directly through the terminal (curl, no manual cloning):**
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/DenisSeko/text-evaluator/main/scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/DenisSeko/lexi-evaluator/main/scripts/install.sh | bash
 ```
 
-The script clones the repo (into `~/lexi`), creates `.venv`, installs dependencies +
+The script clones the repo (into `~/lexi-evaluator`), creates `.venv`, installs dependencies +
 CLI and creates `.env`. If the repo is hosted elsewhere, set the URL before running:
 
 ```bash
 LEXI_REPO_URL="https://github.com/TVOJ-ORG/lexi" \
-  curl -fsSL https://raw.githubusercontent.com/DenisSeko/text-evaluator/main/scripts/install.sh | bash
+  curl -fsSL https://raw.githubusercontent.com/DenisSeko/lexi-evaluator/main/scripts/install.sh | bash
 ```
 
 > Environment variables read by `install.sh` (all optional; the value in parentheses is the default):
 
 | Variable | Default | Description |
 |---|---|---|
-| `LEXI_REPO_URL` | `https://github.com/DenisSeko/text-evaluator` | Repo cloned in direct-install mode |
+| `LEXI_REPO_URL` | `https://github.com/DenisSeko/lexi-evaluator` | Repo cloned in direct-install mode |
 | `LEXI_REPO_BRANCH` | `main` | Branch to clone |
-| `LEXI_DIR` | `~/lexi` (Windows: `%USERPROFILE%\lexi`) | Target folder to clone into |
+| `LEXI_DIR` | `~/lexi-evaluator` (Windows: `%USERPROFILE%\lexi-evaluator`) | Target folder to clone into |
 
 Example of cloning to another location:
 
 ```bash
 LEXI_DIR="$HOME/Desktop/lexi-test" \
-  curl -fsSL https://raw.githubusercontent.com/DenisSeko/text-evaluator/main/scripts/install.sh | bash
+  curl -fsSL https://raw.githubusercontent.com/DenisSeko/lexi-evaluator/main/scripts/install.sh | bash
 ```
 
 > **Security:** `curl | bash` executes a remote script. Inspect it first:
@@ -147,7 +147,7 @@ The scripts do everything automatically: create `.venv`, install pinned dependen
 ### Manual installation
 
 ```bash
-cd text-evaluator    # or the folder you cloned into
+cd lexi-evaluator    # or the folder you cloned into
 python3 -m venv .venv
 # Windows: .venv\Scripts\activate     macOS/Linux: source .venv/bin/activate
 python -m pip install -r requirements-dev.txt
@@ -267,7 +267,7 @@ The repo has an **automated "code review" gate**:
 > agents/providers, conventions): [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md).
 
 ```
-lexi/
+lexi-evaluator/
   lexi_evaluator/
     cli.py            # CLI entry (argparse) + run flow
     config.py         # pydantic-settings (.env, project-relative)

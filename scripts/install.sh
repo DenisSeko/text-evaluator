@@ -13,15 +13,15 @@
 #
 # Env overrides:
 #   LEXI_REPO_URL  - git URL cloned by the direct curl install
-#                    (default: https://github.com/DenisSeko/text-evaluator)
+#                    (default: https://github.com/DenisSeko/lexi-evaluator)
 #   LEXI_REPO_BRANCH - branch to clone (default: main)
 #   LEXI_DIR       - target directory for the direct curl install
-#                    (default: $HOME/lexi)
+#                    (default: $HOME/lexi-evaluator)
 set -euo pipefail
 
-REPO_URL="${LEXI_REPO_URL:-https://github.com/DenisSeko/text-evaluator}"
+REPO_URL="${LEXI_REPO_URL:-https://github.com/DenisSeko/lexi-evaluator}"
 REPO_BRANCH="${LEXI_REPO_BRANCH:-main}"
-INSTALL_DIR="${LEXI_DIR:-$HOME/lexi}"
+INSTALL_DIR="${LEXI_DIR:-$HOME/lexi-evaluator}"
 
 # --- 0. Running inside a checkout, or direct curl install? --------------------
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-.}")" && pwd)"

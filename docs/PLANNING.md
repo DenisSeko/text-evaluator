@@ -13,7 +13,7 @@
 A standalone Python CLI application that: (1) scrapes a Lexi blog post from a URL, (2) extracts the clean article content (without navigation/footer/cookie banner/"Read more"), (3) runs ≥4 AI agents with their own prompts/perspectives that score the text quality, (4) aggregates into an overall score + per-agent rationale. No DB/deploy/auth (per task). Python 3.12, pip + requirements.txt (pinned), Ruff. Cross-OS (Windows/macOS/Linux).
 
 ## Key decisions (confirmed with the user)
-- **Location:** standalone project at `/home/work/Projects/lexi` — separate root and separate git repo (✅ done; moved out of the monorepo after initial setup).
+- **Location:** standalone project at `/home/work/Projects/lexi-evaluator` — separate root and separate git repo (✅ done; moved out of the monorepo after initial setup).
 - **Interface:** CLI (argparse), `python -m lexi_evaluator <URL>`, JSON + Markdown output to stdout/file. Cross-OS: plain Python, pathlib, UTF-8, no shell scripts.
 - **Provider:** OpenAI default (given key) + a thin abstraction layer `providers/` ready for Anthropic/Gemini/Ollama (only OpenAI implemented; plus a Mock provider for offline runs).
 - **Key security (CRITICAL / honeypot):** NEVER write the key into any repo file. `.env` gitignored, `.env.example` placeholder. `scripts/check_no_secrets.py` scans the repo for the `sk-proj-` pattern and fails. Verification `git status` + grep.
@@ -22,7 +22,7 @@ A standalone Python CLI application that: (1) scrapes a Lexi blog post from a UR
 ## Architecture — phases (dependencies in parentheses)
 
 ### Phase 1 — Scaffold ✅
-1. Create `lexi/` (requirements.txt pinned: httpx, beautifulsoup4, trafilatura, openai, pydantic, pydantic-settings, python-dotenv, pytest, ruff), `.env.example` (placeholder key), `.gitignore` (.env, .venv, __pycache__, .cache/), pyproject.toml (ruff config).
+1. Create `lexi-evaluator/` (requirements.txt pinned: httpx, beautifulsoup4, trafilatura, openai, pydantic, pydantic-settings, python-dotenv, pytest, ruff), `.env.example` (placeholder key), `.gitignore` (.env, .venv, __pycache__, .cache/), pyproject.toml (ruff config).
 2. `git init` a new repo in the folder; Python venv `.venv`; pip install. ✅
 3. `config.py` (pydantic-settings: OPENAI_API_KEY, LEXI_MODEL, LEXI_MODEL_SYNTH, LEXI_MAX_CHARS, agent weights). Clear error if the key is missing. ✅
 4. `models.py` (pydantic): `Article`, `Criterion`, `AgentVerdict`, `EvaluationResult`. ✅
@@ -67,7 +67,7 @@ A standalone Python CLI application that: (1) scrapes a Lexi blog post from a UR
 - `scripts/check_no_secrets.py` — honeypot guard
 
 ## Verification
-1. ✅ `cd lexi && .venv/bin/pytest -q` — offline, green (12 passed).
+1. ✅ `cd lexi-evaluator && .venv/bin/pytest -q` — offline, green (12 passed).
 2. ✅ `.venv/bin/ruff check . && .venv/bin/ruff format --check .` — clean.
 3. ✅ `.venv/bin/python -m lexi_evaluator https://lexi.hr/why-writing-sounds-generic/ --out-file examples/...` (live, with key) → valid JSON + MD (overall 7.0/10, C — Good).
 4. ✅ `.venv/bin/python -m lexi_evaluator <url> --dry-run` (or `--fixture`) — pipeline without key/network.
@@ -84,4 +84,4 @@ A standalone Python CLI application that: (1) scrapes a Lexi blog post from a UR
 ## Further considerations
 1. ✅ Model: `gpt-4.1-mini` for agents + `gpt-5-mini` for the synthesizer (configurable via `.env`); the initial `gpt-4o-mini` recommendation was replaced after discussing newer models.
 2. ✅ Output language: the whole report (verdict, strengths, weaknesses, notes and criterion names) **only in the article's language**, with no English glosses in parentheses. Dates/times are localized per article language (HR long form / US form; JSON stays ISO). The language is **auto-detected** from the article (heuristic: Croatian diacritics `čćšžđ` → HR, otherwise EN; `extractor.detect_language`) and passed to every agent's prompt (`agents/base.build_messages`), so the model writes the whole review in the article's language.
-3. ✅ Git: standalone repo in `lexi/` (branch `main`), moved out of the monorepo.
+3. ✅ Git: standalone repo in `lexi-evaluator/` (branch `main`), moved out of the monorepo.

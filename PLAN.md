@@ -32,7 +32,7 @@ A web UI (Streamlit/FastAPI) adds surface without extra value for the task gradi
 **Rejected alternative:** FastAPI server — too much infrastructure, and the spec doesn't ask for a service.
 
 ### ADR-002: Standalone project, separate git repo
-**Decision:** the project lives in its own root folder `lexi/` with its own git repo,
+**Decision:** the project lives in its own root folder `lexi-evaluator/` with its own git repo,
 outside the monorepo where it originated.
 **Why:** the task asks for a public GitHub repo; mixing with a service monorepo (CI, docs-sync,
 pnpm workspace) brings risks and noise. Full isolation.

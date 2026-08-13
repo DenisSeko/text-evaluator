@@ -30,7 +30,7 @@ URL → scraper → extractor → Article
 ## 2. Project tree (with explanations)
 
 ```
-lexi/
+lexi-evaluator/
 ├── README.md                 # user instructions: install, run, tests
 ├── PLAN.md                   # planning + ADRs ("why exactly this")
 ├── pyproject.toml            # package, [project.scripts] (command), ruff + pytest config
